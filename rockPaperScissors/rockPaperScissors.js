@@ -19,5 +19,27 @@
 
 var rockPaperScissors = function (
 ) {
-  // TODO: your solution here
+  // create a results array
+  var allRounds = [];
+  // track number of rounds
+  // track permutations of throws in object
+  // store round results in array
+  // track throws
+  var results = {
+    0: 'rock',
+    1: 'paper',
+    2: 'scissors'
+  }
+  for (let i = 0; i < 3; i++) {
+    for (let x = 0; x < 3; x++) {
+      for (let y = 0; y < 3; y++) {
+        allRounds.push([results[i], results[x], results[y]]);
+      }
+    }
+  }
+  return allRounds;
 };
+
+console.log(rockPaperScissors())
+
+
