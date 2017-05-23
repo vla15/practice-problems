@@ -39,3 +39,16 @@ var rockPaperScissors = function (rounds) {
   return allRounds
 };
 
+
+const assertEqual = function(expected, actual, test) {
+  if (expected === actual) {
+    console.log('passed');
+  } else {
+    console.log(`Failed test [${test}] expected ${expected}, but got ${actual}`);
+  }
+}
+
+// needs to have a length of 27
+assertEqual(27, rockPaperScissors(3).length, 'needs to equal number of throws')
+
+
