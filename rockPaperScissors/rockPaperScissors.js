@@ -17,7 +17,7 @@
 *
 */
 
-var rockPaperScissors = function (rounds) {
+var rockPaperScissors = function (rounds = 3) {
   // create a results array
   var allRounds = [];
   // track number of rounds
