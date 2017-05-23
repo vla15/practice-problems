@@ -17,8 +17,7 @@
 *
 */
 
-var rockPaperScissors = function (
-) {
+var rockPaperScissors = function (rounds) {
   // create a results array
   var allRounds = [];
   // track number of rounds
@@ -30,16 +29,13 @@ var rockPaperScissors = function (
     1: 'paper',
     2: 'scissors'
   }
-  for (let i = 0; i < 3; i++) {
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
+  for (let i = 0; i < rounds; i++) {
+    for (let x = 0; x < rounds; x++) {
+      for (let y = 0; y < rounds; y++) {
         allRounds.push([results[i], results[x], results[y]]);
       }
     }
   }
-  return allRounds;
+  return allRounds
 };
-
-console.log(rockPaperScissors())
-
 
