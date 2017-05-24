@@ -17,38 +17,32 @@
 *
 */
 
-var rockPaperScissors = function (rounds = 3) {
-  // create a results array
-  var allRounds = [];
-  // track number of rounds
-  // track permutations of throws in object
-  // store round results in array
-  // track throws
-  var results = {
-    0: 'rock',
-    1: 'paper',
-    2: 'scissors'
+var rockPaperScissors = function(numRounds) {
+  var outcomes = [];
+  var plays = ["rock", "paper", "scissors"];
+
+  // can add rounds later, get 3 working. 
+  // for a three round game, it would be 3^3 = 27.
+  // for any number of rounds it would be 3^numrounds. 
+
+  function findOutCome(roundsLeft, result){
+  // when you cover all the rounds
+  // push to the outcomes
+  if (roundsLeft === 0) {
+    outcomes.push(result);
+    return;
   }
-  for (let i = 0; i < rounds; i++) {
-    for (let x = 0; x < rounds; x++) {
-      for (let y = 0; y < rounds; y++) {
-        allRounds.push([results[i], results[x], results[y]]);
-      }
-    }
-  }
-  return allRounds
+
+  plays.forEach(function(play) {
+    //result.push(play);
+    //concat returns the entire array
+    findOutCome(roundsLeft-1, result.concat(play))
+  });
 };
 
+findOutCome(numRounds, []); // give it a starting point
 
-const assertEqual = function(expected, actual, test) {
-  if (expected === actual) {
-    console.log('passed');
-  } else {
-    console.log(`Failed test [${test}] expected ${expected}, but got ${actual}`);
-  }
+return outcomes;
 }
 
-// needs to have a length of 27
-assertEqual(27, rockPaperScissors(3).length, 'needs to equal number of throws')
-
-
+console.log(rockPaperScissors(2));
