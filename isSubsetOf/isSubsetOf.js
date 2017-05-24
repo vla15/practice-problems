@@ -31,7 +31,19 @@ Array.prototype.isSubsetOf = function (arr) {
   for (var index = 0; index < this.length; index++) {
     var target = this[index];
     for (var x = 0; x < arr.length; x++) {
-      if (target === arr[x]) {
+      if (Array.isArray(arr[x])) {
+        for (var z = 0; z < arr[x].length; z++) {
+          if (target === arr[x][z]) {
+            counter++;
+          }
+        }
+      } else if (arr[x] instanceof Object) {
+        for (var key in arr[x]) {
+          if (target === arr[x][key]) {
+            counter++;
+          }
+        }
+      } else if (target === arr[x]) {
         counter++;
       }
     }
@@ -41,6 +53,10 @@ Array.prototype.isSubsetOf = function (arr) {
   } else {
     return false;
   }
+    // check if array
+    // recurse
+  // check if object
+    // for in loop
     // iterate through passed in arr
     // if array elements exist in passed in arr
       // return true;
@@ -48,12 +64,18 @@ Array.prototype.isSubsetOf = function (arr) {
 };
 
 
-// var a = ['commit','push']
-// console.log(a.isSubsetOf(['commit','rebase','push','blame'])) // true
-//  // * NOTE: You should disregard duplicates in the set.
-// var b = ['merge','reset','reset']
+var a = ['commit','push'];
+console.log(a.isSubsetOf(['commit','rebase','push','blame'])); // true
+ // * NOTE: You should disregard duplicates in the set.
+var b = ['merge','reset','reset'];
 
-// console.log(b.isSubsetOf(['reset','merge','add','commit'])) // true
+console.log(b.isSubsetOf(['reset','merge','add','commit'])); // true
 
-// var c = ['hello']
-// console.log(c.isSubsetOf(['blah', 'john'])); 
+var c = ['hello'];
+console.log(c.isSubsetOf(['blah', 'john'])); 
+
+var d = ['hello', 'john'];
+console.log(d.isSubsetOf(['nope', ['blah', 'hello'], 'john']));
+
+var e = ['hello', 'world'];
+console.log(e.isSubsetOf(['hello', {this: 'world'}, 'nope']))
