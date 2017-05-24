@@ -28,39 +28,34 @@ Array.prototype.isSubsetOf = function (arr) {
   // create counter to match length of arr
   // iterate through Array(this)
   var counter = 0;
+  var targetCheck = function (arr) {
+    if (Array.isArray(arr)) {
+      for (var z = 0; z < arr.length; z++) {
+        if (target === arr[z]) {
+          counter++;
+        }
+      }
+    } else if (arr instanceof Object) {
+      for (var key in arr) {
+        if (target === arr[key]) {
+          counter++;
+        }
+      }
+    } else if (target === arr) {
+      counter++;
+    }
+  }
   for (var index = 0; index < this.length; index++) {
     var target = this[index];
-    for (var x = 0; x < arr.length; x++) {
-      if (Array.isArray(arr[x])) {
-        for (var z = 0; z < arr[x].length; z++) {
-          if (target === arr[x][z]) {
-            counter++;
-          }
-        }
-      } else if (arr[x] instanceof Object) {
-        for (var key in arr[x]) {
-          if (target === arr[x][key]) {
-            counter++;
-          }
-        }
-      } else if (target === arr[x]) {
-        counter++;
-      }
-    }
+    arr.forEach(function(ele) {
+      targetCheck(ele);
+    });
   }
   if (counter === this.length) {
     return true;
   } else {
     return false;
   }
-    // check if array
-    // recurse
-  // check if object
-    // for in loop
-    // iterate through passed in arr
-    // if array elements exist in passed in arr
-      // return true;
-  // return false
 };
 
 
@@ -78,4 +73,4 @@ var d = ['hello', 'john'];
 console.log(d.isSubsetOf(['nope', ['blah', 'hello'], 'john']));
 
 var e = ['hello', 'world'];
-console.log(e.isSubsetOf(['hello', {this: 'world'}, 'nope']))
+console.log(e.isSubsetOf(['hello', {this: 'world'}, 'nope']));
