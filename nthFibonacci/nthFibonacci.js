@@ -22,7 +22,52 @@
 
 var nthFibonacci = function (n) {
   // TODO: implement me!
+  // input: number indicating number of iterations
+  // output: sum
+  //starting array
+  var start = [0, 1];
+  //recurse on starting array
+  var calculateFibonacci = function (n) {
+    if (n === 1) {
+      return start[n];
+    }
+    if (n === 2) {
+      return start[1];
+    }
+    if (n === start.length) {
+      return;
+    }
+    start.push(start[start.length - 1] + start[start.length - 2]);
+    calculateFibonacci(n)
+  }
+  calculateFibonacci(n);
+  return start.reduce(function(num1, num2) {
+    return num1 + num2;
+  });
+    //base case of start length === n
+      // return
+    //sum last element and second last element of array
+
+  // reduce for sum
 };
 
+console.log(nthFibonacci(3));
 
+  // // n = length
+  // // create starting array with 0th and 1st fib
+  // var start = [0, 1]
+  // if (n === 1) {
+  //   return 0;
+  // } else if (n === 2) {
+  //   return 1;
+  // }
+  // //iterate through starting index and next index
+  // for (var index = 0; start.length < n; index++) {
+  //   start.push(start[index] + start[index + 1]);
+  // }
+  // return start.reduce(function(num1, num2) {
+  //   return num1 + num2;
+  // })
+  // // use previous two results to calculate next result
+  // // reduce for sum
 
