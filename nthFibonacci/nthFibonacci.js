@@ -28,9 +28,6 @@ var nthFibonacci = function (n) {
   var start = [0, 1];
   //recurse on starting array
   var calculateFibonacci = function (n) {
-    if (n === 1) {
-      return start[n];
-    }
     if (n === 2) {
       return start[1];
     }
@@ -39,6 +36,9 @@ var nthFibonacci = function (n) {
     }
     start.push(start[start.length - 1] + start[start.length - 2]);
     calculateFibonacci(n)
+  }
+  if (n === 1 || n === 0) {
+    return 0;
   }
   calculateFibonacci(n);
   return start.reduce(function(num1, num2) {
@@ -51,8 +51,8 @@ var nthFibonacci = function (n) {
   // reduce for sum
 };
 
-console.log(nthFibonacci(3));
-
+console.log(nthFibonacci(5));
+  // iterative solution
   // // n = length
   // // create starting array with 0th and 1st fib
   // var start = [0, 1]
