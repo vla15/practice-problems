@@ -38,4 +38,26 @@ var i;
 
 var bubbleSort = function(array) {
   // Your code here.
+  //input array
+  //output sorted array
+  // no edge case or constraints
+  // iterates through the array
+  for (var index = 0; index < array.length; index++) {
+    // check if there's a next ele
+    if (!(index + 1 === array.length)) {
+    // compares first ele with next ele
+      if (array[index] > array[index + 1]) {
+      // if first ele is greater
+        // store in temp var
+        var temp = array[index];
+        // replace first ele with second 
+        array[index] = array[index + 1];
+        // replace second with temp
+        array[index + 1] = temp;
+      }
+    }
+  }
+  return array;
 };
+
+console.log(bubbleSort([2, 15, 13, 72, 11])); // yields [1, 2, 3]
