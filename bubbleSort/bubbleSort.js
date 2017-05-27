@@ -75,22 +75,20 @@ var bubbleSort = function(array) {
         array[index] = array[index + 1];
         // replace second with temp
         array[index + 1] = temp;
+        if (isSorted(array)) {
+          return array;
+        } else {
+          return bubbleSort(array);
+        }
       }
     }
   }
-  //run isSorted on modified array
-  if (isSorted(array)) {
-    // if passes
-    return array;
-      // return array
-    // else
-  } else {
-      // recurse
-    return bubbleSort(array);
-  }
+  return array;
 };
 
+// console.log(bubbleSort([24.7, 24.3, 23, 9, 3, 3, 100, 25, 100]))
 // console.log(bubbleSort([2, 15, 13, 72, 11]));
+// console.log(bubbleSort([1, 2, 43, 100, 100, 21, 21]))
 // console.log(bubbleSort([18, 12, 99, 5, 0, 1]));
 // console.log(bubbleSort([0]));
 // console.log(bubbleSort([-1, -2, -3]));
