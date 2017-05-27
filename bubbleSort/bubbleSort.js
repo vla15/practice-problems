@@ -53,8 +53,8 @@ var isSorted = function(array) {
   // return true
 };
 
-var sortedArr = [1, 5, 7];
-console.log(isSorted(sortedArr));
+// var sortedArr = [1, 5, 7];
+// console.log(isSorted(sortedArr));
 
 
 var bubbleSort = function(array) {
@@ -78,7 +78,20 @@ var bubbleSort = function(array) {
       }
     }
   }
-  return array;
+  //run isSorted on modified array
+  if (isSorted(array)) {
+    // if passes
+    return array;
+      // return array
+    // else
+  } else {
+      // recurse
+    return bubbleSort(array);
+  }
 };
 
-// console.log(bubbleSort([2, 15, 13, 72, 11])); // yields [1, 2, 3]
+// console.log(bubbleSort([2, 15, 13, 72, 11]));
+// console.log(bubbleSort([18, 12, 99, 5, 0, 1]));
+// console.log(bubbleSort([0]));
+// console.log(bubbleSort([-1, -2, -3]));
+// console.log(bubbleSort([-3, -7, 2, -5])); // yields [1, 2, 3]
