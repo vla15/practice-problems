@@ -34,6 +34,27 @@
 var i;
 
 // Feel free to add helper functions if needed.
+// checks if array is sorted
+var isSorted = function(array) {
+
+  // iterate through array
+  for (var index = 0; index < array.length; index++) {
+
+    // check if there's a next ele
+    if (!(index + 1 === array.length)) {
+      // first ele greater than second
+      if (!(array[index + 1]  > array[index])) {
+        // return false
+        return false;
+      }
+    }
+  }
+  return true;
+  // return true
+};
+
+var sortedArr = [1, 5, 7];
+console.log(isSorted(sortedArr));
 
 
 var bubbleSort = function(array) {
@@ -60,4 +81,4 @@ var bubbleSort = function(array) {
   return array;
 };
 
-console.log(bubbleSort([2, 15, 13, 72, 11])); // yields [1, 2, 3]
+// console.log(bubbleSort([2, 15, 13, 72, 11])); // yields [1, 2, 3]
