@@ -15,14 +15,15 @@ var deepEquals = function(apple, orange) {
   //input objects
   //output boolean
 
-  //boolean set to true
+  //set default check to true
   var isEquivalent = true;
   //iterate through object
   for (var key in apple) {
     // check if keys match
       // match then check if object
         // if both values are objects then recurse
-        // else compare values
+        // else compare if apple value doesn't equate to orange value
+          // set check to false
       // no match then false
     if (orange.hasOwnProperty(key)) {
       if (typeof apple[key] === 'object' && typeof orange[key] === 'object') {
@@ -34,11 +35,12 @@ var deepEquals = function(apple, orange) {
       isEquivalent = false;
     }
   }
-    // check if value is an object
-      // recurse
-
+  //return check
   return isEquivalent;
 };
 
-console.log(deepEquals({a:1, b: {c:3}},{a:1, b: {c:3}})); // true
-console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false
+// console.log(deepEquals({a:1, b: {c:3}},{a:1, b: {c:3}})); // true
+// console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false
+// console.log(deepEquals({a: 5}, {c: 3}));
+// console.log(deepEquals({a: {a: 1, b: {a: 7}}}, {a: {a:1, b: {a: 7}}}));
+// console.log(deepEquals({a: 5, b: {}}, {a: 5, b: {a: 3}}))
