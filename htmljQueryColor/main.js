@@ -14,7 +14,7 @@ $(function() {
     p[index].innerText = '';
     textContent.forEach(function(word) {
       var span = document.createElement('span');
-      span.innerText = word;
+      span.innerText = word + ' ';
       p[index].appendChild(span);
     });
   }
