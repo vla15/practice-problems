@@ -51,7 +51,7 @@ Tree.prototype.DFSelect = function(filter) {
     // recurse on children
   //return the results
   }
-  return results.sort()
+  return results
 };
 
 
