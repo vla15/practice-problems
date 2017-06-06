@@ -29,16 +29,16 @@ var binarySearch = function (array, target) {
   // check if target is smaller than middle
   if (target < array[middle]) {
     // recurse with array from start to middle -1
-    end = middle - 1
-    return binarySearch(array, target, start, end)
+    end = middle - 1;
+    return binarySearch(array, target, start, end);
   }
   if (target > array[middle]) {
-    start = middle + 1
-    return binarySearch(array, target, start, end)
+    start = middle + 1;
+    return binarySearch(array, target, start, end);
   }
   // check if target is larger than middle
     // recurse with array from end to middle +1
 };
 
-var index = binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 19, 25, 88], 12);
-console.log(index);
+// var index = binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 19, 25, 88], 12);
+// console.log(index);
