@@ -20,7 +20,7 @@ var binarySearch = function (array, target) {
   }
   // if middle equals to start or end
   // basecase
-  if (start === end) {
+  if (start === end || array.length < 2) {
     return null;
     // return false
   }
@@ -38,5 +38,5 @@ var binarySearch = function (array, target) {
     // recurse with array from end to middle +1
 };
 
-// var index = binarySearch([1, 2, 3, 4, 5], 2)
-// console.log(index);
+var index = binarySearch([5], 4)
+console.log(index);
