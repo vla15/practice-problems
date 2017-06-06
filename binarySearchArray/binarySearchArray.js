@@ -11,17 +11,22 @@
 var binarySearch = function (array, target) {
   var start = arguments[2] || 0;
   var end = arguments[3] || array.length;
+  console.log(start, end);
   // get middle value of arr with start + end
   var middle = Math.floor((start + end) / 2);
   // check if middel value equals target
   if (array[middle] === target) {
     return middle;
     // return index
+  } else if (array[start] === target) {
+    return start;
+  } else if (array[end] === target) {
+    return end
   }
   // if middle equals to start or end
   // basecase
   if (middle === start || middle === end) {
-    return -1;
+    return null;
     // return false
   }
   // placeholder for start index
@@ -40,5 +45,5 @@ var binarySearch = function (array, target) {
     // recurse with array from end to middle +1
 };
 
-// var index = binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 19, 25, 88], 12);
-// console.log(index);
+var index = binarySearch([1, 2, 3, 4, 5], 2)
+console.log(index);
