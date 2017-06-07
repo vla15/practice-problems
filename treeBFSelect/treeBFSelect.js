@@ -39,6 +39,19 @@ var Tree = function(value) {
 
 Tree.prototype.BFSelect = function(filter) {
   // return an array of values for which the function filter(value, depth) returns true
+  // track esults with an array
+  var results = [];
+  // track depth
+  var depth = 0;
+  results.push(this)
+  // add root tree to results with depth 0 prop
+  var recursion = function (array, filter, depth) {
+
+  }
+  //recurse on children array
+  // iterate through root tree children
+
+  // recurse occurs after iterating through children
 };
 
 /**
@@ -94,3 +107,19 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+
+var root1 = new Tree(1);
+var branch2 = root1.addChild(2);
+var branch3 = root1.addChild(3);
+var leaf4 = branch2.addChild(4);
+var leaf5 = branch2.addChild(5);
+var leaf6 = branch3.addChild(6);
+var leaf7 = branch3.addChild(7);
+var test = root1.BFSelect(function (value, depth) {
+  return value % 2;
+})
+
+console.log(test);
+
+
