@@ -41,17 +41,27 @@ Tree.prototype.BFSelect = function(filter) {
   // return an array of values for which the function filter(value, depth) returns true
   // track esults with an array
   var results = [];
-  // track depth
+  var queue = [this];
+  var target;
   var depth = 0;
-  results.push(this)
-  // add root tree to results with depth 0 prop
-  var recursion = function (array, filter, depth) {
-
+  var childCount = 0;
+  // track depth
+  while (queue.length > 0) {
+    target = queue.shift();
+    target.depth = depth;
+    if (filter(target.value, target.depth)) {
+      results.push(target.value);
+    }
+    for (var index = 0; index< target.children.length; index++) {
+      queue.push(target.children[index]);
+      childCount++
+    }
+    if (queue.length === childCount) {
+      depth++
+      childCount = 0;
+    }
   }
-  //recurse on children array
-  // iterate through root tree children
-
-  // recurse occurs after iterating through children
+  return results;
 };
 
 /**
@@ -109,17 +119,17 @@ Tree.prototype.removeChild = function(child) {
 };
 
 
-var root1 = new Tree(1);
-var branch2 = root1.addChild(2);
-var branch3 = root1.addChild(3);
-var leaf4 = branch2.addChild(4);
-var leaf5 = branch2.addChild(5);
-var leaf6 = branch3.addChild(6);
-var leaf7 = branch3.addChild(7);
-var test = root1.BFSelect(function (value, depth) {
-  return value % 2;
-})
+// var root1 = new Tree(1);
+// var branch2 = root1.addChild(2);
+// var branch3 = root1.addChild(3);
+// var leaf4 = branch2.addChild(4);
+// var leaf5 = branch2.addChild(5);
+// var leaf6 = branch3.addChild(6);
+// var leaf7 = branch3.addChild(7);
+// var test = root1.BFSelect(function (value, depth) {
+//   return depth % 2
+// })
 
-console.log(test);
+// console.log(test);
 
 
