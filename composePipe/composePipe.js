@@ -34,7 +34,30 @@
 'use strict';
 
 var compose = function() {
+  //input: arbitrary number of arugments
+  //inputs: function calls
+  //shoudl return a function
+  var calls = arguments
+  return function(target) {
+    debugger;
+    var result;
+    for (var index = calls.length - 1; index >= 0; index--) {
+      target = calls[index](target);
+    }
+    return target;
+  }
+  //each function is applied on the ffunction that follows.
+  //iterate through arguments array
+    // 
 };
+
+
+
+var greet = function(name){ return 'hi: ' + name;}
+var exclaim = function(statement) { return statement.toUpperCase() + '!';}
+var welcome = compose(greet, exclaim);
+
+console.log(welcome('phillip'));
 
 var pipe = function() {
 };
