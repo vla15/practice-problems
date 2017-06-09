@@ -62,7 +62,6 @@ var pipe = function() {
   var calls = arguments;
   // returns a function
   return function(target) {
-    debugger;
     // iterates left to to right on arguments
     for (var index = 0; index < calls.length; index++) {
       // set target to the result of the function calls
