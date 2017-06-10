@@ -15,42 +15,6 @@
  * Target time complexity: O(log(array.length))
  */
 
-var rotatedArraySearch = function (rotated, target) {
-  // Your code here:
-  //input unsorted array
-  //input target value
-  //output index of target value
-  // resort the array
-  let isSorted = true;
-  let sliceIndex;
-  let sortedArr;
-    // have to find where items have been rotated at
-    // iterate through the array
-  for (let index = 0; index < rotated.length; index++) {
-    if (rotated[index] > rotated[index + 1]) {
-      if (isSorted) {
-        isSorted = false;
-        sliceIndex = index + 1;
-      }
-    }
-      // start from beginning
-      // check if next value is less than current
-        // current value less than next value
-  }
-  if (!isSorted) {
-    sortedArr = rotated.slice(sliceIndex).concat(rotated.slice(0, sliceIndex))
-  } else {
-    sortedArr = rotated.slice(0);
-  }
-  // return binarySearch(sortedArr, target);
-          // splice up to that index
-          // merge with original array
-      // else array is sorted
-    // utilize binary search
-      //build out binary search function and pass in sorted array and target
-
-};
-
 const binarySearch = function(array, target, first = 0, last = array.length - 1) {
   debugger;
   var start = first;
@@ -79,6 +43,47 @@ const binarySearch = function(array, target, first = 0, last = array.length - 1)
 
 }
 
-console.log(binarySearch([0, 1, 2, 3, 4, 5, 6, 7], 5));
-console.log(binarySearch([0, 1, 2], 0))
+// console.log(binarySearch([0, 1, 2, 3, 4, 5, 6, 7], 5));
+// console.log(binarySearch([0, 1, 2], 0))
+
+var rotatedArraySearch = function (rotated, target) {
+  // Your code here:
+  //input unsorted array
+  //input target value
+  //output index of target value
+  // resort the array
+  let isSorted = true;
+  let sliceIndex;
+  let sortedArr;
+    // have to find where items have been rotated at
+    // iterate through the array
+  for (let index = 0; index < rotated.length; index++) {
+    if (rotated[index] > rotated[index + 1]) {
+      if (isSorted) {
+        isSorted = false;
+        sliceIndex = index + 1;
+      }
+    }
+      // start from beginning
+      // check if next value is less than current
+        // current value less than next value
+  }
+  if (!isSorted) {
+    sortedArr = rotated.slice(sliceIndex).concat(rotated.slice(0, sliceIndex))
+  } else {
+    sortedArr = rotated.slice(0);
+  }
+  return binarySearch(sortedArr, target);
+          // splice up to that index
+          // merge with original array
+      // else array is sorted
+    // utilize binary search
+      //build out binary search function and pass in sorted array and target
+
+};
+
+
+
+console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2) === 5)
+console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100) === null)
 
