@@ -39,8 +39,10 @@ var rotatedArraySearch = function (rotated, target) {
   }
   if (!isSorted) {
     sortedArr = rotated.slice(sliceIndex).concat(rotated.slice(0, sliceIndex))
+  } else {
+    sortedArr = rotated.slice(0);
   }
-  return sortedArr;
+  // return binarySearch(sortedArr, target);
           // splice up to that index
           // merge with original array
       // else array is sorted
@@ -49,6 +51,34 @@ var rotatedArraySearch = function (rotated, target) {
 
 };
 
-console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3]));
+const binarySearch = function(array, target, first = 0, last = array.length - 1) {
+  debugger;
+  var start = first;
+  var end = last; 
+  var middle = Math.floor((end + start) / 2);
 
+  //check if middle index is value
+  if (array[middle] === target) {
+    // if so return index
+    return middle;
+  }
+  if (start === end) {
+    return null;
+  }
+  //check if start equals end
+    // return null
+  if (target > array[middle]) {
+    middle++
+    return binarySearch(array, target, start = middle, end)
+  } else if (target < array[middle]) {
+    middle--
+    return binarySearch(array, target, start, end = middle);
+  }
+  // if target > middle index value, right half of array
+  // if target < middle index value, left half of array
+
+}
+
+console.log(binarySearch([0, 1, 2, 3, 4, 5, 6, 7], 5));
+console.log(binarySearch([0, 1, 2], 0))
 
