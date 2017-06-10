@@ -69,11 +69,12 @@ var rotatedArraySearch = function (rotated, target) {
         // current value less than next value
   }
   if (!isSorted) {
-    sortedArr = rotated.slice(sliceIndex).concat(rotated.slice(0, sliceIndex))
+    if (target > rotated[sliceIndex]) {
+      return binarySearch(rotated, target, sliceIndex)
+    }
   } else {
-    sortedArr = rotated.slice(0);
+    return binarySearch(rotated, target);
   }
-  return binarySearch(sortedArr, target);
           // splice up to that index
           // merge with original array
       // else array is sorted
