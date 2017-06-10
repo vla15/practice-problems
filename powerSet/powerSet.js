@@ -18,4 +18,24 @@
  */
 
 var powerSet = function(str) {
+  //input one string
+  //edge case blank spaces
+  //store results
+  var results = []
+  // setup a recursive function
+  var recurseString = function (text, currentIndex) {
+    // sort text
+    // checks if not in the results array
+      // adds to resulst array
+
+    // start at second char of str
+      // add and recurse
+  }
+  for (var index = 0; index < str.length; index++) {
+  // iterate through the str at every char
+    //invoke recursion
+  }
+  // append empty string in front of results
+  // return array results
+
 };
