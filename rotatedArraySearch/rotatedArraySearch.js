@@ -25,6 +25,10 @@ const binarySearch = function(array, target, first = 0, last = array.length - 1)
   if (array[middle] === target) {
     // if so return index
     return middle;
+  } else if (array[middle + 1] === target) {
+    return middle + 1;
+  } else if (array[middle - 1] === target) {
+    return middle - 1;
   }
   if (start === end) {
     return null;
@@ -53,28 +57,22 @@ var rotatedArraySearch = function (rotated, target) {
   //output index of target value
   // resort the array
   let isSorted = true;
-  let sliceIndex;
-  let sortedArr;
+  let middle = Math.floor(rotated.length / 2);
+  if (rotated[middle] === target) {
+    return middle;
+  }
+  if (rotated[rotated.length - 1] > rotated[0]) {
+    return binarySearch(rotated, target);
+  } else if (target > rotated[rotated.length - 1]) {
+    return binarySearch(rotated, target, 0, middle)
+  } else {
+    return binarySearch(rotated, target, middle);
+  }
     // have to find where items have been rotated at
     // iterate through the array
-  for (let index = 0; index < rotated.length; index++) {
-    if (rotated[index] > rotated[index + 1]) {
-      if (isSorted) {
-        isSorted = false;
-        sliceIndex = index + 1;
-      }
-    }
       // start from beginning
       // check if next value is less than current
         // current value less than next value
-  }
-  if (!isSorted) {
-    if (target > rotated[sliceIndex]) {
-      return binarySearch(rotated, target, sliceIndex)
-    }
-  } else {
-    return binarySearch(rotated, target);
-  }
           // splice up to that index
           // merge with original array
       // else array is sorted
@@ -83,8 +81,10 @@ var rotatedArraySearch = function (rotated, target) {
 
 };
 
+// console.log(rotatedArraySearch([4,5,6,0,1,2,3], 2));
+console.log(rotatedArraySearch([3, 4, 5, 2], 4))
 
 
-console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2) === 5)
-console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100) === null)
+// console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2) === 5)
+// console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100) === null)
 
