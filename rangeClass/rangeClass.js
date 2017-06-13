@@ -48,7 +48,11 @@ var Range = function(start, end, step) {
   }
   this.countForward = true;
   if (this.start > this.end) {
-    this.countFoward = false;
+    this.countForward = false;
+  }
+  this.backwards = false;
+  if (this.step < 0) {
+    this.backwards = true;
   }
 };
 
@@ -56,7 +60,7 @@ Range.prototype.size = function () {
   //difference between end and start
   var size = 1;
   var start = this.start
-  if (this.start > this.end) {
+  if (this.start > this.end || this.backwards) {
     //counting backwards
     while (start > this.end) {
       start -= this.step;
@@ -74,7 +78,7 @@ Range.prototype.size = function () {
 
 Range.prototype.each = function (callback) {
   var start = this.start;
-  if (this.countForward) {
+  if (this.countForward || !this.backwards) {
     while (start <= this.end) {
       callback(start);
       start += this.step;
@@ -97,7 +101,7 @@ Range.prototype.includes = function (val) {
         start+= this.step;
       }
     }
-  } else if (!this.countForward) {
+  } else if (!this.countForward || this.backwards) {
     while (start >= this.end) {
       if (start === val) {
         return true;
@@ -109,11 +113,11 @@ Range.prototype.includes = function (val) {
   return false;
 };
 
-var range = new Range(2, 4);
+// var range = new Range(2, 4, 2);
 
-// console.log(range.size());
-// console.log(range.includes(5))
+// // console.log(range.size());
+// // console.log(range.includes(5))
 
-range.each(function(val){
-  console.log(val+"!");
-});
+// range.each(function(val){
+//   console.log(val+"!");
+// });
