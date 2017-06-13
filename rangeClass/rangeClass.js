@@ -73,6 +73,18 @@ Range.prototype.size = function () {
 };
 
 Range.prototype.each = function (callback) {
+  var start = this.start;
+  if (this.countForward) {
+    while (start <= this.end) {
+      callback(start);
+      start += this.step;
+    }
+  } else {
+    while (start >= this.end) {
+      callback(start);
+      start -= this.step;
+    }
+  }
 };
 
 Range.prototype.includes = function (val) {
@@ -97,8 +109,11 @@ Range.prototype.includes = function (val) {
   return false;
 };
 
-var range = new Range(2, 3);
+var range = new Range(2, 4);
 
 // console.log(range.size());
-console.log(range.includes(5))
+// console.log(range.includes(5))
 
+range.each(function(val){
+  console.log(val+"!");
+});
