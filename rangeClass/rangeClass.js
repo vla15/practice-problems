@@ -40,9 +40,31 @@
 
 
 var Range = function(start, end, step) {
+  this.start = start;
+  this.end = end;
+  this.step = step || 1
+  if (start === undefined) {
+    return null;
+  }
 };
 
 Range.prototype.size = function () {
+  //difference between end and start
+  var size = 1;
+  if (this.start > this.end) {
+    //counting backwards
+    while (this.start > this.end) {
+      this.start -= this.step;
+      size += 1;
+    }
+  } else {
+    //counting forwards
+    while (this.start < this.end) {
+      this.start += this.step;
+      size += 1;
+    }
+  }
+  return size;
 };
 
 Range.prototype.each = function (callback) {
@@ -51,5 +73,7 @@ Range.prototype.each = function (callback) {
 Range.prototype.includes = function (val) {
 };
 
-var range = new Range(1);
+var range = new Range(2);
+
+console.log(range.size());
 

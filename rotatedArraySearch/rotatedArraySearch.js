@@ -82,7 +82,7 @@ var rotatedArraySearch = function (rotated, target) {
 };
 
 // console.log(rotatedArraySearch([4,5,6,0,1,2,3], 2));
-console.log(rotatedArraySearch([3, 4, 5, 2], 4))
+// console.log(rotatedArraySearch([3, 4, 5, 2]))
 
 
 // console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2) === 5)
