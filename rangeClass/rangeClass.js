@@ -40,19 +40,24 @@
 
 
 var Range = function(start, end, step) {
-  this.start = start;
-  this.end = end;
-  this.step = step || 1
-  if (this.start === undefined) {
+  if (start === undefined) {
     return null;
   }
-  this.countForward = true;
-  if (this.start > this.end) {
-    this.countForward = false;
-  }
-  this.backwards = false;
+
+  this.step = step || 1;
+  this.countFoward = true;
+
   if (this.step < 0) {
-    this.backwards = true;
+    this.countForward = !this.countForward;
+  }
+  
+  if (start > end || !this.countForward) {
+    this.start = end;
+    this.end = start;
+    this.step = Math.abs(this.step);
+  } else if (start < end) {
+    this.start = start;
+    this.end = end; 
   }
 };
 
@@ -60,13 +65,13 @@ Range.prototype.size = function () {
   //difference between end and start
   var size = 1;
   var start = this.start
-  if (this.start > this.end || this.backwards) {
+  if (this.start > this.end) {
     //counting backwards
     while (start > this.end) {
       start -= this.step;
       size += 1;
     }
-  } else {
+  } else if (this.start < this.end) {
     //counting forwards
     while (start < this.end) {
       start += this.step;
@@ -78,12 +83,12 @@ Range.prototype.size = function () {
 
 Range.prototype.each = function (callback) {
   var start = this.start;
-  if (this.countForward || !this.backwards) {
+  if (start < this.end) {
     while (start <= this.end) {
       callback(start);
       start += this.step;
     }
-  } else {
+  } else if (start > this.end) {
     while (start >= this.end) {
       callback(start);
       start -= this.step;
@@ -93,7 +98,7 @@ Range.prototype.each = function (callback) {
 
 Range.prototype.includes = function (val) {
   var start = this.start;
-  if (this.countForward) {
+  if (start < this.end) {
     while(start <= this.end) {
       if (start === val) {
         return true;
@@ -101,7 +106,7 @@ Range.prototype.includes = function (val) {
         start+= this.step;
       }
     }
-  } else if (!this.countForward || this.backwards) {
+  } else if (start > this.end) {
     while (start >= this.end) {
       if (start === val) {
         return true;
@@ -113,10 +118,11 @@ Range.prototype.includes = function (val) {
   return false;
 };
 
-// var range = new Range(2, 4, 2);
+var range = new Range(6, 4, -1);
 
-// // console.log(range.size());
-// // console.log(range.includes(5))
+console.log(range.size());
+
+// console.log(range.includes(5))
 
 // range.each(function(val){
 //   console.log(val+"!");
