@@ -24,6 +24,22 @@
  *
  */
 var balancedParens = function(input) {
+  //input: string
+  // iterate through string input
+  var charCount = {};
+  var chars = ['[', ']', '{', '}', '(', ')']
+  for (var index = 0; index < input.length; index++) {
+    if (chars.indexOf(input[index]) !== -1) {
+      var key = input[index];
+    }
+  }
+  return charCount
+  // take a count of {, (, [ chars
+  // if counts are not divisible by 2,
+    // return false
+  // else trye;
 };
+
+console.log(balancedParens('[](){}'));
 
 
