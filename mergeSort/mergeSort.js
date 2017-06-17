@@ -119,6 +119,17 @@ var mergeSort = function(array) {
     arraySplit(array);
   }
 
+  var sorting = function(array) {
+    for (var index = 0; index < array.length; index++) {
+      if (array[index] > array[index + 1]) {
+        var largest = array[index];
+        array[index] = array[index + 1];
+        array[index + 1] = largest;
+      }
+    }
+    return array;   
+  }
+
   //results is an array split into individual arrays
   // need to create another recursive function
   var arrayMerge = function(array) {
@@ -128,7 +139,9 @@ var mergeSort = function(array) {
     var mergedArr = [];
     for (var outer = 0; outer < array.length; outer+= 2) {
       if (array[outer + 1] !== undefined) {
-        mergedArr.push(array[outer].concat(array[outer + 1]));
+        var merged = array[outer].concat(array[outer + 1]);
+        var sortMerged = sorting(merged)
+        mergedArr.push(sortMerged);
       } else {
         mergedArr.push(array[outer]);
       }
