@@ -99,4 +99,31 @@
 
 var mergeSort = function(array) {
   // Your code here.
+  // input: an unsorted array
+  var results = []
+  // declare a split function
+  var arraySplit = function(array) {
+    if (array.length === 1) {
+      results.push(array);
+      return;
+    }
+    var middle = Math.floor(array.length / 2);
+    var firstHalf = array.slice(0, middle);
+    var secHalf = array.slice (middle);
+    arraySplit(firstHalf);
+    arraySplit(secHalf);
+    return ;
+  };
+
+  if (array.length > 1) {
+    arraySplit(array);
+  }
+  return results;
+  // split the array
+  // check if length of 1
+    // return
+  // else recurse split
+
 };
+
+console.log(mergeSort([5, 2, 3, 4, 7 ]));

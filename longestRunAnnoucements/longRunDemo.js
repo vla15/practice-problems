@@ -47,4 +47,4 @@ var longestRun = function(str) {
   return [start, end];
 }
 
-console.log(longestRun('abbbcc')); // [1, 3]
+// console.log(longestRun('aabbc')); // [1, 3]
