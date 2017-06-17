@@ -100,11 +100,11 @@
 var mergeSort = function(array) {
   // Your code here.
   // input: an unsorted array
-  var results = []
+  var splitResults = []
   // declare a split function
   var arraySplit = function(array) {
     if (array.length === 1) {
-      results.push(array);
+      splitResults.push(array);
       return;
     }
     var middle = Math.floor(array.length / 2);
@@ -118,12 +118,34 @@ var mergeSort = function(array) {
   if (array.length > 1) {
     arraySplit(array);
   }
-  return results;
-  // split the array
-  // check if length of 1
-    // return
-  // else recurse split
+
+  //results is an array split into individual arrays
+  // need to create another recursive function
+  var arrayMerge = function(array) {
+    if (array.length === 1) {
+      return array
+    }
+    var mergedArr = [];
+    for (var outer = 0; outer < array.length; outer+= 2) {
+      if (array[outer + 1] !== undefined) {
+        mergedArr.push(array[outer].concat(array[outer + 1]));
+      } else {
+        mergedArr.push(array[outer]);
+      }
+    }
+    return arrayMerge(mergedArr);
+  }
+    //base case
+    // if results of merge is length of 1 return;
+
+  if (splitResults.length > 1) {
+    return arrayMerge(splitResults);
+  }
+  //iterate through results
+  //if first value in split results is greater than second value
+    // merge with second value then first value
+  // merge with first value then second value
 
 };
 
-console.log(mergeSort([5, 2, 3, 4, 7 ]));
+console.log(mergeSort([5, 2, 3, 4, 7]));
