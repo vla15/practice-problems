@@ -152,7 +152,8 @@ var mergeSort = function(array) {
     // if results of merge is length of 1 return;
 
   if (splitResults.length > 1) {
-    return arrayMerge(splitResults);
+    var finalResults = arrayMerge(splitResults);
+    return finalResults[0]
   }
   //iterate through results
   //if first value in split results is greater than second value
