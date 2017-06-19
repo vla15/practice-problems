@@ -14,7 +14,34 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+  var start = 0;
+  // var to track end index
+  var end = 0;
+  // var to track length
+  var longestLength = 0;
+  // iterate through str
+  var counter = 0;
+  var traverseString = function(str, target, targetIndex) {
+    for (var tIndex = targetIndex + 1; tIndex < str.length; tIndex++) {
+      if (target === str[tIndex]) {
+        counter++;
+        if (counter > longestLength) {
+          start = targetIndex;
+          end = tIndex;
+          longestLength = counter;
+        }
+        // traverseString(str, target, tIndex);
+      } else {
+        counter = 0;
+        return;
+      }
+    }
+  }
+  for (var index = 0; index < string.length; index++) {
+    var target = string[index]
+    traverseString(string, target, index);
+  }
+  return [start, end];
 };
 
 // If you need a random string generator, use this!
