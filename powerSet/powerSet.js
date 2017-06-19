@@ -52,7 +52,7 @@ var powerSet = function(str) {
     //invoke recursion
   }
   results.unshift('');
-  return results
+  return results;
   // append empty string in front of results
   // return array results
 
