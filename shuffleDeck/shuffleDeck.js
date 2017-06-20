@@ -36,25 +36,35 @@ var shuffleDeck = function(deck) {
   //input: ordered deck
   //output shuffled
   //counter 0
-  var counter = 0;
-  //var current set random number generator from 0 - 51
-  var current = deck[Math.floor(Math.random() * 52)];
-  var replace;
-  //var replace
-  while (counter < deck.length) {
-  // while counter less than deck length
-    var newPosition = Math.floor(Math.random() * 52);
-    // random number generator from 0 - 51
-    replace = deck[newPosition];
-    // set replace to value of array at random number
-    deck[newPosition] = current;
-    // replace current value at array at number generated
-    current = replace;
-    // current value set to replace value
-    counter++
-    // increment counter
+  var middle = Math.floor(deck.length / 2);
+  //split deck
+  var left = deck.slice(0, middle);
+  var right = deck.slice(middle);
+
+  var shuffle = function(deck) {
+  //shuffle
+  //recombine
+    var counter = 0;
+    //var current set random number generator from 0 - 51
+    var current = deck[Math.floor(Math.random() * deck.length)];
+    var replace;
+    //var replace
+    while (counter < deck.length + 1) {
+    // while counter less than deck length
+      var newPosition = Math.floor(Math.random() * deck.length);
+      // random number generator from 0 - 51
+      replace = deck[newPosition];
+      // set replace to value of array at random number
+      deck[newPosition] = current;
+      // replace current value at array at number generated
+      current = replace;
+      // current value set to replace value
+      counter++
+      // increment counter
+    }
+    return deck;
   }
-  return deck;
+  return shuffle(left).concat(shuffle(right));
 };
 
 // Ordered deck generator provided for your testing convenience
