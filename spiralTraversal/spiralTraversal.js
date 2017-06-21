@@ -51,7 +51,7 @@ var spiralTraversal = function(matrix) {
       // iterate through last array backwards and add values to result
     // check if there are any arrays left
       if (matrix.length > 0) {
-        for (var firstIndex = 0; firstIndex < matrix.length; firstIndex++) {
+        for (var firstIndex = matrix.length - 1; firstIndex >= 0; firstIndex--) {
           var firstIndexValue = matrix[firstIndex].splice(0, 1);
           results.push(firstIndexValue);
         }
@@ -78,9 +78,10 @@ var assertEqual = function(actual, expected, test) {
 }
 
 var results = spiralTraversal([
-      [1,2,3],
-      [4,5,6],
-      [7,8,9]
+      [1,2,3,4],
+      [5,6,7,8],
+      [9,10,11,12],
+      [13,14,15,16]
     ]);
 
 console.log(results);
