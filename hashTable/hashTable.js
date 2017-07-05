@@ -22,26 +22,26 @@ var makeHashTable = function() {
   var storageLimit = 1000;
   var size = 0;
   var replaced = false;
-  result.insert = function(str) {
-    var key = getIndexBelowMaxForKey(str, storageLimit);
-    if (storage[key] === undefined) {
-      storage[key] = [];
+  result.insert = function(key, value) {
+    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    if (storage[refKey] === undefined) {
+      storage[refKey] = [];
     } else {
-      size = storage[key].length;
+      size = storage[refKey].length;
     }
 
     // needs to check if value has already been inserted or not
     if (size === 0) {
-      storage[key][0] = [str, key];
+      storage[refKey][0] = [key, value];
     } else {
       for (var index = 0; index < size; index++) {
-        if (storage[key][index][1] === key) {
-          storage[key][index][0] = str;
+        if (storage[refKey][index][0] === key) {
+          storage[refKey][index][1] = str;
           replaced = true;
         }
       }
       if (!replaced) {
-        storage[key][size] = [str, key]
+        storage[refKey][size] = [key, value]
       }
     }
     //handle collisions
@@ -56,15 +56,16 @@ var makeHashTable = function() {
   result.retrieve = function(key) {
     //convert str to key
     // iterate through storage
-    if (storage[key] === undefined) {
+    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    if (storage[refKey] === undefined) {
       return null;
     }
 
-    var targetArr = storage[key];
+    var targetArr = storage[refKey];
 
     for (var index = 0; index < targetArr.length; index++) {
-      if (targetArr[index][1] === key) {
-        return targetArr[index][0];
+      if (targetArr[index][0] === key) {
+        return targetArr[index][1];
       }
     }
 
@@ -76,14 +77,15 @@ var makeHashTable = function() {
   };
 
   result.remove = function(key) {
-    if (storage[key] === undefined) {
+    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    if (storage[refKey] === undefined) {
       return null;
     }
 
-    var targetArr = storage[key];
+    var targetArr = storage[refKey];
 
     for (var index = 0; index < targetArr.length; index++) {
-      if (targetArr[index][1] === key) {
+      if (targetArr[index][0] === key) {
         targetArr.splice(index, 1);
       }
     }
