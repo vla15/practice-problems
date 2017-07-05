@@ -100,11 +100,13 @@ var makeHashTable = function() {
 };
 
 
-var hash = makeHashTable();
-hash.insert('hello');
-var keyPair = getIndexBelowMaxForKey('hello', 1000);
-console.log(hash.retrieve(keyPair));
-console.log(hash.remove(keyPair));
-console.log(hash.retrieve(keyPair));
+// var hash = makeHashTable();
+// hash.insert('hello');
+// var keyPair = getIndexBelowMaxForKey('hello', 1000);
+// console.log(hash.retrieve(keyPair));
+// console.log(hash.remove(keyPair));
+// console.log(hash.retrieve(keyPair));
+// hash.insert('hello');
+// console.log(hash.retrieve(keyPair));
 
 
