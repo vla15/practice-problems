@@ -81,11 +81,11 @@ class Queue {
   };
 };
 
-var QueueTest = new Queue();
-QueueTest.enqueue(5);
-QueueTest.enqueue(7);
-QueueTest.enqueue(10);
+// var QueueTest = new Queue();
+// QueueTest.enqueue(5);
+// QueueTest.enqueue(7);
+// QueueTest.enqueue(10);
 
-console.log(QueueTest.dequeue());
-console.log(QueueTest.dequeue());
-console.log(QueueTest.size())
+// console.log(QueueTest.dequeue());
+// console.log(QueueTest.dequeue());
+// console.log(QueueTest.size())
