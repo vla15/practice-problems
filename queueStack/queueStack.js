@@ -7,20 +7,43 @@
 /**
   * Stack Class
   */
-var Stack = function() {
-
+class Stack {
+  constructor() {
+    this.storage = [];
+    this.sizeOfStorage = 0;
+    this.topPointer = 0;  
+  }
   // add an item to the top of the stack
-  this.push = function() {
+  // pointer for top
+  // creating a storage
+  push(value) {
+    //adds to the top
+    this.storage[this.sizeOfStorage] = value;
+    this.sizeOfStorage++;
+    this.topPointer++;
   };
 
   // remove an item from the top of the stack
-  this.pop = function() {
+  pop() {
+    this.sizeOfStorage--;
+    var topOfStack = this.storage[this.sizeOfStorage];
+    this.topPointer--;
+    return topOfStack
   };
 
   // return the number of items in the stack
-  this.size = function() {
+  size() {
+    return this.sizeOfStorage;
   };
 };
+
+var hello = new Stack();
+
+// hello.push(5);
+// hello.push(7);
+// console.log(hello.pop());
+// console.log(hello.pop());
+
 
 /**
   * Queue Class
