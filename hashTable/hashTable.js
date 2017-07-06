@@ -23,7 +23,7 @@ var makeHashTable = function() {
   var size = 0;
   var replaced = false;
   result.insert = function(key, value) {
-    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    var refKey = getIndexBelowMaxForKey(JSON.stringify(key), storageLimit);
     if (storage[refKey] === undefined) {
       storage[refKey] = [];
     } else {
@@ -56,7 +56,7 @@ var makeHashTable = function() {
   result.retrieve = function(key) {
     //convert str to key
     // iterate through storage
-    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    var refKey = getIndexBelowMaxForKey(JSON.stringify(key), storageLimit);
     if (storage[refKey] === undefined) {
       console.log('dont exist');
       return null;
@@ -78,7 +78,7 @@ var makeHashTable = function() {
   };
 
   result.remove = function(key) {
-    var refKey = getIndexBelowMaxForKey(key, storageLimit);
+    var refKey = getIndexBelowMaxForKey(JSON.stringify(key), storageLimit);
     if (storage[refKey] === undefined) {
       return null;
     }
