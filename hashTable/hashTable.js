@@ -36,7 +36,7 @@ var makeHashTable = function() {
     } else {
       for (var index = 0; index < size; index++) {
         if (storage[refKey][index][0] === key) {
-          storage[refKey][index][1] = str;
+          storage[refKey][index][1] = value;
           replaced = true;
         }
       }
@@ -58,6 +58,7 @@ var makeHashTable = function() {
     // iterate through storage
     var refKey = getIndexBelowMaxForKey(key, storageLimit);
     if (storage[refKey] === undefined) {
+      console.log('dont exist');
       return null;
     }
 
@@ -103,12 +104,9 @@ var makeHashTable = function() {
 
 
 // var hash = makeHashTable();
-// hash.insert('hello');
-// var keyPair = getIndexBelowMaxForKey('hello', 1000);
-// console.log(hash.retrieve(keyPair));
-// console.log(hash.remove(keyPair));
-// console.log(hash.retrieve(keyPair));
-// hash.insert('hello');
-// console.log(hash.retrieve(keyPair));
-
+// hash.insert('hello', 'world');
+// hash.insert('hello', 'champion')
+// console.log(hash.retrieve('hello'));
+// console.log(hash.remove('hello'));
+// console.log(hash.retrieve('hello'));
 
