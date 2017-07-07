@@ -66,9 +66,11 @@
 // Extra extra credit: Implement `heapSort`. `heapSort` takes an array, constructs it into a `BinaryHeap`
 // and then iteratively returns the root of the `BinaryHeap` until its empty, thus returning a sorted array.
 
+ // * parentIndex = Math.floor( (index - 1) / 2 )
+ // * childrenIndices = [index * 2 + 1, index * 2 + 2]
 
 function BinaryHeap () {
-  this._heap = [];
+  this._heap = [0, 1, 2, 3, 4, 5, 6];
   // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
   this._compare = function (i, j) { return i < j };
 }
@@ -84,4 +86,45 @@ BinaryHeap.prototype.insert = function (value) {
 
 BinaryHeap.prototype.removeRoot = function () {
   // TODO: Your code here
+  if (this._heap.length) {
+    var last = this._heap.pop()
+    this._heap[0] = last;
+  }
+  var counter = 0;
+  var traverse = (curIndex) => {
+    var currentIndex = curIndex;
+    var parent = this._heap[curIndex]
+    var newParent;
+    var smallest;
+    var children = [currentIndex * 2 + 1, currentIndex * 2 + 2];
+    if (this._heap[children[0]] > this._heap[children[1]]) {
+      smallest = children[1]
+    } else {
+      smallest = children[0]
+    }
+    if (this._heap[smallest] < parent) {
+      newParent = this._heap[smallest];
+      this._heap[smallest] = parent;
+      this._heap[currentIndex] = newParent;
+      counter++
+      traverse(counter);
+    } else {
+      return;
+    }
+  }
+  traverse(counter);
+  return this._heap;
+  // swap value with the last root
+  // compare recursively down a path of the binary tree
+    // utilize the children indexies formula to get them
+    // utilize the compare function swap
+      // if index 0 of children tuple is less than root
+        // swap places
+      // if index 1 of children tuple is less than root
+        // swap places
+      // else return no swap needed
 }
+
+var Binary = new BinaryHeap();
+
+console.log(Binary.removeRoot())
