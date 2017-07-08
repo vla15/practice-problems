@@ -90,29 +90,27 @@ BinaryHeap.prototype.removeRoot = function () {
     var last = this._heap.pop()
     this._heap[0] = last;
   }
-  var counter = 0;
   var traverse = (curIndex) => {
-    var currentIndex = curIndex;
-    var parent = this._heap[curIndex]
     var newParent;
     var smallest;
-    var children = [currentIndex * 2 + 1, currentIndex * 2 + 2];
-    if (this._heap[children[0]] > this._heap[children[1]]) {
-      smallest = children[1]
-    } else {
-      smallest = children[0]
-    }
-    if (this._heap[smallest] < parent) {
-      newParent = this._heap[smallest];
-      this._heap[smallest] = parent;
-      this._heap[currentIndex] = newParent;
-      counter++
-      traverse(counter);
-    } else {
+    var children = [curIndex * 2 + 1, curIndex * 2 + 2];
+    if (this._heap[children[0]] === undefined && this._heap[children[1]] === undefined) {
       return;
     }
+    if (this._heap[children[0]] < this._heap[children[1]]) {
+      smallest = children[0]
+    } else {
+      smallest = children[1]
+    }
+    if (this._heap[smallest] < this._heap[curIndex]) {
+      newParent = this._heap[smallest];
+      this._heap[smallest] = this._heap[curIndex];
+      this._heap[curIndex] = newParent;
+      traverse(smallest);
+    }
+    return;
   }
-  traverse(counter);
+  traverse(0);
   return this._heap;
   // swap value with the last root
   // compare recursively down a path of the binary tree
