@@ -31,7 +31,6 @@ var makeBoard = function(n) {
   return board;
 };
 
-
 var robotPaths = function(n, board, i, j) {
   // n = size of board,
   // board = board itself
