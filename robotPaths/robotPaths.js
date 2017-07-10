@@ -26,7 +26,13 @@ var makeBoard = function(n) {
     return !!this[i][j];
   };
   board.outOfBounds = function(pos, n) {
-    return pos === n;
+    if (pos < 0) {
+      return true;
+    }
+    if (pos === n) {
+      return true;
+    }
+    return false;
   }
   return board;
 };
@@ -34,11 +40,15 @@ var makeBoard = function(n) {
 var robotPaths = function(n, board, i, j) {
   // n = size of board,
   // board = board itself
-  var Board = board(n);
-  // i = row
-  // j = col
-  // goal is when i === n - 1 && j === n - 1
+  var BoardRight = board(n);
+  BoardRight.togglePiece(0, 1);
+  BoardRight.togglePiece(0, 0);
+  var BoardDown = board(n);
+  BoardDown.togglePiece(1, 0);
+  BoardDown.togglePiece(0, 0);
   var count = 0;
+  console.log(BoardRight);
+
 
   var traverse = function(n, board, row, col) {
   // traverse function
@@ -46,42 +56,46 @@ var robotPaths = function(n, board, i, j) {
       count++;
       return;
     }
-    for (var rowIndex = row; rowIndex < n; rowIndex++) {
-      if (board.hasBeenVisited(row, col)) {
-        for (var colIndex = col; colIndex < n; colIndex++) {
-          if (board.hasBeenVisited(row, col)) {
-            return;
-          } else {
-            board.toggle(row, col);
-            col++
-            traverse(n, board, row, col);
-          }
-        }
-      } else {
-        board.togglePiece(row, col);
-        row++;
-        traverse(n, board, row, col);
-      }
-    }
-    return;
-    // if i === n - 1 && j === n - 1
-      // count +1
-      // board resets
-    // adds one to row
-      // check if it has been visited
-        // if it has
-          // check if col has been visited
-            // if it has return
-          // else add has been visited
-          // recurse
-      // if hasn't add has been visisted
-      // recurse
-    
-  }
-  traverse(n, Board, i, j);
-  return count;
 
+    //go up
+    debugger;
+    row--;
+    if (!board.outOfBounds(row, n) && !board.hasBeenVisited(row, col)) {
+      board.togglePiece(row, col);
+      traverse(n, board, row, col);
+      board.togglePiece(row, col);
+    }
+    row++;
+    //go right
+    col++;
+    if (!board.outOfBounds(col, n) && !board.hasBeenVisited(row, col)) {
+      board.togglePiece(row, col);
+      traverse(n, board, row, col);
+      board.togglePiece(row, col);
+    }
+    col--;
+    //go down
+    row++;
+    if (!board.outOfBounds(row, n) && !board.hasBeenVisited(row, col)) {
+      board.togglePiece(row, col);
+      traverse(n, board, row, col);
+      board.togglePiece(row, col);
+    }
+    row--;    
+    //go left
+    col--;
+    if (!board.outOfBounds(col, n) && !board.hasBeenVisited(row, col)) {
+      board.togglePiece(row, col);
+      traverse(n, board, row, col);
+      board.togglePiece(row, col);
+    }
+    col++;
+    return;
+  }
+  traverse(n, BoardRight, 0, 1)
+  traverse(n, BoardDown, 1, 0)
+  return count;
 };
 
 
-console.log(robotPaths(3, makeBoard, 0, 0))
+// console.log(robotPaths(3, makeBoard, 0, 0))
