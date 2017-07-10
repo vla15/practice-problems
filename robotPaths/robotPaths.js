@@ -40,10 +40,10 @@ var makeBoard = function(n) {
 var robotPaths = function(n, board, i, j) {
   // n = size of board,
   // board = board itself
-  var BoardRight = board(n);
+  var BoardRight = makeBoard(n);
   BoardRight.togglePiece(0, 1);
   BoardRight.togglePiece(0, 0);
-  var BoardDown = board(n);
+  var BoardDown = makeBoard(n);
   BoardDown.togglePiece(1, 0);
   BoardDown.togglePiece(0, 0);
   var count = 0;
@@ -96,6 +96,3 @@ var robotPaths = function(n, board, i, j) {
   traverse(n, BoardDown, 1, 0)
   return count;
 };
-
-
-// console.log(robotPaths(3, makeBoard, 0, 0))
