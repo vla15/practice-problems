@@ -21,7 +21,11 @@ var rockPaperScissors = function(numRounds) {
   //create array with all possiblilities
   var possible = ['rock', 'paper', 'scissors'];
   //iterate through all possible moves
-  var result = []
+  var result = [];
+
+  if (numRounds === 0) {
+    return result;
+  }
   //recurse through
   var throws = function(turn) {
     if (turn.length === numRounds) {
@@ -34,10 +38,8 @@ var rockPaperScissors = function(numRounds) {
       throws(toss);
     }
   }
-
   for (var index = 0; index < possible.length; index++) {
     throws([possible[index]]);
   }
   return result;
 }
-
