@@ -18,31 +18,26 @@
 */
 
 var rockPaperScissors = function(numRounds) {
-  var outcomes = [];
-  var plays = ["rock", "paper", "scissors"];
+  //create array with all possiblilities
+  var possible = ['rock', 'paper', 'scissors'];
+  //iterate through all possible moves
+  var result = []
+  //recurse through
+  var throws = function(turn) {
+    if (turn.length === numRounds) {
+      result.push(turn);
+      return;
+    }
 
-  // can add rounds later, get 3 working. 
-  // for a three round game, it would be 3^3 = 27.
-  // for any number of rounds it would be 3^numrounds. 
-
-  function findOutCome(roundsLeft, result){
-  // when you cover all the rounds
-  // push to the outcomes
-  if (roundsLeft === 0) {
-    outcomes.push(result);
-    return;
+    for (var index = 0; index < possible.length; index++) {
+      var toss = turn.concat([possible[index]])
+      throws(toss);
+    }
   }
 
-  plays.forEach(function(play) {
-    //result.push(play);
-    //concat returns the entire array
-    findOutCome(roundsLeft-1, result.concat(play))
-  });
-};
-
-findOutCome(numRounds, []); // give it a starting point
-
-return outcomes;
+  for (var index = 0; index < possible.length; index++) {
+    throws([possible[index]]);
+  }
+  return result;
 }
 
-console.log(rockPaperScissors(2));
