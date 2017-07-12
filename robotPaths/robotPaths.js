@@ -26,13 +26,11 @@ var makeBoard = function(n) {
     return !!this[i][j];
   };
   board.outOfBounds = function(pos, n) {
-    if (pos < 0) {
+    if (pos < 0 || pos === n) {
       return true;
+    } else {
+      return false;
     }
-    if (pos === n) {
-      return true;
-    }
-    return false;
   }
   return board;
 };
@@ -98,3 +96,6 @@ var robotPaths = function(n, board, i, j) {
   traverse(n, BoardDown, 1, 0)
   return count;
 };
+
+
+console.log(robotPaths(3))
