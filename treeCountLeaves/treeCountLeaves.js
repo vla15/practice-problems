@@ -41,25 +41,25 @@ Tree.prototype.countLeaves = function () {
   // TODO: implement me!
   //create counter
   var counter = 0;
-  // if (!this.children[0]) {
-  //   counter++;
-  // }
-  // for (var index = 0; index < this.children; index++) {
-  //   counter += this.countLeaves(this.children[index].call(this.children[index]));
-  // }
-  // return counter;
-  var traverse = function(root) {
-    if (!root.children[0]) {
-      counter++;
-      return;
-    }
-    var children = root.children;
-    for (var index = 0; index < children.length; index++) {
-      traverse(children[index]);
-    }
+  if (!this.children[0]) {
+    counter++;
   }
-  traverse(this);
+  for (var index = 0; index < this.children.length; index++) {
+    counter += this.countLeaves.call(this.children[index]);
+  }
   return counter;
+  // var traverse = function(root) {
+  //   if (!root.children[0]) {
+  //     counter++;
+  //     return;
+  //   }
+  //   var children = root.children;
+  //   for (var index = 0; index < children.length; index++) {
+  //     traverse(children[index]);
+  //   }
+  // }
+  // traverse(this);
+  // return counter;
   // //traverse tree
   // //when no children
   //   // add to counter
