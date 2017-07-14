@@ -5,7 +5,7 @@
  */
 
 var primeTester = function(n) {
-  if (typeof n !== 'number' || n < 1 || n % 1 !== 0 || n === 1) {
+  if (typeof n !== 'number' || n <= 1 || n % 1 !== 0) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
   }
@@ -27,8 +27,6 @@ var primeTester = function(n) {
   // TODO: return true if n is prime, false otherwise
 };
 
-console.log(primeTester(20));
-
 /* Extra credit: Write a function that generates a list of all prime numbers
  * in a user-specified range (inclusive). If you're not quite sure where to start,
  * check out the Sieve of Eratosthenes on Wikipedia. (And if you're feeling
@@ -36,6 +34,26 @@ console.log(primeTester(20));
  */
 
 var primeSieve = function (start, end) {
+  //input: start
+  //input: end
+  //output: array of prime numbers
+  // create results array
+  var results = [];
+  // create a counter store set to start
+  var counter = start;
+  // while counter less than end
+  while (counter <= end) {
+    // if prime Tester
+    if (primeTester(counter)) {
+      results.push(counter);
+      // add to results
+    }
+    counter++;
+    // increment counter
+    
+  }
+  return results;
+  // return array
 };
 
-
+console.log(primeSieve(15, 23))
