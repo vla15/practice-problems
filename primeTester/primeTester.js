@@ -34,26 +34,53 @@ var primeTester = function(n) {
  */
 
 var primeSieve = function (start, end) {
-  //input: start
-  //input: end
-  //output: array of prime numbers
-  // create results array
-  var results = [];
-  // create a counter store set to start
-  var counter = start;
-  // while counter less than end
-  while (counter <= end) {
-    // if prime Tester
-    if (primeTester(counter)) {
-      results.push(counter);
-      // add to results
+  //create storage array for used numbers
+  var storage = [];
+  var primeNumbers = [];
+  for (var index = 2; index <= end; index++) {
+    if (storage.indexOf(index) === -1) {
+      if (index >= start) {
+        primeNumbers.push(index);
+      }
+      for (var productCounter = 1; index * productCounter <= end; productCounter++) {
+        var product = productCounter * index;
+        if (storage.indexOf(product) === -1) {
+          storage.push(product);
+        }
+      }
     }
-    counter++;
-    // increment counter
-    
   }
-  return results;
-  // return array
+  return primeNumbers;
+  //create counter set to start
+  //create productCounter set to 1
+  // while counter less equal to end
+    // while product of counter and productounter less than equal to end
+      // check if not in storage array
+        // add to storage array
+      // increment produtCounter
+    //increment counter
+  //return storage
+
+  // //input: start
+  // //input: end
+  // //output: array of prime numbers
+  // // create results array
+  // var results = [];
+  // // create a counter store set to start
+  // var counter = start;
+  // // while counter less than end
+  // while (counter <= end) {
+  //   // if prime Tester
+  //   if (primeTester(counter)) {
+  //     results.push(counter);
+  //     // add to results
+  //   }
+  //   counter++;
+  //   // increment counter
+    
+  // }
+  // return results;
+  // // return array
 };
 
-console.log(primeSieve(15, 23))
+// console.log(primeSieve(7, 55));
