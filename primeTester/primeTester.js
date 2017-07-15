@@ -26,6 +26,7 @@ var primeTester = function(n) {
   return true;
   // TODO: return true if n is prime, false otherwise
 };
+
 /* Extra credit: Write a function that generates a list of all prime numbers
  * in a user-specified range (inclusive). If you're not quite sure where to start,
  * check out the Sieve of Eratosthenes on Wikipedia. (And if you're feeling
@@ -33,52 +34,54 @@ var primeTester = function(n) {
  */
 
 var primeSieve = function (start, end) {
-  //create storage array for used numbers
-  // var storage = [];
-  // var primeNumbers = [];
-  // for (var index = 2; index <= end; index++) {
-  //   if (storage.indexOf(index) === -1) {
-  //     if (index >= start) {
-  //       primeNumbers.push(index);
-  //     }
-  //     for (var productCounter = 1; index * productCounter <= end; productCounter++) {
-  //       var product = productCounter * index;
-  //       if (storage.indexOf(product) === -1) {
-  //         storage.push(product);
-  //       }
-  //     }
-  //   }
-  // }
+  // create storage array for used numbers
+  var storage = [];
+  var primeNumbers = [];
+  for (var index = 2; index <= end; index++) {
+    if (storage.indexOf(index) === -1) {
+      if (index >= start) {
+        primeNumbers.push(index);
+      }
+      for (var productCounter = 1; index * productCounter <= end; productCounter++) {
+        var product = productCounter * index;
+        if (storage.indexOf(product) === -1) {
+          storage.push(product);
+        }
+      }
+    }
+  }
+  return primeNumbers;
   // return primeNumbers;
-  //create counter set to start
-  //create productCounter set to 1
+  // create counter set to start
+  // create productCounter set to 1
   // while counter less equal to end
-    // while product of counter and productounter less than equal to end
-      // check if not in storage array
-        // add to storage array
-      // increment produtCounter
-    //increment counter
-  //return storage
+  //   while product of counter and productounter less than equal to end
+  //     check if not in storage array
+  //       add to storage array
+  //     increment produtCounter
+  //   increment counter
+  // return storage
 
   //input: start
   //input: end
   //output: array of prime numbers
   // create results array
-  var results = [];
-  // create a counter store set to start
-  var counter = start;
-  // while counter less than end
-  while (counter <= end) {
-    // if prime Tester
-    if (primeTester(counter)) {
-      results.push(counter);
-      // add to results
-    }
-    counter++;
-    // increment counter
+  // var results = [];
+  // // create a counter store set to start
+  // var counter = start;
+  // // while counter less than end
+  // while (counter <= end) {
+  //   // if prime Tester
+  //   if (primeTester(counter)) {
+  //     results.push(counter);
+  //     // add to results
+  //   }
+  //   counter++;
+  //   // increment counter
     
-  }
-  return results;
-  // return array
+  // }
+  // return results;
+  // // return array
 };
 
+// console.log(primeSieve(5, 100));
