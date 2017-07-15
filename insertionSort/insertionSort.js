@@ -45,8 +45,32 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
-  // Your code goes here. Feel free to add helper functions if needed.
+var insertionSort = function(array) {
+  // input: array of objects
+  // iterate through array
+  var notSorted = true;
+
+  while(notSorted) {
+    for (var index = 0; index < array.length; index++) {
+    // if current value is greater than next value
+    if (array[index + 1] !== undefined) {   
+      if (array[index].value > array[index + 1].value) {
+        var temp = array[index + 1];
+        array[index + 1] = array[index];
+        array[index] = temp;
+        notSorted = false;
+      }
+    }
+      // switch their places in the array
+
+    }
+    notSorted = !notSorted
+  }
+
   return array;
 };
+
+var test = testingTransform([3, 9, 2, 2, 4, 9]);
+
+console.log(insertionSort(test));
+
