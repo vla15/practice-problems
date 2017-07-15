@@ -34,22 +34,22 @@ var primeTester = function(n) {
 
 var primeSieve = function (start, end) {
   //create storage array for used numbers
-  var storage = [];
-  var primeNumbers = [];
-  for (var index = 2; index <= end; index++) {
-    if (storage.indexOf(index) === -1) {
-      if (index >= start) {
-        primeNumbers.push(index);
-      }
-      for (var productCounter = 1; index * productCounter <= end; productCounter++) {
-        var product = productCounter * index;
-        if (storage.indexOf(product) === -1) {
-          storage.push(product);
-        }
-      }
-    }
-  }
-  return primeNumbers;
+  // var storage = [];
+  // var primeNumbers = [];
+  // for (var index = 2; index <= end; index++) {
+  //   if (storage.indexOf(index) === -1) {
+  //     if (index >= start) {
+  //       primeNumbers.push(index);
+  //     }
+  //     for (var productCounter = 1; index * productCounter <= end; productCounter++) {
+  //       var product = productCounter * index;
+  //       if (storage.indexOf(product) === -1) {
+  //         storage.push(product);
+  //       }
+  //     }
+  //   }
+  // }
+  // return primeNumbers;
   //create counter set to start
   //create productCounter set to 1
   // while counter less equal to end
@@ -60,24 +60,25 @@ var primeSieve = function (start, end) {
     //increment counter
   //return storage
 
-  // //input: start
-  // //input: end
-  // //output: array of prime numbers
-  // // create results array
-  // var results = [];
-  // // create a counter store set to start
-  // var counter = start;
-  // // while counter less than end
-  // while (counter <= end) {
-  //   // if prime Tester
-  //   if (primeTester(counter)) {
-  //     results.push(counter);
-  //     // add to results
-  //   }
-  //   counter++;
-  //   // increment counter
+  //input: start
+  //input: end
+  //output: array of prime numbers
+  // create results array
+  var results = [];
+  // create a counter store set to start
+  var counter = start;
+  // while counter less than end
+  while (counter <= end) {
+    // if prime Tester
+    if (primeTester(counter)) {
+      results.push(counter);
+      // add to results
+    }
+    counter++;
+    // increment counter
     
-  // }
-  // return results;
-  // // return array
+  }
+  return results;
+  // return array
 };
+
