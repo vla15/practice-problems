@@ -20,7 +20,7 @@ var evenOccurrence = function(arr) {
   // iterate through arra
   for (var index = 0; index < arr.length; index++) {
     // check if even
-    if (arr[index] % 2 === 0) {
+    if (arr[index].length % 2 === 0 || arr[index] % 2 === 0) {
       var evenTarget = arr[index];
       // store target
       var counter = 0;
@@ -49,3 +49,6 @@ var evenOccurrence = function(arr) {
 
 // var onlyEven = evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4]);
 // console.log(onlyEven);
+
+// console.log(evenOccurrence(['cat', 'matt', 'dog', 'matt']));
+// console.log(evenOccurrence(['cat', 'matt', 4, 7, 'matt', 4, 'matt', 'dog', 'matt']))
