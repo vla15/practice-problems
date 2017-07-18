@@ -44,6 +44,7 @@ var characterFrequency = function(string) {
   //target letter
   var targetLetter;
   var counter = 0;
+  var sorted = false;
   //split string into individual chars
   var ascSortedString = string.split('').sort();
   //sort by ascending
@@ -70,11 +71,25 @@ var characterFrequency = function(string) {
       //iterate through storage
         //compare counter with new counter
         //insert new tuple in front if greater
-
+  }
+  while (!sorted) {
+    for (var index = 0; index < result.length; index++) {
+      if (result[index + 1] !== undefined) {
+        if (result[index][1] < result[index + 1][1]) {
+          var tmp = result[index + 1];
+          result[index + 1] = result[index];
+          result[index] = tmp;
+          sorted = true;
+        }     
+      }
+    }
+    sorted = !sorted;
   }
   return result;
 };
 
 
 
-console.log(characterFrequency('mississippi'));
+// console.log(characterFrequency('mississippi'));
+// console.log(characterFrequency('miaaiaaippi'));
+// console.log(characterFrequency('mmmaaaiiibbb'));
