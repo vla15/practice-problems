@@ -82,7 +82,7 @@ var insertionSort = function(array, comparator) {
 };
 
 
-var test = testingTransform([3, 9, 2, 2, 4, 9]);
-var testTwo = testingTransform([1, 9, 15, 229, 30]);
-console.log(insertionSort(test));
-console.log(insertionSort(testTwo));
+// var test = testingTransform([3, 9, 2, 2, 4, 9]);
+// var testTwo = testingTransform([1, 9, 15, 229, 30]);
+// console.log(insertionSort(test));
+// console.log(insertionSort(testTwo));

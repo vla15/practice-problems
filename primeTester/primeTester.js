@@ -27,8 +27,6 @@ var primeTester = function(n) {
   // TODO: return true if n is prime, false otherwise
 };
 
-console.log(primeTester(5));
-
 /* Extra credit: Write a function that generates a list of all prime numbers
  * in a user-specified range (inclusive). If you're not quite sure where to start,
  * check out the Sieve of Eratosthenes on Wikipedia. (And if you're feeling
@@ -36,7 +34,8 @@ console.log(primeTester(5));
  */
 
 var primeSieve = function (start, end) {
-  // create storage array for used numbers
+  //create storage array for used numbers
+  if (start < 2)
   var storage = [];
   var primeNumbers = [];
   for (var index = 2; index <= end; index++) {
@@ -53,21 +52,20 @@ var primeSieve = function (start, end) {
     }
   }
   return primeNumbers;
-  // return primeNumbers;
-  // create counter set to start
-  // create productCounter set to 1
+  //create counter set to start
+  //create productCounter set to 1
   // while counter less equal to end
-  //   while product of counter and productounter less than equal to end
-  //     check if not in storage array
-  //       add to storage array
-  //     increment produtCounter
-  //   increment counter
-  // return storage
+    // while product of counter and productounter less than equal to end
+      // check if not in storage array
+        // add to storage array
+      // increment produtCounter
+    //increment counter
+  //return storage
 
-  //input: start
-  //input: end
-  //output: array of prime numbers
-  // create results array
+  // //input: start
+  // //input: end
+  // //output: array of prime numbers
+  // // create results array
   // var results = [];
   // // create a counter store set to start
   // var counter = start;
@@ -86,4 +84,4 @@ var primeSieve = function (start, end) {
   // // return array
 };
 
-// console.log(primeSieve(5, 100));
+// console.log(primeSieve(7, 55));
