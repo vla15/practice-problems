@@ -55,7 +55,7 @@ var characterFrequency = function(string) {
       targetLetter = ascSortedString[index];
     }
     if (ascSortedString[index] === targetLetter) {
-      counter++    
+      counter++;    
     }
     //create counter  
     //if not target letter
@@ -63,8 +63,17 @@ var characterFrequency = function(string) {
       var tuple = [targetLetter, counter];
       targetLetter = ascSortedString[index];
       result.push(tuple);
-      counter = 1;
+      if (index === ascSortedString.length - 1 && targetLetter !== ascSortedString[index - 1]) {
+        counter = 0;
+      } else {
+        counter = 1;
+      }
     }
+
+    if (counter === 0) {
+      result.push([targetLetter, 1])
+    }
+
       //create tuple with target letter, counter
       //update  counter to 1
       //update target letter to new letter
@@ -89,7 +98,7 @@ var characterFrequency = function(string) {
 };
 
 
-
+// console.log(characterFrequency('aaabbc'));
 // console.log(characterFrequency('mississippi'));
 // console.log(characterFrequency('miaaiaaippi'));
 // console.log(characterFrequency('mmmaaaiiibbb'));
