@@ -11,4 +11,34 @@
 
 // Solved in O(n) time with O(1) memory
 var sumArray = function(array) {
+  //input: array of numbers
+  //output: contiguous sum of numbers
+  //constraint: o(n)
+
+  //create pointers to value in memory
+  var sum = 0;
+  var currentValue = 0;
+  var nextValue = 1;
+  var currentSum = array[currentValue];
+  while (currentValue < array.length) {
+    if (nextValue < array.length) {
+
+      currentSum += array[nextValue];
+
+      if (currentSum > sum) {
+        sum = currentSum;
+      }
+    } else {
+      currentValue++;
+      currentSum = array[currentValue];
+      nextValue = currentValue + 1;
+    }
+    currentValue++;
+  }
+
+  return sum;
+  //traverse the array
+  //
 };
+
+console.log(sumArray([1, 2, 3]));
