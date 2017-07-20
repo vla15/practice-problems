@@ -22,14 +22,13 @@ var sumArray = function(array) {
   for (var index = 0; index < array.length; index++) {
 
     preValue = Math.max(0, preValue + array[index]);
-    console.log('pre:', preValue);
     currentValue = Math.max(preValue, currentValue);
-    console.log('current: ', currentValue);
   }
 
-  return currentValue;
+  return currentValue || 0;
   //traverse the array
   //
 };
 
 console.log(sumArray([1, 6, 3, -3, -3, 4, 5]));
+console.log(sumArray([-3, -2, -1]))
