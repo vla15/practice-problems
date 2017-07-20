@@ -16,29 +16,20 @@ var sumArray = function(array) {
   //constraint: o(n)
 
   //create pointers to value in memory
-  var sum = 0;
   var currentValue = 0;
-  var nextValue = 1;
-  var currentSum = array[currentValue];
-  while (currentValue < array.length) {
-    if (nextValue < array.length) {
+  var preValue = 0;
 
-      currentSum += array[nextValue];
+  for (var index = 0; index < array.length; index++) {
 
-      if (currentSum > sum) {
-        sum = currentSum;
-      }
-    } else {
-      currentValue++;
-      currentSum = array[currentValue];
-      nextValue = currentValue + 1;
-    }
-    currentValue++;
+    preValue = Math.max(0, preValue + array[index]);
+    console.log('pre:', preValue);
+    currentValue = Math.max(preValue, currentValue);
+    console.log('current: ', currentValue);
   }
 
-  return sum;
+  return currentValue;
   //traverse the array
   //
 };
 
-console.log(sumArray([1, 2, 3]));
+console.log(sumArray([1, 6, 3, -3, -3, 4, 5]));
