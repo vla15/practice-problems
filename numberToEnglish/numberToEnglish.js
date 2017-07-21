@@ -55,4 +55,22 @@ var numbersToPlace = {
 
 Number.prototype.toEnglish = function () {
   // return my value as english words
-};
+  // input: this (num)
+  // convert number to string
+  var stringArr = this.toString().split('');
+  // determine length
+  var place = '1';
+
+  for (var index = 0; index < stringArr.length - 1; index++) {
+    place += '0';
+  }
+  return place;
+  // iterate through numbersToPlace
+    // perform modulo operation
+}
+
+
+console.log((72).toEnglish());
+
+
+
