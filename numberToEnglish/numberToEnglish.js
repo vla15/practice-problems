@@ -57,20 +57,41 @@ Number.prototype.toEnglish = function () {
   // return my value as english words
   // input: this (num)
   // convert number to string
-  var stringArr = this.toString().split('');
+  var value = this;
   // determine length
   var place = '1';
+  var english = '';
+  var counter = 0;
 
-  for (var index = 0; index < stringArr.length - 1; index++) {
-    place += '0';
+  while (value > 0) {
+    var stringArr = value.toString().split('');
+    for (var index = 0; index < stringArr.length - 1; index++) {
+      place += '0';
+    }
+    // if (place.length <= 2) {
+
+    // }
+    place = Number(place);
+
+    while (value - place >= 0) {
+      value -= place;
+      counter++;
+    }
+    english += numbersToWords[counter] + ' ' + numbersToPlace[place] + ' '
+
+    if (numbersToWords[value]) {
+      english += numbersToWords[value];
+      value = 0;
+    }
+    place = 1;
+    counter = 0;
   }
-  return place;
+  return english;
+  //convert place to a number
+  // Number(place)
+  
   // iterate through numbersToPlace
     // perform modulo operation
 }
 
-
-console.log((72).toEnglish());
-
-
-
+console.log((1123).toEnglish());
