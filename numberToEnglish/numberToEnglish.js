@@ -69,7 +69,15 @@ Number.prototype.toEnglish = function () {
       place += '0';
     }
     // if (place.length <= 2) {
-
+    // if (place.length <= 2) {
+    //   var twoDigit = Number(place[0] + '0');
+    //   var oneDigit = Number(place) - twoDigit;
+    //   english += numbersToWords[twoDigit] + '-' + numbersToWords[oneDigit];
+    // }
+      // take first char
+      // add a 0
+      // conver to number
+      // compare
     // }
     place = Number(place);
 
