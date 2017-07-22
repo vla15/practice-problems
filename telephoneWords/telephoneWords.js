@@ -49,7 +49,7 @@ var telephoneWords = function(digitString) {
   // output is an array
   var traverse = function (digit, result) {
     if (result.length === 4) {
-      combos.push(result);
+      combos.push(result.join(''));
       return;
     }
 
@@ -75,4 +75,4 @@ var telephoneWords = function(digitString) {
   // return recursion call and store them into an array
 };
 
-console.log(telephoneWords('2345'));
+console.log(telephoneWords('0001'));
