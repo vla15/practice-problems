@@ -31,4 +31,16 @@
 
 
 var jsonpRequest = function(url, callback) {
+  //access the dom
+  //add a new script tag with url as the source
+  //include src as a parameter
+  var src = `${url}?callback=fn`;
+  var script = document.createElement('script');
+  script.setAttribute('type', "application/javascript")
+  script.setAttribute('src', src)
+  // var body = document.getElementsByTagName('body')
+
+  document.body.appendChild(script);
+
+  var fn = callback;
 };
