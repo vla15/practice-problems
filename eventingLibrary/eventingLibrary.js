@@ -23,12 +23,27 @@
 var mixEvents = function(obj) {
   // TODO: Your code here
   // have an event store
-  obj.events = {};
+  obj.events = [];
   obj.on = (event, action) => {
-    obj.events[event] = action;
+    obj.events.push([event, action]) ;
   }
-  obj.trigger = event => {
-    return obj.events[event]();
+  obj.trigger = (...args) => {
+    var extra = args.slice(1);
+    var actions = [];
+    for (var index = 0; index < obj.events.length; index++) {
+      if (obj.events[index][0] === args[0]) {
+        actions.push(obj.events[index][1])
+      }
+    }
+    for (var i = 0; i < extra.length; i++) {
+      obj.events.push(extra[i]);
+      actions.push(extra[i]);
+    }
+    console.log(actions);
+    while (actions.length > 0) {
+      var current = actions.shift();
+      current();
+    }
   }
   return obj;
 };
@@ -37,8 +52,12 @@ var mixEvents = function(obj) {
 var test = mixEvents({name: 'Alice', age: 30});
 
 test.on('ageChange', function() {
-  console.log('Age Changed')
+  console.log('Age Changed');
 })
 test.age++;
-test.trigger('ageChange');
+test.on('ageChange', () => {
+  console.log('yo hommie');
+})
+
+test.trigger('ageChange', () => { console.log('hello')});
 
