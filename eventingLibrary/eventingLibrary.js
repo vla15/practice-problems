@@ -39,7 +39,6 @@ var mixEvents = function(obj) {
       obj.events.push(extra[i]);
       actions.push(extra[i]);
     }
-    console.log(actions);
     while (actions.length > 0) {
       var current = actions.shift();
       current();
@@ -49,15 +48,15 @@ var mixEvents = function(obj) {
 };
 
 
-var test = mixEvents({name: 'Alice', age: 30});
+// var test = mixEvents({name: 'Alice', age: 30});
 
-test.on('ageChange', function() {
-  console.log('Age Changed');
-})
-test.age++;
-test.on('ageChange', () => {
-  console.log('yo hommie');
-})
+// test.on('ageChange', function() {
+//   console.log('Age Changed');
+// })
+// test.age++;
+// test.on('ageChange', () => {
+//   console.log('yo hommie');
+// })
 
-test.trigger('ageChange', () => { console.log('hello')});
+// test.trigger('ageChange', () => { console.log('hello')});
 
