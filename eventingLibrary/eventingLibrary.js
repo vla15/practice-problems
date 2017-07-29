@@ -36,7 +36,7 @@ var mixEvents = function(obj) {
       }
     }
     for (var i = 0; i < extra.length; i++) {
-      obj.events.push([event, extra[i]]);
+      obj.events.push([args[0], extra[i]]);
       actions.push(extra[i]);
     }
     while (actions.length > 0) {
