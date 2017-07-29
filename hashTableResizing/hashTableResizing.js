@@ -96,6 +96,7 @@ var makeHashTable = function() {
 
     if (targetStorage.length === 0) {
       size--;
+      result.resize();
     }
   };
 
