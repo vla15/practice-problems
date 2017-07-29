@@ -30,7 +30,10 @@ var makeHashTable = function() {
     //hash the key
     var hash = getIndexBelowMaxForKey(key, storageLimit);
     //locate hash of storage
-    storage[hash] = storage[hash] || [];
+    if (storage[hash] === undefined) {
+      storage[hash] = [];
+      size++
+    }
     var wasInserted = false;
     for (var index = 0; index < storage[hash].length; index++) {
       if (storage[hash][index][0] === key) {
@@ -41,7 +44,9 @@ var makeHashTable = function() {
 
     if (!wasInserted) {
       storage[hash].push([key, value]);
+      result.resize();
     }
+
       // if no array then insert array
     // iterate through array
       // if no key match
@@ -55,7 +60,12 @@ var makeHashTable = function() {
     // hash key again
     var hash = getIndexBelowMaxForKey(key, storageLimit)
     // locate targetStorage
-    var targetStorage = storage[hash];
+    var targetStorage;
+    if (storage[hash] === undefined) {
+      targetStorage = [];
+    } else {
+      targetStorage = storage[hash]
+    }
     for (var index = 0; index < targetStorage.length; index++) {
       if (targetStorage[index][0] === key) {
         return targetStorage[index][1];
@@ -71,22 +81,56 @@ var makeHashTable = function() {
   result.remove = function(key) {
     // TODO: implement `remove`
     var hash = getIndexBelowMaxForKey(key, storageLimit);
-
-    var targetStorage = storage[hash];
+    var targetStorage;
+    if (storage[hash] === undefined) {
+      targetStorage = [];
+    } else {
+      targetStorage = storage[hash]
+    }
 
     for (var index = 0; index < targetStorage.length; index++) {
       if (targetStorage[index][0] === key) {
         var removed = targetStorage.splice(index, 1);
       }
     }
-    return removed
+
+    if (targetStorage.length === 0) {
+      size--;
+    }
   };
+
+  result.resize = function() {
+    var resized = false;
+    if (size / storageLimit >= 0.75) {
+      storageLimit = storageLimit * 2;
+      resized = true;
+    } else if (size / storageLimit <= 0.25) {
+      storageLimit = Math.floor(storageLimit / 2);
+      resized = true;
+    }
+
+    if (resized) {
+      size = 0;
+      for (var index = 0; index < storage.length; index++) {
+        if (storage[index] !== undefined) {
+          for (var tupleIndex = 0; tupleIndex < storage[index].length; tupleIndex++) {
+            result.insert(storage[index][tupleIndex][0], storage[index][tupleIndex][1]);
+          }
+        }
+      }
+    }
+
+    //iterate through storage
+    //iterate through every inner storage at each index
+
+  }
 
   return result;
 };
 
-var testHash = new makeHashTable();
-console.log(testHash.insert('blah', 'champion'));
-
-console.log(testHash.retrieve('blah'));
-console.log(testHash.remove('blah'));
+// var testHash = new makeHashTable();
+// testHash.insert('blah', 'champion');
+// testHash.insert('hello', 'whatever');
+// testHash.insert('yo', 'hello');
+// console.log(testHash.retrieve('blah'));
+// console.log(testHash.retrieve('yo'));
