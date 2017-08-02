@@ -20,7 +20,12 @@ $(function () {
       //sort
 
     }
-    sortedArr = sortedArr.sort();
+    sortedArr = sortedArr.sort()
+    sortedArr = sortedArr.sort(function(a, b) {
+      if (!isNaN(a)) {
+        return a - b;
+      }
+    })
     for (var i = 0; i < row.length; i++) {
       row[i].children[clickedHeaderIndex].innerHTML = sortedArr[i];
     }
