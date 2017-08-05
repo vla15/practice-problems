@@ -46,11 +46,11 @@ LRUCache.prototype.size = function () {
 LRUCache.prototype.get = function (key) {
   //iterate through the linked list
   var start = this.list.head
-  while (!start.next) {
+  while (start) {
     if (start.val[0] === key) {
       return start.val[1]
     }
-    start = start.next;
+    start = start.next
   }
   return undefined;
   //check val at each position in the linked list
@@ -59,12 +59,27 @@ LRUCache.prototype.get = function (key) {
 };
 
 LRUCache.prototype.set = function (key, val) {
-  //create a new list node
-  // if (this.size === this.limit) {
-
-  // }
-  this.list.push([key, val])
-  this.size++
+  if (this.size === this.limit) {
+    this.list.shift();
+    this.size--;
+  }
+  //need to check if its already in the list
+  if (this.get(key) === undefined) {
+    this.list.push([key, val])
+    this.size++
+  } else {
+    var targetNode;
+    var start = this.list.head;
+    while (start) {
+      if (start.val[0] === key) {
+        targetNode = start;
+        start = null;
+      }
+      start = start.next
+    }
+    this.list.moveToFront(targetNode);
+  }
+  //if so move to the front
 }
 
 
@@ -197,3 +212,11 @@ ListNode.prototype.delete = function () {
 var cache = new LRUCache(3);
 
 cache.set('hello', 1);
+console.log(cache.get('hello'));
+cache.set('blah', 2);
+console.log(cache.get('blah'));
+cache.set('yo', 9);
+console.log(cache.get('yo'));
+cache.set('man', 3);
+console.log(cache.get('man'));
+console.log(cache.get('hello'));
