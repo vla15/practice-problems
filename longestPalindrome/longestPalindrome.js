@@ -35,6 +35,7 @@ var longestPalindrome = function (string) {
 
 var isPalindrome = function (string = '') {
   var mid = Math.floor(string.length / 2);
+  console.log(mid);
   var firstHalf = string.slice(0, mid);
   var secondHalf = string.slice(mid + 1, string.length);
   for (var index = 0; index < firstHalf.length; index++) {
@@ -46,5 +47,8 @@ var isPalindrome = function (string = '') {
   //split in half
   //compare first half with second half
 }
+
+console.log(isPalindrome('llaall'))
+
 
 // console.log(longestPalindrome('My dad is a racecar athlete'));
