@@ -209,14 +209,16 @@ ListNode.prototype.delete = function () {
   if (this.next) { this.next.prev = this.prev; }
 };
 
-var cache = new LRUCache(3);
+// var cache = new LRUCache(3);
 
-cache.set('hello', 1);
-console.log(cache.get('hello'));
-cache.set('blah', 2);
-console.log(cache.get('blah'));
-cache.set('yo', 9);
-console.log(cache.get('yo'));
-cache.set('man', 3);
-console.log(cache.get('man'));
-console.log(cache.get('hello'));
+// cache.set('hello', 1);
+// console.log(cache.get('hello'));
+// cache.set('blah', 2);
+// console.log(cache.get('blah'));
+// cache.set('yo', 9);
+// console.log(cache.get('yo'));
+// cache.set('man', 3);
+// console.log(cache.get('man'));
+// console.log(cache.get('hello'));
+// console.log(cache.get('blah'));
+// console.log(cache.get('yo'));
