@@ -31,19 +31,42 @@
  */
 
 var LRUCache = function (limit) {
+  this.limit = limit;
+  this.list = new List();
+  this.size = 0;
 };
 
 var LRUCacheItem = function (val, key) {
 };
 
 LRUCache.prototype.size = function () {
+  return this.size;
 };
 
 LRUCache.prototype.get = function (key) {
+  //iterate through the linked list
+  var start = this.list.head
+  while (!start.next) {
+    if (start.val[0] === key) {
+      return start.val[1]
+    }
+    start = start.next;
+  }
+  return undefined;
+  //check val at each position in the linked list
+  //return val if key is found
+
 };
 
 LRUCache.prototype.set = function (key, val) {
-};
+  //create a new list node
+  // if (this.size === this.limit) {
+
+  // }
+  this.list.push([key, val])
+  this.size++
+}
+
 
 
 
@@ -171,3 +194,6 @@ ListNode.prototype.delete = function () {
   if (this.next) { this.next.prev = this.prev; }
 };
 
+var cache = new LRUCache(3);
+
+cache.set('hello', 1);
