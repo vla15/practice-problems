@@ -7,6 +7,7 @@
 */
 
 var longestPalindrome = function (string) {
+<<<<<<< HEAD
   //input is a string
   //output is the longest palindrome string
   //store results
@@ -52,3 +53,25 @@ console.log(isPalindrome('llaall'))
 
 
 // console.log(longestPalindrome('My dad is a racecar athlete'));
+=======
+  let longest = '';
+  for (let i = 0; i < string.length; i++) {
+    for (let j = i; j < string.length - i; j++) {
+      let phrase = string.slice(i,j);
+      if (isPalindrome(phrase)) {
+        if (phrase.length > longest.length) {
+          longest = phrase;
+        }
+      }
+    }
+  }
+  return longest;
+};
+
+var isPalindrome = function (string) {
+  return string.split('').reverse().join('') === string;
+}
+
+console.log(isPalindrome('f fhhf f'));
+console.log(longestPalindrome('dddddkkkkkkdkkdkkdk'));
+>>>>>>> 3a4fb100c31db0b37fcd7e35a1bf8e8cb4fa80b2
