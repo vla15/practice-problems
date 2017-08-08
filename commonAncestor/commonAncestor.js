@@ -4,14 +4,8 @@
   * in the following Tree class
   */
 
-/** example usage:
-  * var grandma = new Tree();
-  * var mom = new Tree();
-  * grandma.addChild(mom);
-  * var me = new Tree();
-  * mom.addChild(me);
-  * grandma.getAncestorPath(me); // => [grandma, mom, me]
-*/
+
+
 
 var Tree = function() {
   this.children = [];
@@ -38,9 +32,20 @@ Tree.prototype.addChild = function(child) {
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-) {
+Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   // TODO: implement me!
+  //takes two children nodes
+  var ancestor = ancestor || null;
+
+  if (this.isDescendant(childOne) && this.isDescendant(childTwo)) {
+    ancestor = this;
+    return ancestor;
+  }
+  for (var index = 0; index < this.children.length; index++) {
+    ancestor = this.getClosestCommonAncestor.call(this.children[index], childOne, childTwo, ancestor);
+
+  }
+  return ancestor;
 };
 
 /**
@@ -51,9 +56,16 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-) {
+Tree.prototype.getAncestorPath = function(child) {
   // TODO: implement me!
+  var path = [];
+  if (this.isDescendant(child)) {
+    path.push(this);
+  }
+  for (var index = 0; index < this.children.length; index++) {
+    path.concat(this.getAncestorPath.call(this.children[index], child));
+  }
+  return path;
 };
 
 /**
@@ -87,3 +99,14 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+
+var grandma = new Tree();
+var mom = new Tree();
+grandma.addChild(mom);
+var me = new Tree();
+mom.addChild(me);
+var bro = new Tree();
+mom.addChild(bro);
+
+console.log(grandma.getClosestCommonAncestor(me, bro));
