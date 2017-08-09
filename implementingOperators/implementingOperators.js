@@ -25,6 +25,11 @@ var divide = function(x, y, decimals) {
   //subtracts y number of times from x
   var total = total || 0;
   var decimals = decimals || 3;
+
+  if (decimals <= 0) {
+    return total;
+  }
+
   while (x >= y) {
     x -= y;
     total++;
@@ -34,13 +39,12 @@ var divide = function(x, y, decimals) {
     x = x * 10;
     decimals--;
     divide(x, y, decimals)
+    decimals = 0;
   } else {
     decimals = 0;
   }
 
-  if (decimals <= 0) {
-    return total;
-  }
+  return total;
 };
 
 console.log(divide(12, 7));
