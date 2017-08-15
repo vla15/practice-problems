@@ -40,36 +40,8 @@
 
 
 var asyncMap = function(tasks, callback, results = []) {
-  //input: array of functions
-  //output: callback invoked on the results array
-  // take out first item in array
-  if (tasks.length === 0) {
-    return callback(results);
-  }
-  var currentTask = tasks.shift()
-  //invoke function,
-  currentTask(function(value) {
-    asyncMap(tasks, callback, results.concat(value));
-  });
-    //recurse
-
-  // finish with callback on tasks
     
 };
-
-
-asyncMap([
-function(cb){
-  setTimeout(function(){
-    cb('one');
-  }, 200);
-},
-function(cb){
-  setTimeout(function(){
-    cb('two');
-  }, 100);
-}
-],
 function(results){
   // the results array will equal ['one','two'] even though
   // the second function had a shorter timeout.

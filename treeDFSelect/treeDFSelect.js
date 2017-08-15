@@ -36,22 +36,6 @@ var Tree = function(value) {
 };
 
 Tree.prototype.DFSelect = function(filter) {
-//store the results
-  var depth = arguments[1] || 0
-  var results = []
-  //invoke filter on this node  
-  if (filter(this.value, depth)) {
-    //if passes
-    results.push(this.value)
-      //push to results
-  }
-  for (var index = 0; index < this.children.length; index++) {
-  // for each children in tree
-    results = results.concat(this.DFSelect.call(this.children[index], filter, depth+1));
-    // recurse on children
-  //return the results
-  }
-  return results
 };
 
 

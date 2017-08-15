@@ -12,29 +12,6 @@
 // Solved in O(n) time with O(1) memory
 var sumArray = function(array) {
   //input: array of numbers
-  //output: contiguous sum of numbers
-  //constraint: o(n)
-
-  //create pointers to value in memory
-  var currentValue = 0;
-  var preValue = 0;
-  var lowestNegative = 0;
-
-  for (var index = 0; index < array.length; index++) {
-
-    preValue = Math.max(0, preValue + array[index]);
-    currentValue = Math.max(preValue, currentValue);
-    if (array[index] < 0) {
-      if (lowestNegative === 0) {
-        lowestNegative = array[index];
-      } else {
-        lowestNegative = Math.max(lowestNegative, array[index]);
-      }
-    }
-  }
-
-  return currentValue || lowestNegative;
-  //traverse the array
   //
 };
 

@@ -46,39 +46,6 @@ var testingTransform = function(array) {
 };
 
 var insertionSort = function(array, comparator) {
-  // input: array of objects
-  // iterate through array
-  var notSorted = true;
-
-  while(notSorted) {
-    for (var index = 0; index < array.length; index++) {
-    // if current value is greater than next value
-    if (array[index + 1] !== undefined) {
-      //if compoarator exists
-      if (comparator) {
-        var compareResults = comparator(array[index], array[index + 1]);
-        if (compareResults > 0) {
-          var newTemp = array[index + 1];
-          array[index + 1] = array[index];
-          array[index] = newTemp;
-        }
-        // compare with comparator   
-      } else {       
-        if (array[index].value > array[index + 1].value) {
-          var temp = array[index + 1];
-          array[index + 1] = array[index];
-          array[index] = temp;
-          notSorted = false;
-        }
-      }
-    }
-      // switch their places in the array
-
-    }
-    notSorted = !notSorted
-  }
-
-  return array;
 };
 
 

@@ -18,27 +18,4 @@
 */
 
 var rockPaperScissors = function(numRounds) {
-  numRounds = numRounds || 3;
-  var possible = ['rock', 'paper', 'scissors'];
-  var result = [];
-
-  var newThrows = function(turn) {
-    if (turn.length === numRounds) {
-      result.push(turn);
-      return;
-    }
-    for (var index = 0; index < possible.length; index++) {
-      var toss = turn.concat([possible[index]])
-      newThrows(toss);
-    }
-  }
-
-  if (numRounds > 0) {
-    for (var index = 0; index < possible.length; index++) {
-      newThrows([possible[index]]);
-    }
-  } else {
-    result.push([]);
-  }
-  return result;
 }

@@ -35,17 +35,6 @@ Tree.prototype.addChild = function(child) {
 Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   // TODO: implement me!
   //takes two children nodes
-  var ancestor = ancestor || null;
-
-  if (this.isDescendant(childOne) && this.isDescendant(childTwo)) {
-    ancestor = this;
-    return ancestor;
-  }
-  for (var index = 0; index < this.children.length; index++) {
-    ancestor = this.getClosestCommonAncestor.call(this.children[index], childOne, childTwo, ancestor);
-
-  }
-  return ancestor;
 };
 
 /**
@@ -58,14 +47,7 @@ Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   */
 Tree.prototype.getAncestorPath = function(child) {
   // TODO: implement me!
-  var path = [];
-  if (this.isDescendant(child)) {
-    path.push(this);
-  }
-  for (var index = 0; index < this.children.length; index++) {
-    path.concat(this.getAncestorPath.call(this.children[index], child));
-  }
-  return path;
+
 };
 
 /**

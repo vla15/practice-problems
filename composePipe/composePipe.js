@@ -37,16 +37,6 @@ var compose = function() {
   //input: arbitrary number of arugments
   //inputs: function calls
   //shoudl return a function
-  var calls = arguments
-  return function(target) {
-    for (var index = calls.length - 1; index >= 0; index--) {
-      target = calls[index](target);
-    }
-    return target;
-  }
-  //each function is applied on the ffunction that follows.
-  //iterate through arguments array
-    // 
 };
 
 
@@ -59,17 +49,7 @@ var compose = function() {
 
 var pipe = function() {
   //input: x number of functions in arguments
-  var calls = arguments;
-  // returns a function
-  return function(target) {
-    // iterates left to to right on arguments
-    for (var index = 0; index < calls.length; index++) {
-      // set target to the result of the function calls
-      target = calls[index](target);
-    }
-    // return target
-    return target;
-  }
+
 };
 
 

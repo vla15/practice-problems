@@ -25,37 +25,6 @@
 // constraints: duplicates dont count
 
 Array.prototype.isSubsetOf = function (arr) {
-  // create counter to match length of arr
-  // iterate through Array(this)
-  var counter = 0;
-  var targetCheck = function (arr) {
-    if (Array.isArray(arr)) {
-      for (var z = 0; z < arr.length; z++) {
-        if (target === arr[z]) {
-          counter++;
-        }
-      }
-    } else if (arr instanceof Object) {
-      for (var key in arr) {
-        if (target === arr[key]) {
-          counter++;
-        }
-      }
-    } else if (target === arr) {
-      counter++;
-    }
-  }
-  for (var index = 0; index < this.length; index++) {
-    var target = this[index];
-    arr.forEach(function(ele) {
-      targetCheck(ele);
-    });
-  }
-  if (counter === this.length) {
-    return true;
-  } else {
-    return false;
-  }
 };
 
 

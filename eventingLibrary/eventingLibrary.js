@@ -23,28 +23,7 @@
 var mixEvents = function(obj) {
   // TODO: Your code here
   // have an event store
-  obj.events = [];
-  obj.on = function(event, action) {
-    obj.events.push([event, action]);
-  }
-  obj.trigger = function(...args) {
-    var extra = args.slice(1);
-    var actions = [];
-    for (var index = 0; index < obj.events.length; index++) {
-      if (obj.events[index][0] === args[0]) {
-        actions.push(obj.events[index][1])
-      }
-    }
-    for (var i = 0; i < extra.length; i++) {
-      obj.events.push([args[0], extra[i]]);
-      actions.push(extra[i]);
-    }
-    while (actions.length > 0) {
-      var current = actions.shift();
-      current();
-    }
-  }
-  return obj;
+
 };
 
 

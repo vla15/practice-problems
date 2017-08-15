@@ -16,27 +16,6 @@ var deepEquals = function(apple, orange) {
   //output boolean
 
   //set default check to true
-  var isEquivalent = true;
-  //iterate through object
-  for (var key in apple) {
-    // check if keys match
-      // match then check if object
-        // if both values are objects then recurse
-        // else compare if apple value doesn't equate to orange value
-          // set check to false
-      // no match then false
-    if (orange.hasOwnProperty(key)) {
-      if (typeof apple[key] === 'object' && typeof orange[key] === 'object') {
-        isEquivalent = deepEquals(apple[key], orange[key])
-      } else if (apple[key] !== orange[key]) {
-        isEquivalent = false;
-      }
-    } else {
-      isEquivalent = false;
-    }
-  }
-  //return check
-  return isEquivalent;
 };
 
 // console.log(deepEquals({a:1, b: {c:3}},{a:1, b: {c:3}})); // true

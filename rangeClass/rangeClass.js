@@ -40,87 +40,19 @@
 
 
 var Range = function(start, end, step) {
-  if (start === undefined) {
-    return null;
-  }
-
-  this.step = step || 1;
-  this.countFoward = true;
-
-  if (this.step < 0) {
-    this.countForward = !this.countForward;
-  }
-  
-  if (start > end || !this.countForward) {
-    this.start = end;
-    this.end = start;
-    this.step = Math.abs(this.step);
-  } else if (start < end) {
-    this.start = start;
-    this.end = end; 
-  }
 };
 
 Range.prototype.size = function () {
-  //difference between end and start
-  var size = 1;
-  var start = this.start
-  if (this.start > this.end) {
-    //counting backwards
-    while (start > this.end) {
-      start -= this.step;
-      size += 1;
-    }
-  } else if (this.start < this.end) {
-    //counting forwards
-    while (start < this.end) {
-      start += this.step;
-      size += 1;
-    }
-  }
-  return size;
+  
 };
 
 Range.prototype.each = function (callback) {
-  var start = this.start;
-  if (start < this.end) {
-    while (start <= this.end) {
-      callback(start);
-      start += this.step;
-    }
-  } else if (start > this.end) {
-    while (start >= this.end) {
-      callback(start);
-      start -= this.step;
-    }
-  }
+ 
 };
 
 Range.prototype.includes = function (val) {
-  var start = this.start;
-  if (start < this.end) {
-    while(start <= this.end) {
-      if (start === val) {
-        return true;
-      } else {
-        start+= this.step;
-      }
-    }
-  } else if (start > this.end) {
-    while (start >= this.end) {
-      if (start === val) {
-        return true;
-      } else {
-        start -= this.step;
-      }
-    }
-  }
-  return false;
+
 };
-
-var range = new Range(6, 4, -1);
-
-console.log(range.size());
 
 // console.log(range.includes(5))
 

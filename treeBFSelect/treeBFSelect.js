@@ -38,30 +38,6 @@ var Tree = function(value) {
 
 
 Tree.prototype.BFSelect = function(filter) {
-  // return an array of values for which the function filter(value, depth) returns true
-  // track esults with an array
-  var results = [];
-  var queue = [this];
-  var target;
-  var depth = 0;
-  var childCount = 0;
-  // track depth
-  while (queue.length > 0) {
-    target = queue.shift();
-    target.depth = depth;
-    if (filter(target.value, target.depth)) {
-      results.push(target.value);
-    }
-    for (var index = 0; index< target.children.length; index++) {
-      queue.push(target.children[index]);
-      childCount++
-    }
-    if (queue.length === childCount) {
-      depth++
-      childCount = 0;
-    }
-  }
-  return results;
 };
 
 /**

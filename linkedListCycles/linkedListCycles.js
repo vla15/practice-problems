@@ -36,27 +36,6 @@ var Node = function(value) {
 };
 
 var hasCycle = function(linkedList) {
-  // TODO: implement me!
-  //while next isnt null
-  var traversed = {};
-  var currentNode = linkedList;
-  var next = linkedList.next
-  while (currentNode.next) {
-    traversed[currentNode.value] ? traversed[currentNode.value]++: traversed[currentNode.value] = 1;
-
-    if (traversed[currentNode.value] > 1) {
-      return true;
-    }
-
-    currentNode = currentNode.next;
-  //check current node value
-  //add to array storage list
-  // set current node value to 
-  //iterate through the linked list
-  //a linked list cycle is when next value is not null
-  }
-  return false;
-  //return false
 };
 
 

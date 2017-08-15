@@ -98,67 +98,6 @@
 
 
 var mergeSort = function(array) {
-  // Your code here.
-  // input: an unsorted array
-  var splitResults = []
-  // declare a split function
-  var arraySplit = function(array) {
-    if (array.length === 1) {
-      splitResults.push(array);
-      return;
-    }
-    var middle = Math.floor(array.length / 2);
-    var firstHalf = array.slice(0, middle);
-    var secHalf = array.slice (middle);
-    arraySplit(firstHalf);
-    arraySplit(secHalf);
-    return ;
-  };
-
-  if (array.length > 1) {
-    arraySplit(array);
-  }
-
-  var sorting = function(array) {
-    for (var index = 0; index < array.length; index++) {
-      if (array[index] > array[index + 1]) {
-        var largest = array[index];
-        array[index] = array[index + 1];
-        array[index + 1] = largest;
-      }
-    }
-    return array;   
-  }
-
-  //results is an array split into individual arrays
-  // need to create another recursive function
-  var arrayMerge = function(array) {
-    if (array.length === 1) {
-      return array
-    }
-    var mergedArr = [];
-    for (var outer = 0; outer < array.length; outer+= 2) {
-      if (array[outer + 1] !== undefined) {
-        var merged = array[outer].concat(array[outer + 1]);
-        var sortMerged = sorting(merged)
-        mergedArr.push(sortMerged);
-      } else {
-        mergedArr.push(array[outer]);
-      }
-    }
-    return arrayMerge(mergedArr);
-  }
-    //base case
-    // if results of merge is length of 1 return;
-
-  if (splitResults.length > 1) {
-    var finalResults = arrayMerge(splitResults);
-    return finalResults[0]
-  }
-  //iterate through results
-  //if first value in split results is greater than second value
-    // merge with second value then first value
-  // merge with first value then second value
 
 };
 

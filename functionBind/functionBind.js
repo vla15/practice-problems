@@ -23,13 +23,8 @@
  *
 */
 
-var bind = function(a, b, c) {
+var bind = function() {
   // TODO: Your code here
-  // func can take three values
-  // returns a function
-  return function(z, b) {
-    return c + z;
-  }
 
 };
 
@@ -71,13 +66,6 @@ var alice = {
 }
 
 Function.prototype.bind = function(...args) {
-  //returns the original funtion
-  //changes the this binding
-  var bound = function () {
-  }
-  return Object.assign(bound, arguments);
-  //changes the this binding to the passed in value
-  // TODO: Your code here
 };
 
 var boundShout = alice.shout.bind(alice);

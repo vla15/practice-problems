@@ -21,43 +21,26 @@
  */
 
 var nthFibonacci = function (n) {
-  // TODO: implement me!
-  // input: number indicating number of iterations
-  // output: sum
-  //starting array
-  var calculateFibonacci = function(n) {
-    if (n === 0) {
-      return 0;
-    }
-    if (n <= 2) {
-      return 1;
-    }
-    if (!nthFibonacci.cache[n]) {
-      nthFibonacci.cache[n] = calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
-    }
-    return nthFibonacci.cache[n];
+  if (nthFibonacci.memo[n]) {
+    return nthFibonacci.memo[n];
   }
-  nthFibonacci.cache = {};
-  return calculateFibonacci(n);
+
+  if (n <= 2) {
+    return 1;
+  }
+  return nthFibonacci.memo[n] = nthFibonacci(n - 1) + nthFibonacci(n - 2)
 };
 
-console.log(nthFibonacci(7));
-  // iterative solution
-  // // n = length
-  // // create starting array with 0th and 1st fib
-  // var start = [0, 1]
-  // if (n === 1) {
-  //   return 0;
-  // } else if (n === 2) {
-  //   return 1;
-  // }
-  // //iterate through starting index and next index
-  // for (var index = 0; start.length < n; index++) {
-  //   start.push(start[index] + start[index + 1]);
-  // }
-  // return start.reduce(function(num1, num2) {
-  //   return num1 + num2;
-  // })
-  // // use previous two results to calculate next result
-  // // reduce for sum
+nthFibonacci.memo = {};
 
+const assertEquals = function(actual, expected) {
+  if (actual === expected) {
+    console.log('true');
+  } else {
+    console.log(`got ${actual}, when expected ${expected}`);
+  }
+}
+
+assertEquals(nthFibonacci(2), 1);
+assertEquals(nthFibonacci(3), 2);
+assertEquals(nthFibonacci(29), 514229);

@@ -42,37 +42,6 @@ var phoneDigitsToLetters = {
 
 
 var telephoneWords = function(digitString) {
-  // TODO: return every combination that can be spelled on a phone with these digits
-  // decision tree
-  // input is 4 digit string
-  var combos = [];
-  // output is an array
-  var traverse = function (digit, result) {
-    if (result.length === 4) {
-      combos.push(result.join(''));
-      return;
-    }
-
-    for (var index = 0; index < phoneDigitsToLetters[digitString[digit]].length; index++) {
-      traverse(digit + 1, result.concat([phoneDigitsToLetters[digitString[digit]][index]]));
-    }
-  }
-  var letters = phoneDigitsToLetters[digitString[0]];
-  for (var innerIndex = 0; innerIndex < letters.length; innerIndex++) {
-    traverse(1, [letters[innerIndex]])
-    //a //
-    //b //
-    //c //
-  }
-  // will need to take first string
-  // compare it against phone digits to letters
-  // take every combination
-  // define recursion call
-    //iterate through that result
-    //pass through result
-  return combos;
-  // recurse
-  // return recursion call and store them into an array
 };
 
 console.log(telephoneWords('0001'));

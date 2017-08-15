@@ -34,56 +34,10 @@
 var i;
 
 // Feel free to add helper functions if needed.
-// checks if array is sorted
-var isSorted = function(array) {
-
-  // iterate through array
-  for (var index = 0; index < array.length; index++) {
-
-    // check if there's a next ele
-    if (!(index + 1 === array.length)) {
-      // first ele greater than second
-      if (!(array[index + 1]  > array[index])) {
-        // return false
-        return false;
-      }
-    }
-  }
-  return true;
-  // return true
-};
-
-// var sortedArr = [1, 5, 7];
-// console.log(isSorted(sortedArr));
 
 
 var bubbleSort = function(array) {
   // Your code here.
-  //input array
-  //output sorted array
-  // no edge case or constraints
-  // iterates through the array
-  for (var index = 0; index < array.length; index++) {
-    // check if there's a next ele
-    if (!(index + 1 === array.length)) {
-    // compares first ele with next ele
-      if (array[index] > array[index + 1]) {
-      // if first ele is greater
-        // store in temp var
-        var temp = array[index];
-        // replace first ele with second 
-        array[index] = array[index + 1];
-        // replace second with temp
-        array[index + 1] = temp;
-        if (isSorted(array)) {
-          return array;
-        } else {
-          return bubbleSort(array);
-        }
-      }
-    }
-  }
-  return array;
 };
 
 // console.log(bubbleSort([24.7, 24.3, 23, 9, 3, 3, 100, 25, 100]))
