@@ -43,16 +43,21 @@ var asyncMap = function(tasks, callback) {
   var results = [];
   var resultsCount = 0;
   for (var index = 0; index < tasks.length; index++) {
-    (function(index) {
-      tasks[index](function(e) {
-        results[index] = e;
+    (function(j) {
+      tasks[j](function(e) {
+        results[j] = e;
         resultsCount++;
         if (resultsCount === tasks.length) {
+          console.log(e);
           callback(results);
         }
       })
     })(index)
   }
+  //outer annon function is invoked immediately
+  //the index from the for loop is passed into it
+  //invokes first async task
+  //sets the result of that first async task to 
 };
 
 
