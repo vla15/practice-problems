@@ -87,3 +87,11 @@ BinaryHeap.prototype.insert = function (value) {
 BinaryHeap.prototype.removeRoot = function () {
   // TODO: Your code here
 }
+
+BinaryHeap.prototype.getParentIndex = function(index) {
+  return Math.floor( (index - 1) / 2);
+}
+
+BinaryHeap.prototype.getChildrenIndices = function(index) {
+  return [index * 2 + 1, index * 2 + 2];
+}
