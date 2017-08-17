@@ -24,26 +24,33 @@
  *
  */
 var balancedParens = function(input) {
-  var isBalanced = true;
-  var targets = {'(': ')', '[': ']', '{': '}'};
-  //iterate through input
-  for (var index = 0; index < input.length; index++) {
-    var target = targets[input[index]]
-    if (target && input[index + 1] !== target) {
-      isBalanced = false;
-    }
+  var stack = [];
+  var pairs = {
+    '{': '}',
+    '[': ']',
+    '(': ')'
   }
-  return isBalanced;
-  //check if balanced
-    //not balanced then set to false
-  //return balanced
+
+  for (var index = 0; index < input.length; index++) {
+    var char = input[index];
+
+    if (pairs[char]) {
+      stack.push(char);
+    } else if (char === '}' || char === ']' || char === ')') {
+      if (pairs[stack.pop()] !== char) {
+        return false;
+      }
+    }
+
+  }
+
+  return stack.length === 0;
+
 };
 
-console.log(balancedParens('('));
-console.log(balancedParens('()'));
-console.log(balancedParens(')('));
-console.log(balancedParens('[](){}'));
-console.log(balancedParens('[({})]'));
+console.log(balancedParens('(')); // false
+console.log(balancedParens('()')); //true
+console.log(balancedParens(')(')); // false
+console.log(balancedParens('[](){}')); //true
+console.log(balancedParens('[({})]')); //true
 console.log(balancedParens('[(]{)}')); // false
-
-
