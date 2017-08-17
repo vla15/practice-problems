@@ -87,7 +87,7 @@ BinaryHeap.prototype.insert = function (value) {
   //insert will place a value at the end
   let parentIndex = this.getParentIndex(targetIndex);
   //if compare is true
-  while (this._compare(value, this._heap[parentIndex])) {
+  while (targetIndex > 0 && this._compare(value, this._heap[parentIndex])) {
     this.swap(this._heap, targetIndex, parentIndex);
     targetIndex = parentIndex
     parentIndex = this.getParentIndex(targetIndex);
