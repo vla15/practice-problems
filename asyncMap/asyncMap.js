@@ -48,7 +48,6 @@ var asyncMap = function(tasks, callback) {
         results[j] = e;
         resultsCount++;
         if (resultsCount === tasks.length) {
-          console.log(e);
           callback(results);
         }
       })
@@ -57,7 +56,13 @@ var asyncMap = function(tasks, callback) {
   //outer annon function is invoked immediately
   //the index from the for loop is passed into it
   //invokes first async task
-  //sets the result of that first async task to 
+  //sets the result of that first async task to its position in the results array outside via scope access
+    //when done running, it checks to see if results array matches tasks
+  //invokes second async task
+  //sets the result of that second async task to its position in the results array outside via scope access
+    //when done running, it checks to see if results array matches tasks
+  //if either async callback meets the if condition, then it access callback and results array via scope access
+  //invokes callbackon the results;
 };
 
 
