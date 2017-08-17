@@ -82,6 +82,9 @@ BinaryHeap.prototype.getRoot = function () {
 
 BinaryHeap.prototype.insert = function (value) {
   // TODO: Your code here
+  //insert will place a value at the end
+  //you'll then use compare
+    //swap
 }
 
 BinaryHeap.prototype.removeRoot = function () {
@@ -94,4 +97,10 @@ BinaryHeap.prototype.getParentIndex = function(index) {
 
 BinaryHeap.prototype.getChildrenIndices = function(index) {
   return [index * 2 + 1, index * 2 + 2];
+}
+
+BinaryHeap.prototype.swap = function (arr, i, j) {
+  var temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
 }
