@@ -24,25 +24,26 @@
  *
  */
 var balancedParens = function(input) {
-  //naive solution
+  var isBalanced = true;
+  var targets = {'(': ')', '[': ']', '{': '}'};
   //iterate through input
-  var leftParen = 0;
-  var rightParen = 0;
-  //count left parens
   for (var index = 0; index < input.length; index++) {
-    input[index] === '(' ? leftParen++ : null;
-    input[index] === ')' ? rightParen++ : null;
+    var target = targets[input[index]]
+    if (target && input[index + 1] !== target) {
+      isBalanced = false;
+    }
   }
-
-  return leftParen === rightParen ? true : false;
-  //count right parens
-  //if numbers are equal, then true, 
-  //else false
+  return isBalanced;
+  //check if balanced
+    //not balanced then set to false
+  //return balanced
 };
 
-console.log(balancedParens('('))
-console.log(balancedParens('()'))
-console.log(balancedParens(')('))
-
+console.log(balancedParens('('));
+console.log(balancedParens('()'));
+console.log(balancedParens(')('));
+console.log(balancedParens('[](){}'));
+console.log(balancedParens('[({})]'));
+console.log(balancedParens('[(]{)}')); // false
 
 
