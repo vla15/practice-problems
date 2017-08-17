@@ -117,3 +117,28 @@ const bubbleSort = (arr) => {
 
 let bubbleTest = bubbleSort([5, 9, 2, 1, 4]);
 assertEqual([1, 2, 4, 5, 9], bubbleTest);
+
+
+//redoing insertion sort
+
+const insertionSortTwo = (arr) => {
+  for (var i = 0; i < arr.length; i++) {
+    let currentValue = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+      //swap them
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = currentValue;
+  }
+  return arr;
+}
+
+console.log(insertionSortTwo([4, 1, 5]));
+
+
+
+
+
+
+
+
