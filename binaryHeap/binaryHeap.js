@@ -70,7 +70,7 @@
  // * childrenIndices = [index * 2 + 1, index * 2 + 2]
 
 function BinaryHeap () {
-  this._heap = [0, 1, 2, 3, 4, 5, 6];
+  this._heap = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
   this._compare = function (i, j) { return i < j };
 }
@@ -82,13 +82,40 @@ BinaryHeap.prototype.getRoot = function () {
 
 BinaryHeap.prototype.insert = function (value) {
   // TODO: Your code here
+  this._heap.push(value);
+  let targetIndex = this._heap.length - 1;
   //insert will place a value at the end
-  //you'll then use compare
+  let parentIndex = this.getParentIndex(targetIndex);
+  //if compare is true
+  while (this._compare(value, this._heap[parentIndex])) {
+    this.swap(this._heap, targetIndex, parentIndex);
+    targetIndex = parentIndex
+    parentIndex = this.getParentIndex(targetIndex);
     //swap
+  }
+  return;
+  //return array
 }
 
 BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  var last = this._heap.pop();
+  this._heap[0] = last;
+  this.traverseDown(0);
+  return this._heap;
+}
+
+BinaryHeap.prototype.traverseDown = function(index) {
+  var lIndex;
+  var rIndex;
+  [lIndex, rIndex] = this.getChildrenIndices(index);
+  if (this._compare(this._heap[lIndex], this._heap[index])) {
+    this.swap(this._heap, lIndex, index);
+    this.traverseDown(lIndex);
+  } else if (this._compare(this._heap[rIndex], this._heap[index])) {
+    this.swap(this._heap, rIndex, index);
+    this.traverseDown(rIndex);
+  }
+  return;
 }
 
 BinaryHeap.prototype.getParentIndex = function(index) {
@@ -104,3 +131,7 @@ BinaryHeap.prototype.swap = function (arr, i, j) {
   arr[i] = arr[j];
   arr[j] = temp;
 }
+
+var heap = new BinaryHeap();
+
+console.log(heap.removeRoot());
