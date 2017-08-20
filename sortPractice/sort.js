@@ -73,3 +73,27 @@ console.log(quickSort([18, 12, 9, 2, 4, 6, 9, 11]));
 
 
 //mergeSort
+
+const merge = (left, right) => {
+  var il = 0;
+  var ir = 0;
+  var result = [];
+
+  while (il < left.length && ir < right.length) {
+    if (left[il] < right[ir]) {
+      result.push(left[il++]);
+    } else {
+      result.push(right[ir++]);
+    }
+  }
+
+  if (il === left.length) {
+    return result.concat(right.slice(ir));
+  } else {
+    return result.concat(left.slice(il));
+  }
+  //compare left and right arrays
+  //sort them in order
+}
+
+console.log(merge([2, 3], [1, 9]))
