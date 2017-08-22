@@ -19,3 +19,19 @@ const bubbleSort = (arr) => {
 }
 
 console.log(bubbleSort([8, 9, 2, 4, 7, 4, 1, 0]));
+
+const insertionSort = (arr) => {
+  //sorting array in place
+  for (var i = 0; i < arr.length; i++) {
+    var target = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > target; j--) {
+      //shift previous value upwards
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = target;
+  }
+  return arr;
+  //track part of array that is sorted
+  //iterate through arr, checking if value is less than neighbor
+}
+console.log(insertionSort([8, 9, 2, 4, 7, 4, 1, 0]));
