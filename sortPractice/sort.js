@@ -86,5 +86,17 @@ const merge = (left, right) => {
 
 console.log(merge([2, 4], [5, 6]));
 
+const mergeSort = (arr) => {
+  if (arr.length < 2) {
+    return arr;
+  }
 
+  var mid = Math.floor(arr.length / 2);
+  var left = arr.slice(0, mid);
+  var right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+console.log(mergeSort([8, 9, 2, 4, 7, 4, 1, 0]));
 
