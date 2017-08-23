@@ -1,90 +1,68 @@
-const bubbleSort = (arr) => {
-  //iterates the arr
-  let isSorted = false;
-  while (!isSorted) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i + 1] < arr[i]) {
-        var tmp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = tmp;
-        isSorted = true;
-      }
-    }
-    isSorted = !isSorted;
-  }
-  return arr;
-  //checks if current value is less than next value
-    //swap
-  //continue process till all is sorted
-}
-
-console.log(bubbleSort([8, 9, 2, 4, 7, 4, 1, 0]));
-
+//insertionSort
 const insertionSort = (arr) => {
-  //sorting array in place
+  //we iterate the array
   for (var i = 0; i < arr.length; i++) {
     var target = arr[i];
     for (var j = i - 1; j >= 0 && arr[j] > target; j--) {
-      //shift previous value upwards
       arr[j + 1] = arr[j];
     }
     arr[j + 1] = target;
   }
   return arr;
-  //track part of array that is sorted
-  //iterate through arr, checking if value is less than neighbor
+  //sort array in place, putting smallest to the left
+  //iterate through remaining array
+  //check if next value is smaller then largest of sorted
+    //swap places
+  //replace value at stopped
 }
-console.log(insertionSort([8, 9, 2, 4, 7, 4, 1, 0]));
 
+console.log(insertionSort([9, 6, 3, 2, 7, 4, 5]));
+//quickSort
 
 const quickSort = (arr) => {
-  //create a starting point
   if (arr.length < 2) {
     return arr;
   }
-  //compare all values against startingpoint
+
   var pivot = arr[0];
   var left = [];
   var right = [];
-  //smaller values go in their own array
-  for (var index = 1; index < arr.length; index++) {
-    if (arr[index] < pivot) {
-      left.push(arr[index]);
+
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
     } else {
-      right.push(arr[index]);
+      right.push(arr[i]);
     }
   }
-
   return quickSort(left).concat(pivot, quickSort(right));
-  //greater values go in their own array
-  //recurseively call quickSort
 }
+//mergeSort
 
-console.log(quickSort([8, 9, 2, 4, 7, 4, 1, 0]));
-
+console.log(quickSort([9, 6, 3, 2, 7, 4, 5]));
 
 const merge = (left, right) => {
-  //merges left and right array by comparing eagainst each other
-  let il = 0;
-  let ir = 0;
-  let result = [];
+  var il = 0;
+  var ir = 0;
+  var results = [];
 
   while (il < left.length && ir < right.length) {
     if (left[il] < right[ir]) {
-      result.push(left[il++]);
+      results.push(left[il++]);
     } else {
-      result.push(right[ir++]);
+      results.push(right[ir++]);
     }
   }
 
   if (il === left.length) {
-    return result.concat(right.slice(ir));
+    return results.concat(right.slice(ir));
   } else {
-    return result.concat(left.slice(il));
+    return results.concat(left.slice(il));
   }
+
 }
 
-console.log(merge([2, 4], [5, 6]));
+console.log(merge([3, 5], [2, 4]));
 
 const mergeSort = (arr) => {
   if (arr.length < 2) {
@@ -98,5 +76,4 @@ const mergeSort = (arr) => {
   return merge(mergeSort(left), mergeSort(right));
 }
 
-console.log(mergeSort([8, 9, 2, 4, 7, 4, 1, 0]));
-
+console.log(mergeSort([9, 6, 3, 2, 7, 4, 5]));
