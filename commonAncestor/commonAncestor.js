@@ -35,6 +35,21 @@ Tree.prototype.addChild = function(child) {
 Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   // TODO: implement me!
   //takes two children nodes
+  //return if isDescandant returns false
+  var result = null;
+  if (this.isDescendant(childOne) || this.isDescendant(childTwo)) {
+    result = this;
+  } else {
+    return null;
+  }
+
+  //utilize isDescandant helper function
+  for (var i = 0; i < this.children.length; i++) {
+    result = this.children[i].getClosestCommonAncestor(childOne, childTwo) || result;
+  }
+  return result;
+  //start at top of tree and contiinue to check if both childOne and ChildTwo are descandants
+    //if true, continue to its children path
 };
 
 /**
@@ -82,6 +97,9 @@ Tree.prototype.removeChild = function(child) {
   }
 };
 
+//grandma
+//mom
+//me bro
 
 var grandma = new Tree();
 var mom = new Tree();
