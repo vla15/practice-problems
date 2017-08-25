@@ -34,23 +34,25 @@ Tree.prototype.addChild = function(child) {
   */
 Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   // TODO: implement me!
-  //takes two children nodes
-  //return if isDescandant returns false
-  var result = null;
-  if (this.isDescendant(childOne) || this.isDescendant(childTwo)) {
-    result = this;
-  } else {
+  var pathOne = this.getAncestorPath(childOne);
+  if (!pathOne) {
     return null;
   }
 
-  //utilize isDescandant helper function
-  for (var i = 0; i < this.children.length; i++) {
-    result = this.children[i].getClosestCommonAncestor(childOne, childTwo) || result;
+  var pathTwo = this.getAncestorPath(childTwo);
+  if (!pathTwo) {
+    return null;
   }
-  return result;
-  //start at top of tree and contiinue to check if both childOne and ChildTwo are descandants
-    //if true, continue to its children path
-};
+
+  var pathLen = Math.min(pathOne.length, pathTwo.length);
+  var commonAncestor = this;
+  for (var i = 0; i < pathLen; i++) {
+    if (pathOne[i] === pathTwo[i]) {
+      commonAncestor = pathOne[i]
+    }
+  }
+  return commonAncestor;
+}
 
 /**
   * should return the ancestral path of a child to this node.
@@ -60,10 +62,25 @@ Tree.prototype.getClosestCommonAncestor = function(childOne, childTwo) {
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(child) {
-  // TODO: implement me!
+Tree.prototype.getAncestorPath = function(child, ancestors) {
 
-};
+  //basically recurse down the tree until you find child node
+  var ancestors = ancestors || [];
+  if (this === child) {
+    ancestors.unshift(this);
+    return ancestors;
+  }
+
+  for (var i = 0; i < this.children.length; i++) {
+    if (this.children[i].getAncestorPath(child, ancestors)) {
+      ancestors.unshift(this);
+      return ancestors;
+    }
+  }
+  return null
+}
+  //if you did then you return from there
+  //back to beginning and unshifting the values into an array as you go backwards
 
 /**
   * check to see if the provided tree is already a child of this
@@ -110,3 +127,4 @@ var bro = new Tree();
 mom.addChild(bro);
 
 console.log(grandma.getClosestCommonAncestor(me, bro));
+console.log(grandma.getAncestorPath(me));
