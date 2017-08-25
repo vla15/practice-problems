@@ -40,4 +40,40 @@ console.log(bubbleSort([8, 3, 5, 2, 9, 7, 1]))
 //if not 
 //reiterate through array
 //mergeSort
+//merge helper function
+//split values of array into individual values
+//merge them back in order
+const merge = (left, right) => {
+  let il = 0;
+  let ir = 0;
+  let results = [];
+  while (il < left.length && ir < right.length) {
+    if (left[il] < right[ir]) {
+      results.push(left[il++]);
+    } else {
+      results.push(right[ir++]);
+    }
+  }
+  if (il === left.length) {
+    return results.concat(right.slice(ir));
+  } else {
+    return results.concat(left.slice(il));
+  }
+}
+
+console.log(merge([5, 9], [2, 10]));
+
+const mergeSort = (arr) => {
+  if (arr.length < 2) {
+    return arr;
+  }
+
+  var mid = Math.floor(arr.length / 2);
+  var left = arr.slice(0, mid);
+  var right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+console.log(mergeSort([8, 3, 5, 2, 9, 7, 1]))
 //quickSort
