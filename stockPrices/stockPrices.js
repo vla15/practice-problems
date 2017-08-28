@@ -1,4 +1,4 @@
-var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
+var stockPricesYesterday = [10, 7, 5, 8, 11, 9, 3, 7, 12, 2, 11];
 var negativePricesYesterday = [-10, -7, -5, -8, -11, -9];
 
 // get_max_profit(stock_prices_yesterday)
@@ -55,5 +55,5 @@ const getMaxProfit = function(prices) {
 //       //update maxProfit
 // }
 
-// console.log(getMaxProfit(stockPricesYesterday));
+console.log(getMaxProfit(stockPricesYesterday));
 console.log(getMaxProfit(negativePricesYesterday));
