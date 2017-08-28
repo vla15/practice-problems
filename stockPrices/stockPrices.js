@@ -13,7 +13,7 @@ const getMaxProfit = function(prices) {
   //var to hold maxProfit
   var maxProfit = 0;
   for (var i = 0 ; i < prices.length; i++) {
-    for (var j = i; j < prices.length; j+= 2) {
+    for (var j = i + 2; j < prices.length; j++) {
       if (i !== j && prices[j]) {
         var diff = prices[j] - prices[i];
         maxProfit = Math.max(maxProfit, diff);
