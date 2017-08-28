@@ -1,4 +1,5 @@
 var stockPricesYesterday = [10, 7, 5, 8, 11, 9];
+var negativePricesYesterday = [-10, -7, -5, -8, -11, -9];
 
 // get_max_profit(stock_prices_yesterday)
 // # returns 6 (buying for $5 and selling for $11)
@@ -11,12 +12,16 @@ const getMaxProfit = function(prices) {
   // find the max difference between cur value and cur + 2
   //brute force method
   //var to hold maxProfit
-  var maxProfit = 0;
+  var maxProfit;
   for (var i = 0 ; i < prices.length; i++) {
     for (var j = i + 2; j < prices.length; j++) {
       if (i !== j && prices[j]) {
         var diff = prices[j] - prices[i];
-        maxProfit = Math.max(maxProfit, diff);
+        if (!maxProfit) {
+          maxProfit = diff;
+        } else {
+          maxProfit = Math.max(maxProfit, diff);
+        }
       }
     }
   }
@@ -26,7 +31,7 @@ const getMaxProfit = function(prices) {
     //get difference for profit
     //compare if larger
       //update maxProfit
-
 }
 
 console.log(getMaxProfit(stockPricesYesterday));
+console.log(getMaxProfit(negativePricesYesterday));
