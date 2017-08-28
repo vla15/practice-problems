@@ -3,22 +3,43 @@
 //  [1, 7, 3, 4]
 //  [84, 12, 28, 21]
 
+// const getProductsOfAllIntsExceptAtIndex = function(arr) {
+//   var results = [];
+//   //brute force would be to iterate through twice
+//   for (var i = 0; i < arr.length; i++) {
+//     let current;
+//     for (var j = 0; j < arr.length; j++) {
+//       if (i !== j) {
+//         if (current) {
+//           current *= arr[j];
+//         } else {
+//           current = arr[j];
+//         }
+//       }
+//     }
+//     results.push(current);
+//   }
+//   return results;
+// }
+
 const getProductsOfAllIntsExceptAtIndex = function(arr) {
-  var results = [];
-  //brute force would be to iterate through twice
-  for (var i = 0; i < arr.length; i++) {
-    let current;
-    for (var j = 0; j < arr.length; j++) {
-      if (i !== j) {
-        if (current) {
-          current *= arr[j];
-        } else {
-          current = arr[j];
-        }
-      }
-    }
-    results.push(current);
+  var results = new Array(arr.length);
+  var counter = 0;
+  var productSoFar = 1;
+  while (counter < arr.length) {
+    results[counter] = productSoFar;
+    productSoFar *= arr[counter];
+    counter += 1;
+  }
+  productSoFar = 1;
+  counter = arr.length - 1;
+  while (counter >= 0) {
+    results[counter] *= productSoFar;
+    productSoFar *= arr[counter];
+    counter -= 1;
   }
   return results;
 }
+
 console.log(getProductsOfAllIntsExceptAtIndex([1, 7, 3, 4]));
+
