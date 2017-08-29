@@ -41,5 +41,8 @@ const getProductsOfAllIntsExceptAtIndex = function(arr) {
   return results;
 }
 
+//passing the lenght of the array twice only.  So it results in a 2(n) time complexity
+//(n) space complexity, as storing the length of the array in a result;
+
 console.log(getProductsOfAllIntsExceptAtIndex([1, 7, 3, 4]));
 
