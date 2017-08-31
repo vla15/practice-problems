@@ -16,5 +16,22 @@ const insertionSort = function(arr) {
 
 console.log(insertionSort([8, 4, 2, 9, 5, 7, 6]))
 //bubble sort
+const bubbleSort = function(arr) {
+  var sorted = false;
+  while (!sorted) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i + 1] < arr[i]) {
+        var tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        sorted = true;
+      }
+    }
+    sorted = !sorted;
+  }
+  return arr;
+}
+
+console.log(bubbleSort([8, 4, 2, 9, 5, 7, 6]))
 //quick sort
 //merge sort
