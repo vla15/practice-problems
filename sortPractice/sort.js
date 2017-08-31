@@ -57,4 +57,38 @@ const quickSort = function(arr) {
 }
 
 console.log(quickSort([8, 4, 2, 9, 5, 7, 6]))
+
+const merge = function(left, right) {
+  var result = [];
+  var il = 0;
+  var ir = 0;
+
+  while (il < left.length && ir < right.length) {
+    if (left[il] < right[ir]) {
+      result.push(left[il++]);
+    } else {
+      result.push(right[ir++]);
+    }
+  }
+  if (il === left.length) {
+    return result.concat(right.slice(ir));
+  } else {
+    return result.concat(left.slice(il));
+  }
+}
+
+const mergeSort = function(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+
+  var mid = Math.floor(arr.length / 2);
+  var left = arr.slice(0, mid);
+  var right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+console.log(mergeSort([8, 4, 2, 9, 5, 7, 6]))
+
 //merge sort
