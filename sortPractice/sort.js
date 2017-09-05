@@ -1,21 +1,21 @@
 const insertionSort = function(arr) {
-  for (var i = 0; i < arr.length; i ++) {
+  for (var i = 0; i < arr.length; i++) {
     var target = arr[i];
     for (var j = i - 1; j >= 0 && arr[j] > target; j--) {
-      arr[j + 1] = arr[j]
+      arr[j + 1] = arr[j];
     }
     arr[j + 1] = target;
   }
   return arr;
 }
 
-console.log(insertionSort([8, 4, 2, 9, 5, 7, 6]))
-//bubble sort
+console.log(insertionSort([9, 4, 2, 5, 8, 3, 7]));
+
 const bubbleSort = function(arr) {
   var sorted = false;
   while (!sorted) {
     for (var i = 0; i < arr.length; i++) {
-      if (arr[i + 1] < arr[i]) {
+      if (arr[i] > arr[i + 1]) {
         var tmp = arr[i];
         arr[i] = arr[i + 1];
         arr[i + 1] = tmp;
@@ -27,9 +27,7 @@ const bubbleSort = function(arr) {
   return arr;
 }
 
-console.log(bubbleSort([8, 4, 2, 9, 5, 7, 6]))
-//quick sort
-
+console.log(bubbleSort([9, 4, 2, 5, 8, 3, 7]));
 
 const quickSort = function(arr) {
   if (arr.length < 2) {
@@ -47,30 +45,33 @@ const quickSort = function(arr) {
       right.push(arr[i]);
     }
   }
-
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
-console.log(quickSort([8, 4, 2, 9, 5, 7, 6]))
+console.log(quickSort([9, 4, 2, 5, 8, 3, 7]));
+
 
 const merge = function(left, right) {
-  var result = [];
   var il = 0;
   var ir = 0;
+  var results = [];
 
   while (il < left.length && ir < right.length) {
     if (left[il] < right[ir]) {
-      result.push(left[il++]);
+      results.push(left[il++]);
     } else {
-      result.push(right[ir++]);
+      results.push(right[ir++]);
     }
   }
+
   if (il === left.length) {
-    return result.concat(right.slice(ir));
+    return results.concat(right.slice(ir));
   } else {
-    return result.concat(left.slice(il));
+    return results.concat(left.slice(il));
   }
 }
+
+console.log(merge([4, 9], [2, 7]));
 
 const mergeSort = function(arr) {
   if (arr.length < 2) {
@@ -84,6 +85,4 @@ const mergeSort = function(arr) {
   return merge(mergeSort(left), mergeSort(right));
 }
 
-console.log(mergeSort([8, 4, 2, 9, 5, 7, 6]))
-
-//merge sort
+console.log(mergeSort([9, 4, 2, 5, 8, 3, 7]));
