@@ -51,3 +51,25 @@ const quickSort = function (arr) {
 
 console.log(quickSort([4, 9, 7, 2, 5, 6, 1]));
 //mergeSort
+
+const merge = function(left, right) {
+  var il = 0;
+  var ir = 0;
+  var results = [];
+
+  while (il < left.length && ir < right.length) {
+    if (left[il] < right[ir]) {
+      results.push(left[il++]);
+    } else {
+      results.push(right[ir++]);
+    }
+  }
+
+  if (il === left.length) {
+    return results.concat(right.slice(ir));
+  } else {
+    return results.concat(left.slice(il));
+  }
+}
+
+console.log(merge([2, 4], [3, 6]));
