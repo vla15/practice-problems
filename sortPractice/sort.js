@@ -12,3 +12,21 @@ const insertionSort = function(arr) {
 }
 
 console.log(insertionSort([9, 3, 1, 4, 5]));
+
+const bubbleSort = function(arr) {
+  var isSorted = false;
+  while (!isSorted) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i + 1] < arr[i]) {
+        var tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        isSorted = true;
+      }
+    }
+    isSorted = !isSorted;
+  }
+  return arr;
+}
+
+console.log(bubbleSort([9, 3, 1, 4, 5]));
