@@ -31,6 +31,7 @@ c.next = d;
 d.next = e;
 
 
+
 const reverseLinkedList = function(node) {
   if (!node.next) {
     return node;
@@ -41,5 +42,29 @@ const reverseLinkedList = function(node) {
   return current;
 }
 // console.log(a);
-console.log(reverseLinkedList(a));
+// console.log(reverseLinkedList(a));
 // console.log(a)
+
+
+const reverseLinkedListIterative = function (node) {
+  var current = node;
+  var previous = null;
+  //traverse list
+  while (current) {
+    //pointer to next value to traverse
+    var next = current.next;
+    //since first value will be last, next has to be null
+    current.next = previous;
+    //store previous value as the current
+    previous = current;
+    //continue to iterate through
+    if (next) {
+      current = next;
+    } else {
+      return current;
+    }
+  }
+}
+
+var b = reverseLinkedListIterative(a);
+console.log(b);
