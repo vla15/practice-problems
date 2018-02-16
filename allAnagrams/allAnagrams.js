@@ -13,35 +13,37 @@
   */
 
 var allAnagrams = function(string) {
-  //create a results storage
-  //start with each letter of string
-  var results = {};
-
-  const anagram = function(ana, str) {
-    if (str === '') {
-      results[ana] = 1;
+  //store results
+  let results = [];
+  //create function that iterates through string
+  const recursivelyGetLetters = function(letters, word) {
+    if (word.length === string.length && results.indexOf(word) === -1) {
+      results.push(word);
+      return;
     }
-    for (var i = 0; i < str.length; i++) {
-      console.log(str);
-      anagram(ana + str[i], str.slice(0, i) + str.slice(i + 1));
+    for (var i = 0; i < letters.length; i++) {
+      let currentWord = word + letters[i];
+      let remaining = letters.substring(0, i) + letters.substring(i + 1);
+      recursivelyGetLetters(remaining, currentWord);
     }
-  }
-  anagram('', string);
-  return Object.keys(results);
-  //go down each possible combination
-    //when string result is same length
-      //push to results storage
+  };
+  recursivelyGetLetters(string, "");
+  return results;
+  //check if passed in value is equal to string length
+  //store string to results
+  //remove string
+  //recurse through function
+  //return results
 };
 
-const assertEqual = (expected, actual) => {
-  if (JSON.stringify(expected) === JSON.stringify(actual)) {
-    console.log('equals!');
+const assertEqual = function(expected, result) {
+  if (JSON.stringify(expected) === JSON.stringify(result)) {
+    console.log("correct");
   } else {
-    console.log(`failed, expected ${expected}, but got ${actual}`);
+    console.log(`failed, expected ${expected} but got ${result}`);
   }
-}
+};
 
-var test = allAnagrams('abc');
+assertEqual(["abc", "acb", "bac", "bca", "cab", "cba"], allAnagrams("abc"));
 
-assertEqual(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'], test);
-
+assertEqual(["ccc"], allAnagrams("ccc"));
