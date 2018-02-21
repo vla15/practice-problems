@@ -14,26 +14,21 @@
 
 var allAnagrams = function(string) {
   //store results
-  let results = [];
-  //create function that iterates through string
-  const recursivelyGetLetters = function(letters, word) {
-    if (word.length === string.length && results.indexOf(word) === -1) {
-      results.push(word);
-      return;
+  var results = {};
+  const getAnagrams = function(anagram, remainingLetters) {
+    if (remainingLetters.length === 0 && !results[anagram]) {
+      results[anagram] = true;
     }
-    for (var i = 0; i < letters.length; i++) {
-      let currentWord = word + letters[i];
-      let remaining = letters.substring(0, i) + letters.substring(i + 1);
-      recursivelyGetLetters(remaining, currentWord);
+    for (var i = 0; i < remainingLetters.length; i++) {
+      var currentLetter = remainingLetters[i]
+      getAnagrams(anagram + currentLetter, remainingLetters.substring(0, i) + remainingLetters.substring(i + 1));
     }
-  };
-  recursivelyGetLetters(string, "");
-  return results;
-  //check if passed in value is equal to string length
-  //store string to results
-  //remove string
-  //recurse through function
-  //return results
+  }
+  getAnagrams('', string);
+  return Object.keys(results);
+  //iterate through the string
+  //have a base letter
+  //pass in remaining letters
 };
 
 const assertEqual = function(expected, result) {
