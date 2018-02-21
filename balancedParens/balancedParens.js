@@ -24,33 +24,50 @@
  *
  */
 var balancedParens = function(input) {
-  var stack = [];
-  var pairs = {
-    '{': '}',
+  var parens = {
     '[': ']',
+    '{': '}',
     '(': ')'
   }
-
-  for (var index = 0; index < input.length; index++) {
-    var char = input[index];
-
-    if (pairs[char]) {
-      stack.push(char);
-    } else if (char === '}' || char === ']' || char === ')') {
-      if (pairs[stack.pop()] !== char) {
+  //balanced parens, open brackets work as a line LILO
+  //closed brackets work as a stack FIFO
+  var openBrackets = ['[', '(', '{'];
+  var closedBrackets = [']', ')', '}'];
+  //store open brackets
+  var currentOpenBrackets = [];
+  //store closed brackets
+  //iterate through input
+  var currentOpen;
+  for (var i = 0; i < input.length; i++) {
+    var currentLetter = input[i]
+    if (openBrackets.indexOf(currentLetter) !== -1) {
+      currentOpenBrackets.push(currentLetter)
+    } else if (closedBrackets.indexOf(currentLetter) !== -1) {
+      currentOpen = currentOpenBrackets.pop();
+      if (parens[currentOpen] !== currentLetter) {
         return false;
       }
     }
-
   }
-
-  return stack.length === 0;
-
+  if (currentOpenBrackets.length > 0) {
+    return false;
+  } else {
+    return true;
+  }
 };
 
-console.log(balancedParens('(')); // false
-console.log(balancedParens('()')); //true
-console.log(balancedParens(')(')); // false
-console.log(balancedParens('[](){}')); //true
-console.log(balancedParens('[({})]')); //true
-console.log(balancedParens('[(]{)}')); // false
+const assertEqual = function(expected, actual) {
+  if (expected === actual) {
+    console.log('Truth')
+  } else {
+    console.log(`incorrect, expected ${expected}, but got ${actual}`)
+  }
+}
+assertEqual(false, balancedParens('(')); // false
+assertEqual(true, balancedParens('()')); //true
+assertEqual(false, balancedParens(')(')); // false
+assertEqual(true, balancedParens('[](){}')); //true
+assertEqual(true, balancedParens('[({})]')); //true
+assertEqual(false, balancedParens('[(]{)}')); // false
+assertEqual(true, balancedParens(' var wow  = { yo: thisIsAwesome() }')); // true
+assertEqual(false, balancedParens(' var hubble = function() { telescopes.awesome();')); // false
