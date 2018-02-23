@@ -29,11 +29,25 @@ const merge = function(left, right) {
 }
 
 console.log(mergeSort([17, 2, 5, 23, 1, 4, 0]));
-
-//[3, 2, 1, 5, 7];
-// [] [1] [2, 3, 5, 7]
-//[2, 3, 5, 7
-// [] [2] [3]
 //bubble sort
+
+const bubbleSort = function(array) {
+  let sorted = false;
+  while (!sorted) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] > array[i + 1]) {
+        let tmp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = tmp;
+        sorted = true;
+      }
+    }
+    sorted = !sorted;
+  }
+  return array;
+}
+
+console.log(bubbleSort([2, 9, 3, 4]));
+
 
 //quick sort
