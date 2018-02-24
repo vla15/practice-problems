@@ -59,19 +59,20 @@ const insertionSort = function(array) {
   }
   for (var i = 1; i < array.length; i++) {
     var value = array[i];
+    //iterates from one index back of i to 0
+    //shifts back all values
     for (var j = i - 1; j >= 0 && array[j] > value; j--) {
+      //swap next value with current
       array[j + 1] = array[j];
     }
+    //places the value in correct spot
     array[j + 1] = value;
   }
   return array;
 }
 console.log(insertionSort([42, 1, 4, 52, 3]));
 console.log(insertionSort([2, 3, 4, 5, 1]))
-//starts at second item
-//iterates through array
-//checks if current is greater than previous
-  //swap
-  //repeats for the swapped
+
+//insertion sort approaches the problem by iterating backwards only if the current value at index is less then the value at the previous index.  It will continue until it finds the spot to place the current value at.
 
 //selection sort
