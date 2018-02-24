@@ -58,18 +58,16 @@ const insertionSort = function(array) {
     return array;
   }
   for (var i = 1; i < array.length; i++) {
-    let currentIdx = i;
-    while (array[currentIdx] < array[currentIdx - 1] && currentIdx > 0) {
-      //continually swap while true
-      let tmp = array[currentIdx];
-      array[currentIdx] = array[currentIdx - 1];
-      array[currentIdx - 1] = tmp;
-      currentIdx--;
+    var value = array[i];
+    for (var j = i - 1; j >= 0 && array[j] > value; j--) {
+      array[j + 1] = array[j];
     }
+    array[j + 1] = value;
   }
   return array;
 }
 console.log(insertionSort([42, 1, 4, 52, 3]));
+console.log(insertionSort([2, 3, 4, 5, 1]))
 //starts at second item
 //iterates through array
 //checks if current is greater than previous
