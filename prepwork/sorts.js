@@ -32,17 +32,17 @@ console.log(mergeSort([17, 2, 5, 23, 1, 4, 0]));
 //bubble sort
 
 const bubbleSort = function(array) {
-  let sorted = false;
-  while (!sorted) {
+  let swapped = false;
+  while (!swapped) {
     for (var i = 0; i < array.length; i++) {
       if (array[i] > array[i + 1]) {
         let tmp = array[i];
         array[i] = array[i + 1];
         array[i + 1] = tmp;
-        sorted = true;
+        swapped = true;
       }
     }
-    sorted = !sorted;
+    swapped = !swapped;
   }
   return array;
 }
@@ -51,3 +51,29 @@ console.log(bubbleSort([2, 9, 3, 4]));
 
 
 //quick sort
+
+//insertion sort
+const insertionSort = function(array) {
+  if (array.length < 2) {
+    return array;
+  }
+  for (var i = 1; i < array.length; i++) {
+    let currentIdx = i;
+    while (array[currentIdx] < array[currentIdx - 1] && currentIdx > 0) {
+      //continually swap while true
+      let tmp = array[currentIdx];
+      array[currentIdx] = array[currentIdx - 1];
+      array[currentIdx - 1] = tmp;
+      currentIdx--;
+    }
+  }
+  return array;
+}
+console.log(insertionSort([42, 1, 4, 52, 3]));
+//starts at second item
+//iterates through array
+//checks if current is greater than previous
+  //swap
+  //repeats for the swapped
+
+//selection sort
