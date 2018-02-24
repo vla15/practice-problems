@@ -95,3 +95,29 @@ console.log('insertion sort: ', insertionSort([2, 3, 4, 5, 1]))
 //selection sort
 
 //bucket sort
+
+//counting sort
+//time efficient but very space inefficient
+const countingSort = function(array) {
+  let numOfCounts = [];
+  let results = [];
+  //create a new array that tracks count of values in input array
+  //value of the input array will represent the index of new array
+  for (var i = 0; i < array.length; i++) {
+    if (numOfCounts[array[i]]) {
+      numOfCounts[array[i]]++;
+    } else {
+      numOfCounts[array[i]] = 1;
+    }
+  }
+  numOfCounts.forEach(function(counts, number) {
+    if (numOfCounts[number]) {
+      for (var x = 0; x < counts; x++) {
+        results.push(number);
+      }
+    }
+  })
+  return results;
+}
+
+console.log('counting sort: ', countingSort([2, 1, 3, 4, 6, 5, 1]));
