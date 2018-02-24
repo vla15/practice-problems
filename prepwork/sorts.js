@@ -28,7 +28,7 @@ const merge = function(left, right) {
   return results.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
 
-console.log(mergeSort([17, 2, 5, 23, 1, 4, 0]));
+console.log('mergeSort: ', mergeSort([17, 2, 5, 23, 1, 4, 0]));
 //bubble sort
 
 const bubbleSort = function(array) {
@@ -47,10 +47,27 @@ const bubbleSort = function(array) {
   return array;
 }
 
-console.log(bubbleSort([2, 9, 3, 4]));
+console.log('bubble sort: ', bubbleSort([2, 9, 3, 4]));
 
 
 //quick sort
+const quickSort = function(array) {
+  if (array.length < 2) {
+    return array;
+  }
+  let pivot = array[0];
+  let left = [];
+  let right = [];
+  for (var i = 1; i < array.length; i++) {
+    if (array[i] < pivot) {
+      left.push(array[i]);
+    } else {
+      right.push(array[i])
+    }
+  }
+  return quickSort(left).concat(pivot, quickSort(right))
+}
+console.log('quick sort:', quickSort([3, 1, 2, 12, 15,4 ]))
 
 //insertion sort
 const insertionSort = function(array) {
@@ -70,9 +87,11 @@ const insertionSort = function(array) {
   }
   return array;
 }
-console.log(insertionSort([42, 1, 4, 52, 3]));
-console.log(insertionSort([2, 3, 4, 5, 1]))
+console.log('insertion sort: ',insertionSort([42, 1, 4, 52, 3]));
+console.log('insertion sort: ', insertionSort([2, 3, 4, 5, 1]))
 
 //insertion sort approaches the problem by iterating backwards only if the current value at index is less then the value at the previous index.  It will continue until it finds the spot to place the current value at.
 
 //selection sort
+
+//bucket sort
