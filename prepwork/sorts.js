@@ -1,6 +1,65 @@
+//mergesort
+//insertionSort
+const insertionSortTWO = function(array) {
+  //start at one after beginning
+  if (array.length < 2) {
+    return array;
+  }
+
+  for (var i = 1; i < array.length; i++) {
+    var tmpValue = array[i];
+    for (var j = i - 1; j >= 0 && array[j] > tmpValue; j--) {
+      array[j + 1] = array[j];
+    }
+    array[j + 1] = tmpValue;
+  }
+  return array;
+}
+console.log('is two', insertionSortTWO([3, 1, 3, 4, 5, 2, 9]));
+//bubbleSort
+//quickSort
+const quickSortTWO = function(array) {
+  if (array.length < 2) {
+    return array;
+  }
+  let pivot = array[0];
+  let lesser = [];
+  let greater = [];
+
+  for (var i = 1; i < array.length; i++) {
+    if (array[i] < pivot) {
+      lesser.push(array[i]);
+    } else {
+      greater.push(array[i]);
+    }
+  }
+
+  return quickSortTWO(lesser).concat(pivot, quickSortTWO(greater));
+}
+console.log('qs two', quickSortTWO([4, 2, 31, 2, 1]))
+//countingSort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //merge sort
-//spilt array into two arrays
-//spilt until array is of one size and compare
+//O(n log n); iterates through the entire array but spilts array in half
 const mergeSort = function(array) {
   if (array.length < 2) {
     return array
@@ -51,6 +110,7 @@ console.log('bubble sort: ', bubbleSort([2, 9, 3, 4]));
 
 
 //quick sort
+//O(n log n)
 const quickSort = function(array) {
   if (array.length < 2) {
     return array;
@@ -121,3 +181,12 @@ const countingSort = function(array) {
 }
 
 console.log('counting sort: ', countingSort([2, 1, 3, 4, 6, 5, 1]));
+
+module.exports = {
+  mergeSort: mergeSort,
+  merge: merge,
+  bubbleSort: bubbleSort,
+  quickSort: quickSort,
+  insertionSort: insertionSort,
+  countingSort: countingSort
+}
