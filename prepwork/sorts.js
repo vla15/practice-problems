@@ -1,114 +1,15 @@
-//merge sort
-const quickSort = function(arr) {
-  //terminating case
-  if (arr.length < 2) {
-    return arr;
-  }
-  //takes pivot point
-  let pivot = arr[0];
-  //compares pivot to array
-  let lesser = [];
-  let greater = [];
-  //creates lesser and greater arrays
-  for (var i = 1; i < arr.length; i++) {
-    if (arr[i] < pivot) {
-      lesser.push(arr[i]);
-    } else {
-      greater.push(arr[i]);
-    }
-  }
-
-  return quickSort(lesser).concat(pivot, quickSort(greater));
-  //merge the MergeSorted arrays
-}
-
-const mergeSort = function(arr) {
-  //merges two left and right together
-  //basically breaks it down to smallest numbers and merge them back in order
-  if (arr.length < 2) {
-    return arr;
-  }
-
-  let mid = Math.floor(arr.length / 2);
-  let left = arr.slice(0, mid);
-  let right = arr.slice(mid);
-
-  return merge(mergeSort(left), mergeSort(right));
-
-};
-const merge = function(left, right) {
-  //store results in an array
-  let results = [];
-  //track progress of left index;
-  let leftIdx = 0;
-  //track progress of right index;
-  let rightIdx = 0;
-
-  //loop through till all values in left arr and right arr are added to results
-  while (leftIdx < left.length && rightIdx < right.length) {
-    if (left[leftIdx] < right[rightIdx]) {
-      results.push(left[leftIdx]);
-      leftIdx++;
-    } else {
-      results.push(right[rightIdx]);
-      rightIdx++;
-    }
-  }
-  return results.concat(left.slice(leftIdx), right.slice(rightIdx));
-};
-const bubbleSort = function(arr) {
-  var swapped = false;
-  while (!swapped) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > arr[i + 1]) {
-        var tmp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = tmp;
-        swapped = true;
-      }
-    }
-    swapped = !swapped;
-  }
-  return arr;
-};
-const insertionSort = function(arr) {
-  for (var i = 0; i < arr.length; i++) {
-    let currentValue = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
-      arr[j + 1] = arr[j];
-    }
-    arr[j + 1] = currentValue;
-  }
-  return arr;
-};
-const countingSort = function(arr) {
-  //create a new array
-  //use input arr values as index
-  let countArr = [];
-  for (var i = 0; i < arr.length; i++) {
-    if (countArr[arr[i]]) {
-      countArr[arr[i]]++;
-    } else {
-      countArr[arr[i]] = 1;
-    }
-  }
-  //store results
-  let results = [];
-  //iterate through countArr
-  countArr.forEach(function(count, num) {
-    for (var j = 0; j < count; j++) {
-      results.push(num);
-    }
-  })
-  return results;
-  //use index as the value to add to results array
-  //use value at index as the number of times to add it
-};
+//mergeSort
+const mergeSort = function(arr) {}
 //merge
+const merge = function(arr) {}
 //bubble sort
+const bubbleSort = function(arr) {}
 //insertion sort
+const insertionSort = function(arr) {}
 //quick sort
+const quickSort = function(arr) {}
 //counting sort
+const countingSort = function(arr) {}
 
 
 

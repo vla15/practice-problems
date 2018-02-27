@@ -1,87 +1,114 @@
 //binary search
-const binarySearch = function(array, target, left = 0, right = array.length) {
-  //termination case left boundary greater than right boundary
+const binarySearch = function(arr, target, left = 0, right = arr.length) {
+  //create mid from left and right values
   if (left > right) {
     return null;
   }
-  let mid = Math.floor((right + left) / 2);
-  if (target === array[mid]) {
+  let mid = Math.floor((left + right) / 2);
+  if (target === arr[mid]) {
     return mid;
-  } else if (target > array[mid]) {
-    return binarySearch(array, target, mid + 1, right);
-  } else {
-    return binarySearch(array, target, left, mid - 1);
+  }
+  if (target > arr[mid]) {
+    //target is greater than midpoint, go right
+    return binarySearch(arr, target, mid + 1, right);
+    //target is less than midpoint, go left
+  } else if (target < arr[mid]) {
+    return binarySearch(arr, target, left, mid - 1);
   }
 }
 
-console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8], 5));
-//2 and 3
-  //takes an array as input
-  //checks if mid is target
-    //if mid greater than target
-      //search right half of array
-    //if mid less than target
-      //search left half of array
-  //return
-//breath first search
+console.log(binarySearch([1, 2, 3, 4, 5, 6, 7], 3));
+
 //depth first search
-Object.prototype.depthFirstSearch = function(target) {
-  //takes a tree
-  let idx;
-  if (this.value === target) {
-    return this.index;
-  }
-  //checks if value is at tree
-    //return index/id
-  if (this.left) {
-    idx = idx || this.depthFirstSearch.call(this.left, target);
-  }
-  if (this.right) {
-    idx = idx || this.depthFirstSearch.call(this.right, target);
-  }
-  return idx;
-  //takes left leaf
-    //recurse down leaf
-  //takes right leaf
-    //recurse down leaf
-  //return null
-}
 
-let binaryTree = {
-  value: 5,
+const depthFirstSearch = function(node, target) {
+  let left = null;
+  let right = null;
+  if (node.value === target) {
+    return node.index;
+  }
+  if (node.left) {
+    left = depthFirstSearch(node.left, target);
+  }
+  if (node.right) {
+    right = depthFirstSearch(node.right, target);
+  }
+  return left || right;
+}
+const tree = {
+  value: 0,
   index: 0,
   left: {
-    value: 2,
+    value: 1,
     index: 1,
     left: {
       value: 3,
       index: 3,
-      left: null,
-      right: null
+      left: {},
+      right: {}
     },
     right: {
-      value: 7,
+      value: 4,
       index: 4,
-      left: null,
-      right: null
+      left: {},
+      right: {}
     }
   },
   right: {
-    value: 6,
+    value: 2,
     index: 2,
     left: {
-      value: 4,
+      value: 5,
       index: 5,
-      left: null,
-      right: null
+      left: {},
+      right: {}
     },
     right: {
-      value: 10,
+      value: 6,
       index: 6,
-      left: null,
-      right: null
+      left: {},
+      right: {}
     }
   }
 }
+console.log(depthFirstSearch(tree, 5));
 
-console.log(binaryTree.depthFirstSearch(15))
+const dfsIterative = function(tree, target) {
+  let stack = [tree]
+  while (stack.length > 0) {
+    let node = stack.pop();
+
+    if (node.value === target) {
+      return node.index;
+    }
+    if (node.right) {
+      stack.push(node.right)
+    }
+    if (node.left) {
+      stack.push(node.left);
+    }
+  }
+  return null;
+}
+
+console.log(dfsIterative(tree, 5));
+//breath first search
+
+const bfs = function(root, target) {
+  let queue = [root];
+  while (queue.length > 0) {
+    let node = queue.shift();
+    if (node.value === target) {
+      return node.index;
+    }
+    if (node.left) {
+      queue.push(node.left);
+    }
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+  return null;
+}
+
+console.log(bfs(tree, 3));
