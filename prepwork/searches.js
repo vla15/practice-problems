@@ -119,8 +119,22 @@ console.log(bfs(testTree, 8));
 
 
 
+const fisherYatesShuffle = function(arr) {
+  //shuffles arr in place
+  let pointer = arr.length;
+  while (pointer > 0) {
+    let rnd = Math.floor(Math.random() * (pointer--))
 
-
+    let tmp = arr[pointer];
+    arr[pointer] = arr[rnd];
+    arr[rnd] = tmp;
+  }
+  return arr;
+  //creates a pointer to track where we've shuffled to
+  //during each iteration
+    //randomly shuffle
+}
+console.log(fisherYatesShuffle([5, 2, 3, 7, 9, 12]));
 
 
 
