@@ -129,7 +129,63 @@ const fisherYatesShuffle = function(arr) {
   return arr;
 }
 //heaps
+class Heaps {
+  constructor() {
+    this.contents = [];
+  }
 
+  add(value) {
+    this.contents.push(value);
+    this.bubbleUp(this.contents.length - 1);
+  }
+
+  bubbleUp(childIdx) {
+    if (childIdx > 0) {
+      let parentIdx = Math.floor((childIdx - 1) / 2);
+      if (this.contents[childIdx] < this.contents[parentIdx]) {
+        let tmp = this.contents[childIdx];
+        this.contents[childIdx] = this.contents[parentIdx];
+        this.contents[parentIdx] = tmp;
+        this.bubbleUp(parentIdx);
+      }
+    }
+  }
+
+  pop() {
+    //pops off last value
+    let newRoot = this.contents.pop();
+    this.contents[0] = newRoot;
+    this.bubbleDown(0);
+    //replaces root value
+    //bubbles down
+  }
+  bubbleDown(currentIdx) {
+    let heapIndex = currentIdx + 1;
+    let firstChildIdx = (heapIndex * 2) - 1
+    let secondChildIdx = (heapIndex * 2 + 1) - 1;
+    if (this.contents[firstChildIdx] < this.contents[secondChildIdx] && this.contents[firstChildIdx] < this.contents[currentIdx]) {
+      let tmp = this.contents[firstChildIdx];
+      this.contents[firstChildIdx] = this.contents[currentIdx];
+      this.contents[currentIdx] = tmp;
+      this.bubbleDown(firstChildIdx);
+    } else if (this.contents[firstChildIdx] > this.contents[secondChildIdx] && this.contents[secondChildIdx] < this.contents[currentIdx]) {
+      let tmp = this.contents[secondChildIdx];
+      this.contents[secondChildIdx] = this.contents[currentIdx];
+      this.contents[currentIdx] = tmp;
+      this.bubbleDown(secondChildIdx);
+    }
+  }
+}
+
+let heap = new Heaps();
+heap.add(2);
+heap.add(5);
+heap.add(3);
+heap.add(4);
+heap.add(1);
+heap.add(0);
+heap.pop()
+console.log(heap.contents);
 
 
 
