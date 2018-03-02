@@ -1,3 +1,108 @@
+const mergeSort = function (arr) {
+  //spilts array to single values
+  //merges them back up in order
+  //terminating case when one value in array
+  if (arr.length < 2) {
+    return arr;
+  }
+  let mid = Math.floor(arr.length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+const merge = function (left, right) {
+  //iterates through left and right
+  //uses a pointer to iterate through all values
+  let results = [];
+  let leftIdx = 0;
+  let rightIdx = 0;
+
+  while (leftIdx < left.length && rightIdx < right.length) {
+    if (left[leftIdx] < right[rightIdx]) {
+      results.push(left[leftIdx++]);
+    } else {
+      results.push(right[rightIdx++]);
+    }
+  }
+  return results.concat(left.slice(leftIdx), right.slice(rightIdx));
+}
+const quickSort = function(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  //use pivot to organize arrays to lesser and greater
+  let pivot = arr[0];
+  let lesser = [];
+  let greater = [];
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      lesser.push(arr[i]);
+    } else {
+      greater.push(arr[i]);
+    }
+  }
+  return quickSort(lesser).concat(pivot, quickSort(greater));
+}
+const bubbleSort = function(arr) {
+  var isSorted = false;
+  while (!isSorted) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        isSorted = true;
+      }
+    }
+    isSorted = !isSorted;
+  }
+  return arr;
+}
+const insertionSort = function(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    let currentValue = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = currentValue;
+  }
+  return arr;
+}
+const countingSort = function(arr) {
+  let counts = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (counts[arr[i]]) {
+      counts[arr[i]]++;
+    } else {
+      counts[arr[i]] = 1;
+    }
+  }
+  let results = [];
+  counts.forEach(function(counts, num) {
+    for (var i = 0; i < counts; i++) {
+      results.push(num);
+    }
+  })
+  return results;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
