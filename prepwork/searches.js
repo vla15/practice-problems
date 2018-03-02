@@ -72,9 +72,82 @@ const fisherYates = function(arr) {
 }
 console.log(fisherYates([2, 5, 7, 10]));
 //binary search
+const binarySearch = function (arr, target, left = 0, right = arr.length) {
+  //get mid point
+  if (left > right) {
+    return null;
+  }
+  let mid = Math.floor((left + right) / 2);
+  if (arr[mid] === target) {
+    return mid;
+  } else if (target > arr[mid]) {
+    return binarySearch(arr, target, mid + 1, right);
+  } else if (target < arr[mid]) {
+    return binarySearch(arr, target, left, mid - 1);
+  }
+  return null;
+  //compare against target to see which side of array to check
+  //call binarySearch on side
+}
+console.log(binarySearch([1,2,3,4,5,6,7], 3))
 //heap
+class Heap {
+  constructor() {
+    this.contents = [];
+  }
 
+  add(node) {
+    //for heaps you add to the end then bubble up
+    this.contents.push(node);
+    this.bubbleUp(this.contents.length - 1);
+  }
 
+  bubbleUp(childIndex) {
+    //check parent index
+    if (childIndex > 0) {
+      let heapChildIndex = childIndex + 1;
+      let heapParentIndex = Math.floor(heapChildIndex / 2);
+
+      let parentIndex = heapParentIndex - 1;
+      if (this.contents[childIndex] < this.contents[parentIndex]) {
+        let tmp = this.contents[childIndex];
+        this.contents[childIndex] = this.contents[parentIndex];
+        this.contents[parentIndex] = tmp;
+        this.bubbleUp(parentIndex);
+      }
+    }
+    //if child value is less than parent
+      //swap
+      //call bubble up on parentIdx
+
+  }
+
+  remove() {
+    //replaces top value with bottom value
+    if (this.heapSize > 0) {
+      let rootValue = this.contents[0]
+      this.contents[0] = this.contents[this.heapSize() - 1]
+      this.bubbleDown(0)
+      return rootValue;
+    } else {
+      return this.contents.pop();
+    }
+    //bubbles down
+  }
+
+  heapSize() {
+    return this.contents.length;
+  }
+
+  bubbleDown(parentIndex) {
+    //checks left and right children
+    //swaps with the lesser of the two
+    //bubbles down until no children are present
+  }
+}
+
+let heap = new Heap();
+console.log(heap);
 
 
 
