@@ -1,9 +1,95 @@
 //mergesort
+const mergeSort = function(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  let mid = Math.floor(arr.length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
 //merge
+const merge = function(left, right) {
+  let answer = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      answer.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      answer.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+  return answer.concat(left.slice(leftIndex), right.slice(rightIndex));
+}
 //bubbleSort
+const bubbleSort = function(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let tmp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = tmp;
+        isSorted = true;
+      }
+    }
+    isSorted = !isSorted;
+  }
+  return arr;
+}
 //insertionSort
+const insertionSort = function(arr) {
+  for (var i = 0 ; i < arr.length; i++) {
+    let currentValue = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+      arr[j + 1] = arr[j]
+    }
+    arr[j + 1] = currentValue;
+  }
+  return arr;
+}
 //quickSort
+const quickSort = function(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  //use pivots
+  let pivot = arr[0];
+  let lesser = [];
+  let greater = [];
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      lesser.push(arr[i])
+    } else {
+      greater.push(arr[i]);
+    }
+  }
+  return quickSort(lesser).concat(pivot, quickSort(greater));
+}
 //countingSort
+const countingSort = function(arr) {
+  let counts = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (counts[arr[i]]) {
+      counts[arr[i]]++;
+    } else {
+      counts[arr[i]] = 1;
+    }
+  }
+  let results = [];
+  counts.forEach(function(counts, num) {
+    for (var j = 0; j < counts; j++) {
+      results.push(num);
+    }
+  })
+  return results;
+}
+
 
 
 
