@@ -1,5 +1,80 @@
+class Node {
+  constructor(value, id) {
+    this.value = value;
+    this.id = id;
+    this.left = null;
+    this.right = null;
+  }
+}
+let tree = new Node(0, 0);
+let b = new Node(1, 1);
+let c = new Node(2, 2);
+let d = new Node(12, 3);
+let e = new Node(12, 4);
+let f = new Node(5, 5);
+let g = new Node(6, 6);
+tree.left = b;
+tree.right = c;
+b.left = d;
+b.right = e;
+c.left = f;
+c.right = g;
 //bfs
-//dfs
+const dfs = function(tree, target) {
+  let left = null;
+  let right = null;
+  if (tree.value === target) {
+    return tree;
+  }
+  if (tree.left) {
+    left = dfs(tree.left, target);
+  }
+  if (tree.right) {
+    right = dfs(tree.right, target);
+  }
+  return left || right;
+}
+console.log('dfs', dfs(tree, 12))
+
+//dfs iterative
+const dfsIterative = function(arr, target) {
+  let stack = [arr];
+  while (stack.length > 0) {
+    let node = stack.pop();
+    if (node.value === target) {
+      return node;
+    }
+    if (node.right) {
+      stack.push(node.right);
+    }
+    if (node.left) {
+      stack.push(node.left);
+    }
+  }
+  return null;
+}
+
+console.log('dfs iterative', dfsIterative(tree, 12))
+//bfs
+//is a queue system
+const bfs = function(tree, target) {
+  let queue = [tree];
+  while (queue.length > 0) {
+    let node = queue.shift();
+    if (node.value === target) {
+      return node;
+    }
+    if (node.left) {
+      queue.push(node.left);
+    }
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+  return null;
+}
+console.log('bfsbfs', bfs(tree, 5));
+
 //fisherYates
 const fisherYates = function(arr) {
   //takes the array
