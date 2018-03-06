@@ -115,6 +115,68 @@ console.log(binarySearch('binary search', [2,3,4,5,6,7,8,9], 6))
 //heap
 
 
+class MinHeap {
+  constructor() {
+    this.contents = [];
+  }
+  add(value) {
+    this.contents.push(value);
+    this.bubbleUp(this.contents.length - 1);
+  }
+
+  pop() {
+    //takes last value
+    let last = this.contents.pop();
+    let top = this.contents[0];
+    this.contents[0] = last;
+    this.bubbleDown(0);
+    return top;
+    //replaces with first value
+    //bubbles that value downwards
+  }
+
+  bubbleUp(childIdx) {
+    //child to parent
+    //Math.floor(parentIdx * 2 + 1)
+    if (childIdx > 0) {
+      let heapAdjustChildIdx = childIdx + 1;
+      let parentIdx = Math.floor(heapAdjustChildIdx / 2) - 1;
+      if (this.contents[childIdx] < this.contents[parentIdx]) {
+        let tmp = this.contents[parentIdx];
+        this.contents[parentIdx] = this.contents[childIdx];
+        this.contents[childIdx] = tmp;
+        this.bubbleUp(parentIdx);
+      }
+    }
+  }
+
+  bubbleDown(index) {
+    let heapAdjustIdx = index + 1;
+    let firstChildIdx = (heapAdjustIdx * 2) - 1;
+    let secondChildIdx = (heapAdjustIdx * 2 + 1) - 1;
+    if (this.contents[firstChildIdx] < this.contents[secondChildIdx] && this.contents[index] > this.contents[firstChildIdx]) {
+      let tmp = this.contents[firstChildIdx];
+      this.contents[firstChildIdx] = this.contents[index];
+      this.contents[index] = tmp;
+      this.bubbleDown(firstChildIdx);
+    } else if (this.contents[secondChildIdx] < this.contents[firstChildIdx] && this.contents[index] > this.contents[secondChildIdx]) {
+      let tmp = this.contents[index];
+      this.contents[index] = this.contents[secondChildIdx];
+      this.contents[secondChildIdx] = tmp;
+      this.bubbleDown(secondChildIdx);
+    }
+  }
+}
+
+let heap = new MinHeap();
+heap.add(12);
+heap.add(9);
+heap.add(4);
+console.log(heap.contents);
+heap.add(3);
+heap.add(1);
+console.log(heap.contents);
+console.log(heap.pop(), heap.contents);
 
 
 
