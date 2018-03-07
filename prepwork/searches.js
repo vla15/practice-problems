@@ -166,17 +166,38 @@ class MinHeap {
       this.bubbleDown(secondChildIdx);
     }
   }
+
+  remove(node) {
+    let targetIndex;
+    for (var i = 0; i < this.contents.length; i++) {
+      if (this.contents[i] === node) {
+        targetIndex = i;
+        break;
+      }
+    }
+    //replace the removed item with the last item
+    let lastItem = this.contents.pop();
+    this.contents[targetIndex] = lastItem;
+    //check parent
+    this.bubbleUp(targetIndex);
+    this.bubbleDown(targetIndex);
+    //child children if exist
+  }
 }
 
 let heap = new MinHeap();
 heap.add(12);
 heap.add(9);
 heap.add(4);
-console.log(heap.contents);
 heap.add(3);
 heap.add(1);
+heap.add(8);
+heap.add(6);
+heap.add(2);
+heap.add(5);
 console.log(heap.contents);
-console.log(heap.pop(), heap.contents);
+heap.remove(8);
+console.log(heap.contents);
 
 
 
