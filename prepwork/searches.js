@@ -8,7 +8,7 @@ class Node {
 }
 let tree = new Node(0, 0);
 let b = new Node(1, 1);
-let c = new Node(2, 2);
+let c = new Node(12, 2);
 let d = new Node(12, 3);
 let e = new Node(12, 4);
 let f = new Node(5, 5);
@@ -20,43 +20,6 @@ b.right = e;
 c.left = f;
 c.right = g;
 //bfs
-const dfs = function(tree, target) {
-  let left = null;
-  let right = null;
-  if (tree.value === target) {
-    return tree;
-  }
-  if (tree.left) {
-    left = dfs(tree.left, target);
-  }
-  if (tree.right) {
-    right = dfs(tree.right, target);
-  }
-  return left || right;
-}
-console.log('dfs', dfs(tree, 12))
-
-//dfs iterative
-const dfsIterative = function(arr, target) {
-  let stack = [arr];
-  while (stack.length > 0) {
-    let node = stack.pop();
-    if (node.value === target) {
-      return node;
-    }
-    if (node.right) {
-      stack.push(node.right);
-    }
-    if (node.left) {
-      stack.push(node.left);
-    }
-  }
-  return null;
-}
-
-console.log('dfs iterative', dfsIterative(tree, 12))
-//bfs
-//is a queue system
 const bfs = function(tree, target) {
   let queue = [tree];
   while (queue.length > 0) {
@@ -73,28 +36,50 @@ const bfs = function(tree, target) {
   }
   return null;
 }
-console.log('bfsbfs', bfs(tree, 5));
+console.log(bfs(tree, 12));
 
-//fisherYates
-const fisherYates = function(arr) {
-  //takes the array
-  let length = arr.length;
-
-  while(length > 0) {
-    let rnd = Math.floor(Math.random() * length--);
-    let tmp = arr[rnd];
-    arr[rnd] = arr[length];
-    arr[length] = tmp;
+//dfs
+const dfs = function(tree, target) {
+  let left = null;
+  let right = null;
+  if (tree.value === target) {
+    return tree;
   }
-  return arr;
-  //shuffles in place
-  //takes a random item in arr and replaces it with last item
-  //shift boundary up from last item to last item - 1
+  if (tree.left) {
+    left = left || dfs(tree.left, target);
+  }
+  if (tree.right) {
+    right = right || dfs(tree.right, target);
+  }
+  //only work because the value can only be down one path
+  return left || right;
 }
-console.log('fisher yates', fisherYates([4, 12, 3, 5]))
+console.log('dfs', dfs(tree, 12));
+
+const dfsIterative = function(tree, target) {
+  let stack = [tree];
+  while (stack.length > 0) {
+    let node = stack.pop();
+    //you'll always add left to the stack first
+    //then it acts as a regular recursive tree
+    if (node.value === target) {
+      //return value will break the while loop
+      return node;
+    }
+    if (node.right) {
+      stack.push(node.right);
+    }
+    if (node.left) {
+      stack.push(node.left);
+    }
+  }
+  return null;
+}
+
+console.log("dfsiterative", dfs(tree, 12) === dfsIterative(tree, 12));
 
 //binarySearch
-const binarySearch = function(arr, target, left = 0, right = arr.length) {
+const binarySearch = function(arr, target, left = 0, right = arr.length - 1) {
   if (left > right) {
     return null;
   }
@@ -102,113 +87,123 @@ const binarySearch = function(arr, target, left = 0, right = arr.length) {
   if (arr[mid] === target) {
     return mid;
   }
+  if (target > arr[mid]) {
+    //on the right
+    return binarySearch(arr, target, mid + 1, right);
+  }
   if (target < arr[mid]) {
     return binarySearch(arr, target, left, mid - 1);
   }
-  if (target > arr[mid]) {
-    return binarySearch(arr, target, mid + 1, right);
-  }
   return null;
 }
+console.log(binarySearch([1,2,3,4,5,6], 6))
+//fisherYates
 
-console.log(binarySearch('binary search', [2,3,4,5,6,7,8,9], 6))
+const fisherYatesShuffle = function(arr) {
+  //shuffles in place
+  //use a pointer to separate sorted and unsorted part of arr
+  //as sort occurs, move sorted to sorted section of arr which increases
+  //decrease unsorted section as sorted section increases
+  let length = arr.length;
+  while (length > 0) {
+    let rnd = Math.floor(Math.random() * length--);
+    //swap places
+    let tmp = arr[rnd];
+    arr[rnd] = arr[length];
+    arr[length] = tmp;
+  }
+  return arr;
+}
+console.log(fisherYatesShuffle([2,12, 9, 3, 1, 0, 4]))
 //heap
-
-
-class MinHeap {
+class Heap {
   constructor() {
     this.contents = [];
   }
+
   add(value) {
     this.contents.push(value);
-    this.bubbleUp(this.contents.length - 1);
+    this.bubbleUp(this.contents.length - 1)
   }
 
-  pop() {
-    //takes last value
-    let last = this.contents.pop();
-    let top = this.contents[0];
-    this.contents[0] = last;
-    this.bubbleDown(0);
-    return top;
-    //replaces with first value
-    //bubbles that value downwards
-  }
-
-  bubbleUp(childIdx) {
-    //child to parent
-    //Math.floor(parentIdx * 2 + 1)
-    if (childIdx > 0) {
-      let heapAdjustChildIdx = childIdx + 1;
-      let parentIdx = Math.floor(heapAdjustChildIdx / 2) - 1;
-      if (this.contents[childIdx] < this.contents[parentIdx]) {
-        let tmp = this.contents[parentIdx];
-        this.contents[parentIdx] = this.contents[childIdx];
-        this.contents[childIdx] = tmp;
-        this.bubbleUp(parentIdx);
-      }
-    }
-  }
-
-  bubbleDown(index) {
-    let heapAdjustIdx = index + 1;
-    let firstChildIdx = (heapAdjustIdx * 2) - 1;
-    let secondChildIdx = (heapAdjustIdx * 2 + 1) - 1;
-    if (this.contents[firstChildIdx] < this.contents[secondChildIdx] && this.contents[index] > this.contents[firstChildIdx]) {
-      let tmp = this.contents[firstChildIdx];
-      this.contents[firstChildIdx] = this.contents[index];
-      this.contents[index] = tmp;
-      this.bubbleDown(firstChildIdx);
-    } else if (this.contents[secondChildIdx] < this.contents[firstChildIdx] && this.contents[index] > this.contents[secondChildIdx]) {
-      let tmp = this.contents[index];
-      this.contents[index] = this.contents[secondChildIdx];
-      this.contents[secondChildIdx] = tmp;
-      this.bubbleDown(secondChildIdx);
-    }
-  }
-
-  remove(node) {
-    let targetIndex;
-    for (var i = 0; i < this.contents.length; i++) {
-      if (this.contents[i] === node) {
-        targetIndex = i;
+  remove(value) {
+    //find a value in contents
+    let targetIdx;
+    for (var i = 0 ; i < this.contents.length; i ++) {
+      if (this.contents[i] === value) {
+        targetIdx = i;
         break;
       }
     }
-    //replace the removed item with the last item
-    let lastItem = this.contents.pop();
-    this.contents[targetIndex] = lastItem;
-    //check parent
-    this.bubbleUp(targetIndex);
-    this.bubbleDown(targetIndex);
-    //child children if exist
+    const last = this.contents.pop();
+    this.contents[targetIdx] = last;
+    this.bubbleDown(targetIdx);
+    //replace with last value
+    //bubbleDown
+  }
+
+  pop() {
+    //pops top value off
+    if (this.contents.length > 0) {
+      let topValue = this.contents[0];
+      let last = this.contents.pop();
+      this.contents[0] = last;
+      this.bubbleDown(0);
+      return topValue;
+    }
+    return null;
+    //replaces it with last value
+
+  }
+
+  bubbleDown(index) {
+    let firstChild = (2 * (index + 1)) - 1;
+    let secondChild = (2 * (index + 1) + 1) - 1;
+    //check which child is smallest
+    if (this.contents[firstChild] < this.contents[secondChild] && this.contents[index] > this.contents[firstChild]) {
+      let tmp = this.contents[index];
+      this.contents[index] = this.contents[firstChild];
+      this.contents[firstChild] = tmp;
+      this.bubbleDown(firstChild);
+    } else if (this.contents[secondChild] < this.contents[firstChild] && this.contents[index] > this.contents[secondChild]) {
+      let tmp = this.contents[index];
+      this.contents[index] = this.contents[secondChild];
+      this.contents[secondChild] = tmp;
+      this.bubbleDown[secondChild]
+    }
+  }
+
+  bubbleUp(childIdx) {
+    if (childIdx > 0) {
+      let parentIdx = Math.floor((childIdx + 1) / 2) - 1;
+      if (this.contents[childIdx] < this.contents[parentIdx]) {
+        let tmp = this.contents[childIdx];
+        this.contents[childIdx] = this.contents[parentIdx];
+        this.contents[parentIdx] = tmp;
+        this.bubbleUp(parentIdx);
+      }
+    }
+
   }
 }
 
-let heap = new MinHeap();
-heap.add(12);
-heap.add(9);
+let heap = new Heap();
+heap.add(7);
 heap.add(4);
-heap.add(3);
-heap.add(1);
-heap.add(8);
-heap.add(6);
-heap.add(2);
 heap.add(5);
+heap.add(3);
+heap.add(9);
+heap.add(6);
 console.log(heap.contents);
-heap.remove(8);
+console.log(heap.pop());
 console.log(heap.contents);
-
-
-
-
-
-
-
-
-
-
-
+heap.add(3);
+heap.add(4);
+console.log(heap.contents);
+heap.remove(6);
+console.log(heap.contents);
+heap.remove(4);
+console.log(heap.contents);
 
 
 // //binary search
