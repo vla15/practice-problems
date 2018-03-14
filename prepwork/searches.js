@@ -116,13 +116,64 @@ class Heap {
     this.contents = [];
   }
   add(value) {
-
+    //adds value to end of array
+    //bubble up to make sure heap is still in order
+    this.contents.push(value);
+    this.bubbleUp(this.contents.length - 1);
   }
   remove(value) {
-
+    //iterates through heap
+    //once it finds value replace with last value
+    let targetIdx;
+    for (var i = 0; i < this.contents.length; i++) {
+      if (this.contents[i] === value) {
+        targetIdx = i;
+        break;
+      }
+    }
+    if (targetIdx) {
+      let lastValue = this.contents.pop();
+      this.contents[targetIdx] = lastValue;
+      //check parent first
+      this.bubbleUp(targetIdx);
+      this.bubbleDown(targetIdx);
+    }
   }
   pop() {
+    //replaces top value with last value
+    let lastValue = this.contents.pop();
+    let topValue = this.contents[0];
+    this.contents[0] = lastValue;
+    this.bubbleDown(0);
+    return topValue
+  }
+  bubbleDown(parentIdx) {
+    let firstChild = 2 * (parentIdx + 1) - 1
+    let secondChild = 2 * (parentIdx + 1) + 1 - 1;
+    //check which child is smaller in value
+    if (this.contents[firstChild] && this.contents[firstChild] < this.contents[secondChild] && this.contents[firstChild] < this.contents[parentIdx]) {
+      let tmp = this.contents[firstChild];
+      this.contents[firstChild] = this.contents[parentIdx];
+      this.contents[parentIdx] = tmp;
+      this.bubbleDown(firstChild)
+    } else if (this.contents[secondChild] && this.contents[secondChild] < this.contents[firstChild] && this.contents[secondChild] < this.contents[parentIdx]) {
+      let tmp = this.contents[secondChild];
+      this.contents[secondChild] = this.contents[parentIdx];
+      this.contents[parentIdx] = tmp;
+      this.bubbleDown(secondChild);
+    }
+  }
 
+  bubbleUp(childIdx) {
+    if (childIdx > 0) {
+      let parentIndex = Math.floor((childIdx + 1) / 2) - 1;
+      if (this.contents[parentIndex] > this.contents[childIdx]) {
+        let tmp = this.contents[parentIndex];
+        this.contents[parentIndex] = this.contents[childIdx];
+        this.contents[childIdx] = tmp;
+        this.bubbleUp(parentIndex);
+      }
+    }
   }
 }
 
