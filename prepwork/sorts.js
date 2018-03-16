@@ -1,48 +1,38 @@
-//insertionSort
-const insertionSort = function(arr) {
-  //iterates through the array
-  for (var i = 0; i < arr.length; i++) {
-    let current = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > current; j--) {
-      arr[j + 1] = arr[j];
-    }
-    arr[j + 1] = current;
-  }
-
-  return arr;
-  //has another iterator that checks to see if previous value is greater then current
-  //replaces current value with previous value
-  //continues until forloop stops
-  //then replaces current value with new value
-}
 //bubbleSort
 const bubbleSort = function(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    for (var j = 0; j < arr.length; j++) {
-      if (arr[j] > arr[j + 1]) {
-        let tmp = arr[j + 1];
-        arr[j + 1] = arr[j];
-        arr[j] = tmp;
-        j = -1;
-      }
-      if (j == arr.length - 1) {
-        isSorted = true;
-      }
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > arr[i + 1]) {
+      let tmp = arr[i];
+      arr[i] = arr[i + 1];
+      arr[i + 1] = tmp;
+      i = -1;
     }
   }
   return arr;
 }
-//quickSort
+//insertionSort
+const insertionSort = function(arr) {
+  //iterate through first array
+  for (var j = 0; j < arr.length; j++) {
+    let current = arr[j];
+    for (var i = j - 1; i >= 0 && arr[i] > current; i--) {
+      arr[i + 1] = arr[i]
+    }
+    arr[i + 1] = current;
+  }
+  return arr;
+  //while iterating having another iterating that checks previous value against next value
+
+}
+//mergesort
 const quickSort = function(arr) {
-  //uses pivot point to create two separate arrays
+  //uses pivot to spilt arrays into greater and lesser
   if (arr.length < 2) {
     return arr;
   }
   let pivot = arr[0];
   let lesser = [];
   let greater = [];
-
   for (var i = 1; i < arr.length; i++) {
     if (arr[i] > pivot) {
       greater.push(arr[i]);
@@ -51,41 +41,40 @@ const quickSort = function(arr) {
     }
   }
   return quickSort(lesser).concat(pivot, quickSort(greater));
+  //merge parts together
 }
-//mergeSort
-const mergeSort = function (arr) {
+//quickSort
+const mergeSort = function(arr) {
+  //spilt till single values
+  //rebuild back up while in order
   if (arr.length < 2) {
     return arr;
   }
-  //doesnt use pivot
-  //breaks it in pieces until its the smallest value
   let mid = Math.floor(arr.length / 2);
   let left = arr.slice(0, mid);
   let right = arr.slice(mid);
-
+  
   return merge(mergeSort(left), mergeSort(right));
 }
 //merge
 const merge = function(left, right) {
+  let leftIdx = 0;
+  let rightIdx = 0;
   let results = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
-
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex] < right[rightIndex]) {
-      results.push(left[leftIndex]);
-      leftIndex++;
+  while (leftIdx < left.length && rightIdx < right.length) {
+    if (left[leftIdx] < right[rightIdx]) {
+      results.push(left[leftIdx]);
+      leftIdx++;
     } else {
-      results.push(right[rightIndex]);
-      rightIndex++;
+      results.push(right[rightIdx]);
+      rightIdx++;
     }
   }
-  return results.concat(left.slice(leftIndex), right.slice(rightIndex));
-
+  return results.concat(left.slice(leftIdx), right.slice(rightIdx));
 }
 //countingSort
 const countingSort = function(arr) {
-  //uses the values in array as index
+  //uses the nums in the arr as index of a new arr
   let counts = [];
   for (var i = 0; i < arr.length; i++) {
     if (counts[arr[i]]) {
@@ -95,16 +84,22 @@ const countingSort = function(arr) {
     }
   }
 
-  //iterate through counts
   let results = [];
-  //then produce results array in order
   counts.forEach(function(count, value) {
     for (var j = 0; j < count; j++) {
       results.push(value);
     }
   })
-  return results
+  return results;
 }
+
+
+
+
+
+
+
+
 
 
 
