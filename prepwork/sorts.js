@@ -1,32 +1,78 @@
-//bubbleSort
-const bubbleSort = function(arr) {
+//countingSort
+const countingSort = function(arr) {
+  //uses values in the array as the index in a new array
+  //value in the new array will be count of that index showing up in input arr
+  let count = [];
   for (var i = 0; i < arr.length; i++) {
-    if (arr[i] > arr[i + 1]) {
-      let tmp = arr[i];
-      arr[i] = arr[i + 1];
-      arr[i + 1] = tmp;
-      i = -1;
+    if (count[arr[i]]) {
+      count[arr[i]]++;
+    } else {
+      count[arr[i]] = 1;
     }
   }
-  return arr;
+  let results = [];
+  count.forEach(function(count, value) {
+    for (var j = 0; j < count; j++) {
+      results.push(value);
+    }
+  })
+  return results
 }
 //insertionSort
 const insertionSort = function(arr) {
-  //iterate through first array
-  for (var j = 0; j < arr.length; j++) {
-    let current = arr[j];
-    for (var i = j - 1; i >= 0 && arr[i] > current; i--) {
-      arr[i + 1] = arr[i]
+  //iterates through and sorts array in place
+  //pushes all sorted values to left side of array
+  for (var i = 0; i < arr.length; i++) {
+    let value = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > value; j--) {
+      arr[j + 1] = arr[j];
     }
-    arr[i + 1] = current;
+    arr[j + 1] = value;
   }
   return arr;
-  //while iterating having another iterating that checks previous value against next value
-
 }
 //mergesort
+const mergeSort = function(arr) {
+  //breaks array down to single value
+  if (arr.length < 2) {
+    return arr;
+  }
+  //uses helper merge function to join back in order
+  let mid = Math.floor(arr.length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+//merge
+const merge = function(left, right) {
+  let leftIndex = 0;
+  let rightIndex = 0;
+  let results = [];
+
+  while (leftIndex < left.length || rightIndex < right.length) {
+    if (left[leftIndex] && right[rightIndex]) {
+      if (left[leftIndex] < right[rightIndex]) {
+        results.push(left[leftIndex]);
+        leftIndex++;
+      } else {
+        results.push(right[rightIndex]);
+        rightIndex++;
+      }
+    } else if (right[rightIndex]) {
+      results.push(right[rightIndex]);
+      rightIndex++;
+    } else if (left[leftIndex]) {
+      results.push(left[leftIndex]);
+      leftIndex++;
+    }
+  }
+  return results;
+}
+
+//quickSort
 const quickSort = function(arr) {
-  //uses pivot to spilt arrays into greater and lesser
+  //uses a pivot to sort the arr
   if (arr.length < 2) {
     return arr;
   }
@@ -41,74 +87,19 @@ const quickSort = function(arr) {
     }
   }
   return quickSort(lesser).concat(pivot, quickSort(greater));
-  //merge parts together
 }
-//quickSort
-const mergeSort = function(arr) {
-  //spilt till single values
-  //rebuild back up while in order
-  if (arr.length < 2) {
-    return arr;
-  }
-  let mid = Math.floor(arr.length / 2);
-  let left = arr.slice(0, mid);
-  let right = arr.slice(mid);
-  
-  return merge(mergeSort(left), mergeSort(right));
-}
-//merge
-const merge = function(left, right) {
-  let leftIdx = 0;
-  let rightIdx = 0;
-  let results = [];
-  while (leftIdx < left.length && rightIdx < right.length) {
-    if (left[leftIdx] < right[rightIdx]) {
-      results.push(left[leftIdx]);
-      leftIdx++;
-    } else {
-      results.push(right[rightIdx]);
-      rightIdx++;
-    }
-  }
-  return results.concat(left.slice(leftIdx), right.slice(rightIdx));
-}
-//countingSort
-const countingSort = function(arr) {
-  //uses the nums in the arr as index of a new arr
-  let counts = [];
+//bubbleSort
+const bubbleSort = function (arr) {
   for (var i = 0; i < arr.length; i++) {
-    if (counts[arr[i]]) {
-      counts[arr[i]]++;
-    } else {
-      counts[arr[i]] = 1;
+    if (arr[i] > arr[i + 1]) {
+      let tmp = arr[i];
+      arr[i] = arr[i + 1];
+      arr[i + 1] = tmp;
+      i = -1;
     }
   }
-
-  let results = [];
-  counts.forEach(function(count, value) {
-    for (var j = 0; j < count; j++) {
-      results.push(value);
-    }
-  })
-  return results;
+  return arr;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
