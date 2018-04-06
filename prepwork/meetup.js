@@ -748,3 +748,110 @@ var hh = 0.2;
 var x = Math.round((gg % hh) * 100) / 100;
 
 console.log(x);
+
+
+
+function isConsectiveSum(
+  numbers,
+  target,
+  start = numbers.length - 1,
+  total = 0
+) {
+  // Start your code here
+  if (numbers.length === 0) {
+    return false;
+  }
+  if (total === target) {
+    return true;
+  }
+  if (start < 0) {
+    return false;
+  }
+  let newTotal = total + numbers[start];
+  return isConsectiveSum(numbers, target, start - 1, newTotal) ||
+    isConsectiveSum(numbers, target, start - 1, total)
+  //have to try all routes
+  //include and not include the number;
+}
+
+isConsectiveSum([4, 2, 1, 300], 301);
+
+console.log(isConsectiveSum([4, 2, 1, 300], 301));
+
+function spiralTraversal(arr) {
+  // Start your code here
+  let top = 0;
+  let bot = arr.length - 1;
+  //iterate through until top boundary greater than bot
+  //pop top off
+  //iterate furthest right column and pop value off till last row
+  //shift bottom row and reverse
+  //shift col until hit top
+  let spiraled = [];
+  while (top < bot) {
+    spiraled = spiraled.concat(arr.shift());
+    for (var j = 0; j < bot - 1; j++) {
+      spiraled = spiraled.concat(arr[j].pop());
+    }
+    let botRow = arr.pop();
+    if (botRow) {
+      spiraled = spiraled.concat(botRow.reverse())
+    }
+    for (var i = arr.length - 1; i > top; i--) {
+      spiraled = spiraled.concat(arr[i].shift());
+    }
+    bot = arr.length;
+  }
+  return spiraled;
+}
+
+let spiral = [[10, 12, 14], [16, 18, 20], [22, 24, 26]];
+
+console.log(spiralTraversal(spiral));
+
+
+function isConsecutiveSum2(
+  numbers,
+  target,
+  start = numbers.length - 1,
+  total = 0
+) {
+  // Start your code here
+  if (numbers.length === 0) {
+    return false;
+  }
+  if (total === target) {
+    return true;
+  }
+  if (start < 0) {
+    return false;
+  }
+  let newTotal = total + numbers[start];
+  return (
+    isConsecutiveSum2(numbers, target, start - 1, newTotal) ||
+    isConsecutiveSum2(numbers, target, start - 1, total)
+  );
+  //have to try all routes
+  //include and not include the number;
+}
+
+console.log('ay', isConsecutiveSum2([],2));
+
+
+
+function isConsecutiveSum(a, target) {
+  const L = a.length;
+  let memo = Array(L).fill(0);
+
+  for (let l = 1; l <= L; l++) {
+    // Increase length of subarray
+    for (let i = 0; i < L - l + 1; i++) {
+      // Traverse memo
+      memo[i] += a[l + i - 1];
+      if (memo[i] === target) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

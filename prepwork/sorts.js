@@ -1,23 +1,49 @@
-//quickSort
 const quickSort = function(arr) {
+  //utilizes a pivot
   if (arr.length < 2) {
     return arr;
   }
-  //utilzes a pivot point
   let pivot = arr[0];
   let lesser = [];
   let greater = [];
   for (var i = 1; i < arr.length; i++) {
-    if (arr[i] > pivot) {
-      greater.push(arr[i])
-    } else {
+    if (arr[i] < pivot) {
       lesser.push(arr[i])
+    } else {
+      greater.push(arr[i])
     }
   }
   return quickSort(lesser).concat(pivot, quickSort(greater));
+  //creates a lesser and a greater arr
+  //spilts till its small
 }
-//mergeSort
+
+const bubbleSort = function(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > arr[i + 1]) {
+      let tmp = arr[i];
+      arr[i] = arr[i + 1];
+      arr[i + 1] = tmp;
+      i = -1;
+    }
+  }
+  return arr;
+}
+
+const insertionSort = function(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    let current = arr[i];
+    for (var j = i - 1; j >= 0 && current < arr[j]; j--) {
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = current;
+  }
+  return arr;
+}
+
 const mergeSort = function(arr) {
+  //breaks down to smallest number
+  //merges back with merge helper function
   if (arr.length < 2) {
     return arr;
   }
@@ -26,71 +52,42 @@ const mergeSort = function(arr) {
   let right = arr.slice(mid);
 
   return merge(mergeSort(left), mergeSort(right));
+
 }
-//merge
-const merge = function(left, right) {
+
+const merge = function (left, right) {
   let leftIdx = 0;
   let rightIdx = 0;
   let results = [];
-  while (leftIdx < left.length || rightIdx < right.length) {
-    if (left[leftIdx] && right[rightIdx]) {
-      if (left[leftIdx] < right[rightIdx]) {
-        results.push(left[leftIdx]);
-        leftIdx++;
-      } else {
-        results.push(right[rightIdx])
-        rightIdx++;
-      }
-    } else if (left[leftIdx]) {
-      return results.concat(left.slice(leftIdx));
-    } else if (right[rightIdx]) {
-      return results.concat(right.slice(rightIdx));
-    }
-  }
-}
-//bubbleSort
-const bubbleSort = function(arr) {
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] > arr[i + 1]) {
-      let tmp = arr[i];
-      arr[i] = arr[i + 1];
-      arr[i + 1] = tmp;
-      i = -1
-    }
-  }
-  return arr;
-}
-//countingSort
-const countingSort = function(arr) {
-  let count = [];
-  for (var i = 0; i < arr.length; i++) {
-    if (count[arr[i]]) {
-      count[arr[i]]++;
+  while (leftIdx < left.length && rightIdx < right.length) {
+    if (left[leftIdx] < right[rightIdx]) {
+      results.push(left[leftIdx]);
+      leftIdx++;
     } else {
-      count[arr[i]] = 1;
+      results.push(right[rightIdx])
+      rightIdx++;
+    }
+  }
+  return results.concat(left.slice(leftIdx), right.slice(rightIdx));
+}
+
+const countingSort = function(arr) {
+  let counts = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (counts[arr[i]]) {
+      counts[arr[i]]++;
+    } else {
+      counts[arr[i]] = 1;
     }
   }
   let results = [];
-  count.forEach((count, num) => {
-    for (var x = 0; x < count; x++) {
-      results.push(num);
+  counts.forEach(function(counts, value) {
+    for (var j = 0; j < counts; j++) {
+      results.push(value);
     }
   })
   return results;
 }
-//insertionSort
-const insertionSort = function(arr) {
-  for (var i = 0; i < arr.length; i++) {
-    let current = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > current; j--) {
-      arr[j + 1] = arr[j];
-    }
-    arr[j + 1] = current;
-  }
-  return arr;
-}
-
-
 
 
 
