@@ -8,7 +8,7 @@ class Node {
 }
 let tree = new Node(0, 0);
 let b = new Node(1, 1);
-let c = new Node(12, 2);
+let c = new Node(13, 2);
 let d = new Node(13, 3);
 let e = new Node(13, 4);
 let f = new Node(6, 5);
@@ -35,11 +35,13 @@ const dfs = function(tree, target) {
   }
   return left || right;
 }
-console.log(dfs(tree, 13));
+
+
+console.log('dfs', dfs(tree, 13));
 
 //iterative dfs
-//iterative dfs is a stack
 const iterativeDfs = function(tree, target) {
+  //utilizes a stack
   let stack = [tree];
   while (stack.length > 0) {
     let node = stack.pop();
@@ -56,11 +58,10 @@ const iterativeDfs = function(tree, target) {
   return null;
 }
 
-console.log(iterativeDfs(tree, 13) === dfs(tree, 13));
-console.log(iterativeDfs(tree, 555))
+console.log("iterative dfs", iterativeDfs(tree, 6));
 //bfs
-//bfs is visit every leaf from left to right
-const bfs = function (tree, target) {
+
+const bfs = function(tree, target) {
   let queue = [tree];
   while (queue.length > 0) {
     let node = queue.shift();
@@ -71,44 +72,33 @@ const bfs = function (tree, target) {
       queue.push(node.left);
     }
     if (node.right) {
-      queue.push(node.right)
+      queue.push(node.right);
     }
   }
   return null;
 }
-console.log(bfs(tree,6));
+
+console.log('bfs ', bfs(tree, 13))
 //binarySearch
-const binarySearch = function(arr, target, left = 0, right = arr.length) {
-  let result = null;
-  //starts at mid
-  if (left > right) {
-    return null;
-  }
-  let mid = Math.floor((left + right) / 2);
+const binarySearch = function(arr, target, start = 0, end = arr.length) {
+  let mid = Math.floor((start + end) / 2);
   if (arr[mid] === target) {
     return mid;
   }
+  if (start > end) {
+    return null;
+  }
   if (target > arr[mid]) {
-    result = result || binarySearch(arr, target, mid + 1, right);
+    //right half
+    return binarySearch(arr, target, mid + 1, end);
+  } else if (target < arr[mid]) {
+    //left half
+    return binarySearch(arr, target, start, mid - 1)
   }
-  if (target < arr[mid]) {
-    result = result || binarySearch(arr, target, left, mid - 1);
-  }
-  return result;
-  //base case, when the left side is greater than right side
-    //we've exchausted the search
-  //checks to see if target is less than or greater than mid
-    //greater than, check right side of original arr
-    //less than, check left side of original arr
-  //return null;
 }
-console.log('binary search', binarySearch([1,2,3,4,5,6,7], 1))
-
-
-//fisherYates
+console.log(binarySearch([1,2,3,4,5],3))
+//fisherYaes
 const fisherYates = function(arr) {
-  //sorts array in place by replacing value at random index with last index;
-  //keep repeating as last index size shifts
   let length = arr.length;
   while (length > 0) {
     let rnd = Math.floor(Math.random() * length--);
@@ -118,8 +108,7 @@ const fisherYates = function(arr) {
   }
   return arr;
 }
-console.log(fisherYates([2,4,12,3,1,0,3,4]))
-//heaps on heaps
+console.log('fisher', fisherYates([1,2,3,4,5]))
 
 class Heap {
   constructor() {
