@@ -855,3 +855,99 @@ function isConsecutiveSum(a, target) {
   }
   return false;
 }
+
+
+/**
+ * @param {number[][]} meetingSeries
+ * @return {number}
+ */
+function minNumberOfRoom(meetingSeries) {
+  //sort rooms based on start time
+	meetingSeries.sort(function(a, b) {
+		return a[0] - b[0];
+	});
+	let meetingsRooms = [];
+	for (var i = 0; i < meetingSeries.length; i++) {
+    let currentRoom = meetingSeries[i];
+    let roomAdded = false;
+		if (!meetingsRooms.length) {
+			//initializes 1 room if there were none
+			meetingsRooms.push([currentRoom]);
+		} else {
+			for (var j = 0; j < meetingsRooms.length; j++) {
+				let last = meetingsRooms[j].length - 1;
+				if (meetingsRooms[j][last][1] <= currentRoom[0]) {
+          meetingsRooms[j].push(currentRoom);
+          roomAdded = true;
+          j = meetingsRooms.length;
+				}
+      }
+      if (!roomAdded) {
+        meetingsRooms.push([currentRoom]);
+      }
+		}
+  }
+	return meetingsRooms.length;
+}
+
+console.log(minNumberOfRoom([[1,3],[6,8],[4,5],[3,6],[7,10],[7,9],[11,12],[8,10],[7,8]]));
+
+
+
+function deleteDuplicate(integers) {
+  let dupIndex = 1;
+  for (var i = 1; i < integers.length; i++) {
+    //scan array
+    //if there's a dup, update dupIndex
+    if (integers[i] !== integers[i - 1]) {
+      integers[dupIndex] = integers[i];
+      dupIndex++;
+    }
+  }
+  return integers.slice(0, dupIndex);
+}
+
+console.log(deleteDuplicate([1, 1, 2, 2, 2, 5, 6, 7, 7, 8]));
+
+
+function search2dMatrix(matrix, target, start = 0, end = matrix.length - 1) {
+  if (start > end) {
+    return false;
+  }
+  let mid = Math.floor((start + end) / 2);
+  console.log(start, end, mid);
+  if (matrix[mid][0] === target) {
+    return true;
+  }
+  if (target > matrix[mid][0]) {
+    //recurse lower
+    if (binarySearch(matrix[mid], target)) {
+      return true;
+    } else {
+      return search2dMatrix(matrix, target, mid + 1, end);
+    }
+  } else if (target < matrix[mid][0]) {
+      return search2dMatrix(matrix, target, start, mid - 1);
+    //check binary search of that arr
+      //true then return true
+  }
+}
+
+const binarySearch = function(arr, target, start = 0, end = arr.length - 1) {
+  if (start > end) {
+    return false;
+  }
+  let mid = Math.floor((start + end) / 2);
+  if (arr[mid] === target) {
+    return true;
+  }
+  if (target > arr[mid]) {
+    return binarySearch(arr, target, mid + 1, end);
+  } else if (target < arr[mid]) {
+    return binarySearch(arr, target, start, mid -1);
+  }
+}
+
+let inputMatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+
+console.log(search2dMatrix(inputMatrix, 7));
