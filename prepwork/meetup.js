@@ -951,3 +951,25 @@ const binarySearch = function(arr, target, start = 0, end = arr.length - 1) {
 let inputMatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
 console.log(search2dMatrix(inputMatrix, 7));
+
+function plusOneToNumber(numbers) {
+  //iterate through it backwards
+  let add = 1;
+  for (var i = numbers.length - 1; i >= 0; i--) {
+    if (numbers[i] + add === 10) {
+      numbers[i] = 0;
+      add = 1;
+    } else {
+      numbers[i] += add;
+      add = 0;
+    }
+  }
+  if (add === 1) {
+    return [1].concat(numbers);
+  } else {
+    return numbers;
+
+  }
+}
+
+console.log(plusOneToNumber([9,1,9]));
