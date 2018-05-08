@@ -719,257 +719,367 @@
 // console.log(rearrangeNumber([2, 3, 4, 5, 6, 7]));
 
 
-var data = [[1, 2, 3, [4, [5, 6, 14]]], [8, [9, 18, [11, [12]], 13]]];
-console.log('length', data.length);
-function test(data, elem) {
-  if (typeof data == "number") {
-    return !elem || data > elem ? data : elem;
-  } else {
-    for (var i = 0; i < data.length; i++) {
-      elem = test(data[i], elem);
-    }
-    return elem;
-  }
-}
-var result = test(data);
+// var data = [[1, 2, 3, [4, [5, 6, 14]]], [8, [9, 18, [11, [12]], 13]]];
+// console.log('length', data.length);
+// function test(data, elem) {
+//   if (typeof data == "number") {
+//     return !elem || data > elem ? data : elem;
+//   } else {
+//     for (var i = 0; i < data.length; i++) {
+//       elem = test(data[i], elem);
+//     }
+//     return elem;
+//   }
+// }
+// var result = test(data);
 
-console.log(result)
-
-
-var dt = new Date();
-var hr = dt.getHours();
-var min = dt.getMinutes();
-var tm = hr.toString() + ':' + min.toString();
-console.log(tm, tm > '9:00', tm + '9:00');
+// console.log(result)
 
 
-var gg = 1.5;
-var hh = 0.2;
-var x = Math.round((gg % hh) * 100) / 100;
+// var dt = new Date();
+// var hr = dt.getHours();
+// var min = dt.getMinutes();
+// var tm = hr.toString() + ':' + min.toString();
+// console.log(tm, tm > '9:00', tm + '9:00');
 
-console.log(x);
+
+// var gg = 1.5;
+// var hh = 0.2;
+// var x = Math.round((gg % hh) * 100) / 100;
+
+// console.log(x);
 
 
 
-function isConsectiveSum(
-  numbers,
-  target,
-  start = numbers.length - 1,
-  total = 0
-) {
+// function isConsectiveSum(
+//   numbers,
+//   target,
+//   start = numbers.length - 1,
+//   total = 0
+// ) {
+//   // Start your code here
+//   if (numbers.length === 0) {
+//     return false;
+//   }
+//   if (total === target) {
+//     return true;
+//   }
+//   if (start < 0) {
+//     return false;
+//   }
+//   let newTotal = total + numbers[start];
+//   return isConsectiveSum(numbers, target, start - 1, newTotal) ||
+//     isConsectiveSum(numbers, target, start - 1, total)
+//   //have to try all routes
+//   //include and not include the number;
+// }
+
+// isConsectiveSum([4, 2, 1, 300], 301);
+
+// console.log(isConsectiveSum([4, 2, 1, 300], 301));
+
+// function spiralTraversal(arr) {
+//   // Start your code here
+//   let top = 0;
+//   let bot = arr.length - 1;
+//   //iterate through until top boundary greater than bot
+//   //pop top off
+//   //iterate furthest right column and pop value off till last row
+//   //shift bottom row and reverse
+//   //shift col until hit top
+//   let spiraled = [];
+//   while (top < bot) {
+//     spiraled = spiraled.concat(arr.shift());
+//     for (var j = 0; j < bot - 1; j++) {
+//       spiraled = spiraled.concat(arr[j].pop());
+//     }
+//     let botRow = arr.pop();
+//     if (botRow) {
+//       spiraled = spiraled.concat(botRow.reverse())
+//     }
+//     for (var i = arr.length - 1; i > top; i--) {
+//       spiraled = spiraled.concat(arr[i].shift());
+//     }
+//     bot = arr.length;
+//   }
+//   return spiraled;
+// }
+
+// let spiral = [[10, 12, 14], [16, 18, 20], [22, 24, 26]];
+
+// console.log(spiralTraversal(spiral));
+
+
+// function isConsecutiveSum2(
+//   numbers,
+//   target,
+//   start = numbers.length - 1,
+//   total = 0
+// ) {
+//   // Start your code here
+//   if (numbers.length === 0) {
+//     return false;
+//   }
+//   if (total === target) {
+//     return true;
+//   }
+//   if (start < 0) {
+//     return false;
+//   }
+//   let newTotal = total + numbers[start];
+//   return (
+//     isConsecutiveSum2(numbers, target, start - 1, newTotal) ||
+//     isConsecutiveSum2(numbers, target, start - 1, total)
+//   );
+//   //have to try all routes
+//   //include and not include the number;
+// }
+
+// console.log('ay', isConsecutiveSum2([],2));
+
+
+
+// function isConsecutiveSum(a, target) {
+//   const L = a.length;
+//   let memo = Array(L).fill(0);
+
+//   for (let l = 1; l <= L; l++) {
+//     // Increase length of subarray
+//     for (let i = 0; i < L - l + 1; i++) {
+//       // Traverse memo
+//       memo[i] += a[l + i - 1];
+//       if (memo[i] === target) {
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+
+// /**
+//  * @param {number[][]} meetingSeries
+//  * @return {number}
+//  */
+// function minNumberOfRoom(meetingSeries) {
+//   //sort rooms based on start time
+// 	meetingSeries.sort(function(a, b) {
+// 		return a[0] - b[0];
+// 	});
+// 	let meetingsRooms = [];
+// 	for (var i = 0; i < meetingSeries.length; i++) {
+//     let currentRoom = meetingSeries[i];
+//     let roomAdded = false;
+// 		if (!meetingsRooms.length) {
+// 			//initializes 1 room if there were none
+// 			meetingsRooms.push([currentRoom]);
+// 		} else {
+// 			for (var j = 0; j < meetingsRooms.length; j++) {
+// 				let last = meetingsRooms[j].length - 1;
+// 				if (meetingsRooms[j][last][1] <= currentRoom[0]) {
+//           meetingsRooms[j].push(currentRoom);
+//           roomAdded = true;
+//           j = meetingsRooms.length;
+// 				}
+//       }
+//       if (!roomAdded) {
+//         meetingsRooms.push([currentRoom]);
+//       }
+// 		}
+//   }
+// 	return meetingsRooms.length;
+// }
+
+// console.log(minNumberOfRoom([[1,3],[6,8],[4,5],[3,6],[7,10],[7,9],[11,12],[8,10],[7,8]]));
+
+
+
+// function deleteDuplicate(integers) {
+//   let dupIndex = 1;
+//   for (var i = 1; i < integers.length; i++) {
+//     //scan array
+//     //if there's a dup, update dupIndex
+//     if (integers[i] !== integers[i - 1]) {
+//       integers[dupIndex] = integers[i];
+//       dupIndex++;
+//     }
+//   }
+//   return integers.slice(0, dupIndex);
+// }
+
+// console.log(deleteDuplicate([1, 1, 2, 2, 2, 5, 6, 7, 7, 8]));
+
+
+// function search2dMatrix(matrix, target, start = 0, end = matrix.length - 1) {
+//   if (start > end) {
+//     return false;
+//   }
+//   let mid = Math.floor((start + end) / 2);
+//   console.log(start, end, mid);
+//   if (matrix[mid][0] === target) {
+//     return true;
+//   }
+//   if (target > matrix[mid][0]) {
+//     //recurse lower
+//     if (binarySearch(matrix[mid], target)) {
+//       return true;
+//     } else {
+//       return search2dMatrix(matrix, target, mid + 1, end);
+//     }
+//   } else if (target < matrix[mid][0]) {
+//       return search2dMatrix(matrix, target, start, mid - 1);
+//     //check binary search of that arr
+//       //true then return true
+//   }
+// }
+
+// const binarySearch = function(arr, target, start = 0, end = arr.length - 1) {
+//   if (start > end) {
+//     return false;
+//   }
+//   let mid = Math.floor((start + end) / 2);
+//   if (arr[mid] === target) {
+//     return true;
+//   }
+//   if (target > arr[mid]) {
+//     return binarySearch(arr, target, mid + 1, end);
+//   } else if (target < arr[mid]) {
+//     return binarySearch(arr, target, start, mid -1);
+//   }
+// }
+
+// let inputMatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+
+// console.log(search2dMatrix(inputMatrix, 7));
+
+// function plusOneToNumber(numbers) {
+//   //iterate through it backwards
+//   let add = 1;
+//   for (var i = numbers.length - 1; i >= 0; i--) {
+//     if (numbers[i] + add === 10) {
+//       numbers[i] = 0;
+//       add = 1;
+//     } else {
+//       numbers[i] += add;
+//       add = 0;
+//     }
+//   }
+//   if (add === 1) {
+//     return [1].concat(numbers);
+//   } else {
+//     return numbers;
+
+//   }
+// }
+
+// console.log(plusOneToNumber([9,1,9]));
+
+
+// function ascendingOrderArray(numbers) {
+//   // Start your code here
+//   // iterate through once
+//   // you need to check previous value and next value to see if they meet condition;
+//   if (numbers.length < 3) {
+//     return true;
+//   }
+
+//   let counter = 0;
+
+//   for (var i = 1; i < numbers.length; i++) {
+//     let prev = numbers[i - 1];
+//     let current = numbers[i];
+//     if (current < prev) {
+//       counter++;
+//     }
+//   }
+
+//   return counter <= 1;
+// }
+
+// console.log(ascendingOrderArray([2,3,3,2,4]));
+
+
+// /**
+//  * @param {number[]} numbers
+//  * @return {number[][]}
+//  */
+// function createRangeSummary(numbers) {
+//   // Start your code here
+//   let ranges = [];
+//   let currentRange = [numbers[0]];
+//   let start = numbers[0];
+//   let end;
+
+//   for (var i = 1; i < numbers.length; i++) {
+//       //if there is a start
+//       //check if current number diff between two  numbers is 0 or 1
+//     let diff = Math.abs(start - numbers[i]);
+//     if (diff === 1 || diff === 0) {
+//       start = numbers[i];
+//     } else if (currentRange[0] !== start) {
+//       currentRange.push(start);
+//       start = numbers[i];
+//       ranges.push(currentRange);
+//       currentRange = [numbers[i]];
+//     } else {
+//       ranges.push(currentRange);
+//       start = numbers[i];
+//       currentRange = [numbers[i]];
+//     }
+//   }
+//   if (currentRange.length > 0) {
+//     currentRange.push(start);
+//     ranges.push(currentRange);
+//   }
+//   return ranges;
+
+// }
+
+// console.log(createRangeSummary([1, 2, 3, 4, 12, 15, 16]));
+
+function reverseString(str) {
   // Start your code here
-  if (numbers.length === 0) {
-    return false;
+  if (str.length === 1) {
+    return str;
   }
-  if (total === target) {
-    return true;
-  }
-  if (start < 0) {
-    return false;
-  }
-  let newTotal = total + numbers[start];
-  return isConsectiveSum(numbers, target, start - 1, newTotal) ||
-    isConsectiveSum(numbers, target, start - 1, total)
-  //have to try all routes
-  //include and not include the number;
+  return str.substring(str.length - 1) + reverseString(str.substring(0, str.length - 1));
 }
 
-isConsectiveSum([4, 2, 1, 300], 301);
+console.log(reverseString('spamasubi'));
 
-console.log(isConsectiveSum([4, 2, 1, 300], 301));
 
-function spiralTraversal(arr) {
+const columnTitletoNumber = function(str) {
+  const charCodeAtA = 65;
+  let base = str.length - 1;
+  let num = 0;
+  for (var i = 0; i < str.length; i++, base--) {
+    console.log(num);
+    num += Math.pow(26, base) * (str.charCodeAt(i) - charCodeAtA + 1);
+  }
+  return num;
+
+}
+
+console.log(columnTitletoNumber('BA'));
+
+
+function minJumpToEnd(numbers, start = 0, end = numbers.length - 1) {
   // Start your code here
-  let top = 0;
-  let bot = arr.length - 1;
-  //iterate through until top boundary greater than bot
-  //pop top off
-  //iterate furthest right column and pop value off till last row
-  //shift bottom row and reverse
-  //shift col until hit top
-  let spiraled = [];
-  while (top < bot) {
-    spiraled = spiraled.concat(arr.shift());
-    for (var j = 0; j < bot - 1; j++) {
-      spiraled = spiraled.concat(arr[j].pop());
-    }
-    let botRow = arr.pop();
-    if (botRow) {
-      spiraled = spiraled.concat(botRow.reverse())
-    }
-    for (var i = arr.length - 1; i > top; i--) {
-      spiraled = spiraled.concat(arr[i].shift());
-    }
-    bot = arr.length;
+  //store shortest jump to
+  if (start >= end) {
+    return 0;
   }
-  return spiraled;
+  if (numbers[start] === 0) {
+    return 1;
+  }
+  let jumps = Number.POSITIVE_INFINITY;
+  let current = 0;
+  let availableMoves = numbers[start];
+  for (var i = availableMoves; i > 0; i--) {
+    let index = start + i;
+    jumps = Math.min(jumps, 1 + minJumpToEnd(numbers, index, end));
+  }
+  return jumps
 }
-
-let spiral = [[10, 12, 14], [16, 18, 20], [22, 24, 26]];
-
-console.log(spiralTraversal(spiral));
-
-
-function isConsecutiveSum2(
-  numbers,
-  target,
-  start = numbers.length - 1,
-  total = 0
-) {
-  // Start your code here
-  if (numbers.length === 0) {
-    return false;
-  }
-  if (total === target) {
-    return true;
-  }
-  if (start < 0) {
-    return false;
-  }
-  let newTotal = total + numbers[start];
-  return (
-    isConsecutiveSum2(numbers, target, start - 1, newTotal) ||
-    isConsecutiveSum2(numbers, target, start - 1, total)
-  );
-  //have to try all routes
-  //include and not include the number;
-}
-
-console.log('ay', isConsecutiveSum2([],2));
-
-
-
-function isConsecutiveSum(a, target) {
-  const L = a.length;
-  let memo = Array(L).fill(0);
-
-  for (let l = 1; l <= L; l++) {
-    // Increase length of subarray
-    for (let i = 0; i < L - l + 1; i++) {
-      // Traverse memo
-      memo[i] += a[l + i - 1];
-      if (memo[i] === target) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-
-/**
- * @param {number[][]} meetingSeries
- * @return {number}
- */
-function minNumberOfRoom(meetingSeries) {
-  //sort rooms based on start time
-	meetingSeries.sort(function(a, b) {
-		return a[0] - b[0];
-	});
-	let meetingsRooms = [];
-	for (var i = 0; i < meetingSeries.length; i++) {
-    let currentRoom = meetingSeries[i];
-    let roomAdded = false;
-		if (!meetingsRooms.length) {
-			//initializes 1 room if there were none
-			meetingsRooms.push([currentRoom]);
-		} else {
-			for (var j = 0; j < meetingsRooms.length; j++) {
-				let last = meetingsRooms[j].length - 1;
-				if (meetingsRooms[j][last][1] <= currentRoom[0]) {
-          meetingsRooms[j].push(currentRoom);
-          roomAdded = true;
-          j = meetingsRooms.length;
-				}
-      }
-      if (!roomAdded) {
-        meetingsRooms.push([currentRoom]);
-      }
-		}
-  }
-	return meetingsRooms.length;
-}
-
-console.log(minNumberOfRoom([[1,3],[6,8],[4,5],[3,6],[7,10],[7,9],[11,12],[8,10],[7,8]]));
-
-
-
-function deleteDuplicate(integers) {
-  let dupIndex = 1;
-  for (var i = 1; i < integers.length; i++) {
-    //scan array
-    //if there's a dup, update dupIndex
-    if (integers[i] !== integers[i - 1]) {
-      integers[dupIndex] = integers[i];
-      dupIndex++;
-    }
-  }
-  return integers.slice(0, dupIndex);
-}
-
-console.log(deleteDuplicate([1, 1, 2, 2, 2, 5, 6, 7, 7, 8]));
-
-
-function search2dMatrix(matrix, target, start = 0, end = matrix.length - 1) {
-  if (start > end) {
-    return false;
-  }
-  let mid = Math.floor((start + end) / 2);
-  console.log(start, end, mid);
-  if (matrix[mid][0] === target) {
-    return true;
-  }
-  if (target > matrix[mid][0]) {
-    //recurse lower
-    if (binarySearch(matrix[mid], target)) {
-      return true;
-    } else {
-      return search2dMatrix(matrix, target, mid + 1, end);
-    }
-  } else if (target < matrix[mid][0]) {
-      return search2dMatrix(matrix, target, start, mid - 1);
-    //check binary search of that arr
-      //true then return true
-  }
-}
-
-const binarySearch = function(arr, target, start = 0, end = arr.length - 1) {
-  if (start > end) {
-    return false;
-  }
-  let mid = Math.floor((start + end) / 2);
-  if (arr[mid] === target) {
-    return true;
-  }
-  if (target > arr[mid]) {
-    return binarySearch(arr, target, mid + 1, end);
-  } else if (target < arr[mid]) {
-    return binarySearch(arr, target, start, mid -1);
-  }
-}
-
-let inputMatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-
-console.log(search2dMatrix(inputMatrix, 7));
-
-function plusOneToNumber(numbers) {
-  //iterate through it backwards
-  let add = 1;
-  for (var i = numbers.length - 1; i >= 0; i--) {
-    if (numbers[i] + add === 10) {
-      numbers[i] = 0;
-      add = 1;
-    } else {
-      numbers[i] += add;
-      add = 0;
-    }
-  }
-  if (add === 1) {
-    return [1].concat(numbers);
-  } else {
-    return numbers;
-
-  }
-}
-
-console.log(plusOneToNumber([9,1,9]));
+let test = [2, 1, 4, 1, 1, 1, 4, 2, 1, 1];
+console.log(minJumpToEnd(test));
