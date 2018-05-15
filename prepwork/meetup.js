@@ -1083,3 +1083,59 @@ function minJumpToEnd(numbers, start = 0, end = numbers.length - 1) {
 }
 let test = [2, 1, 4, 1, 1, 1, 4, 2, 1, 1];
 console.log(minJumpToEnd(test));
+
+
+// const tree = { val: 108, left: { val: 108, left: { val: -10, left: { val: -14, left: null, right: null }, right: { val: 2, left: null, right: null } }, right: { val: 108, left: null, right: null } }, right: { val: 285, left: { val: 243, left: null, right: null }, right: { val: 285, left: null, right: { val: 401, left: null, right: null } } } };
+// // given a binary tree, return the first instance of the giving k value
+// function firstAppearance(node, k) {
+
+// }
+
+// given a binary search tree, give the k largest value
+// const tree = { val: 19, left: { val: 7, left: { val: 3, left: { val: 2, left: null, right: null }, right: { val: 5, left: null, right: null } }, right: { val: 11, left: null, right: { val: 17, left: { val: 13, left: null, right: null }, right: null } } }, right: { val: 43, left: { val: 23, left: null, right: { val: 37, left: { val: 29, left: null, right: { val: 31, left: null, right: null } }, right: { val: 41, left: null, right: null } } }, right: { val: 47, left: null, right: { val: 53, left: null, right: null } } } };
+
+// given a array in pre-order, recreate a binary search tree from it
+
+// const preOrder = [19, 7, 3, 2, 5, 11, 17, 13, 43, 23, 37, 29, 31, 41, 47, 53];
+// const postOrder = [2, 5, 3, 13, 17, 11, 7, 31, 29, 41, 37, 23, 53, 47, 43, 19];
+
+
+// 1)
+// // --- Search in Rotated Array
+// // Given a sorted array of n integers that has been rotated an unknown number of times, write code to find an element in the array. // You may assume that the array was originally sorted in increasing order.
+// // EXAMPLE
+// // Input: find 5 in [15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14]
+// // Output: 8 (the index of 5 in the array)
+
+
+// 2)
+// // Sorted Merge: You are given two sorted arrays, A and B, where A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
+
+// 3)
+// // Sparse Search:
+// Given a sorted array of strings that is interspersed with empty strings, write a method to find the location of a given string.EXAMPLE
+// Input: ball, ['at', '', '', '', 'ball', '', '', 'car', '', '', 'dad', '', '']
+
+// 4)
+// Given a string, compute recursively(no loops) the number of times lowercase "th" appears in the string.
+
+//   example 1) what is love ? baby dont hurt me
+// input: 'thabbth'
+// output: 2
+
+const findStringRecursively = function(str, current = '') {
+  if (current === 'th') {
+    return 1 + findStringRecursively(str.substring(1), '')
+  }
+  if (!str) {
+    return 0;
+  }
+  if (str.substring(0, 1) === 't' || current === 't') {
+    return 0 + findStringRecursively(str.substring(1), current + str.substring(0, 1))
+  } else {
+    return 0 + findStringRecursively(str.substring(1), '');
+  }
+}
+
+
+console.log('results', findStringRecursively('thbthathathasdfdasfth'));
