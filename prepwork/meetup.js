@@ -1123,19 +1123,69 @@ console.log(minJumpToEnd(test));
 // input: 'thabbth'
 // output: 2
 
-const findStringRecursively = function(str, current = '') {
-  if (current === 'th') {
-    return 1 + findStringRecursively(str.substring(1), '')
+// const findStringRecursively = function(str, current = '') {
+//   if (current === 'th') {
+//     return 1 + findStringRecursively(str.substring(1), '')
+//   }
+//   if (!str) {
+//     return 0;
+//   }
+//   if (str.substring(0, 1) === 't' || current === 't') {
+//     return 0 + findStringRecursively(str.substring(1), current + str.substring(0, 1))
+//   } else {
+//     return 0 + findStringRecursively(str.substring(1), '');
+//   }
+// }
+
+
+// console.log('results', findStringRecursively('thbthathathasdfdasfth'));
+
+
+
+String.prototype.repeatify = function(n) {
+  let counter = 0;
+  let result = '';
+  while (counter < n) {
+    counter++;
+    result += this;
   }
-  if (!str) {
-    return 0;
-  }
-  if (str.substring(0, 1) === 't' || current === 't') {
-    return 0 + findStringRecursively(str.substring(1), current + str.substring(0, 1))
+  return result;
+}
+
+Array.prototype.customReduce = function(reducer, initializer) {
+  if (initializer) {
+    for (var i = 0; i < this.length; i++) {
+      initializer = reducer(initializer, this[i]);
+    }
   } else {
-    return 0 + findStringRecursively(str.substring(1), '');
+    initializer = this[0];
+    for (var i = 1; i < this.length; i++) {
+      initializer = reducer(initializer, this[i]);
+    }
+  }
+  return initializer;
+}
+
+let blah = [1,2,3]
+let resultsOfBlah = blah.customReduce((a, b) => a + b, 1);
+console.log(resultsOfBlah);
+
+
+
+function Awesome(val) {
+  return `${this.a} ${val}`
+}
+
+Function.prototype.customBind = function(binder, value) {
+  return function(val) {
+    return Awesome.call(binder, value) + ' ' + val;
   }
 }
 
+const obj = {
+  a: "Hello"
+};
 
-console.log('results', findStringRecursively('thbthathathasdfdasfth'));
+
+const func = Awesome.customBind(obj, "World"); // returns an uninvoked function
+console.log(func("awesome")); // "Hello World awesome"
