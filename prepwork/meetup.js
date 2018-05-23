@@ -1188,4 +1188,88 @@ const obj = {
 
 
 const func = Awesome.customBind(obj, "World"); // returns an uninvoked function
-console.log(func("awesome")); // "Hello World awesome"
+
+
+function isConsecutiveSum(numbers, target, index = numbers.length - 1, sum = 0) {
+  // Start your code here
+  // can be done through a brute force method
+  // check all values
+  if (sum === target) {
+    return true;
+  }
+  if (index < 0) {
+    return false;
+  }
+
+  let current = sum + numbers[index];
+  return isConsecutiveSum(numbers, target, index - 1, current) || isConsecutiveSum(numbers, target, index - 1, sum);
+}
+
+function intToString(x) {
+  // Start your code here
+  let isNeg = false;
+  let nums = [];
+  if (x < 0) {
+    isNeg = true;
+    x = x * -1;
+  }
+  while (true) {
+    nums.push((x % 10));
+    x = Math.floor(x / 10);
+    if (x === 0 && isNeg) {
+      return '-' + nums.reverse().join('');
+    } else if (x === 0 && !isNeg) {
+      return nums.reverse().join('')
+    }
+  }
+}
+
+console.log(typeof intToString(-12));
+
+
+//serialize a binary tree;
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+let a = new Node(1);
+let b = new Node(2);
+let c = new Node(3);
+let d = new Node(4);
+let e = new Node(5);
+let f = new Node(6);
+let g = new Node(7);
+a.left = b;
+a.right = c;
+b.left = d;
+d.left = e;
+c.left = f;
+c.right = g;
+
+//we can approach it bfs
+const serializeTree = function(tree) {
+  let stack = [tree];
+  let serialized = [];
+  while (stack.length > 0) {
+    let node = stack.shift();
+    serialized.push(node);
+    if (node.left) {
+      stack.push(node.left)
+    } else {
+      serialized.push(null);
+    }
+    if (node.right) {
+      stack.push(node.right);
+    } else {
+      serialized.push(null)
+    }
+  }
+  console.log(serialized);
+}
+
+serializeTree(a);
