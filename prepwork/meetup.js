@@ -1273,3 +1273,52 @@ const serializeTree = function(tree) {
 }
 
 serializeTree(a);
+
+
+function multiply(num1, num2) {
+
+}
+
+multiply([-1, 3, 9], [2, 8]); // -> [ -3, 8, 9, 2 ]
+
+
+function generateNPrime(n) {
+  let primes = [];
+  for (var i = 2; i < n; i ++) {
+    if (isPrime(i)) {
+      primes.push(i);
+    }
+  }
+  return primes;
+}
+
+function isPrime(n) {
+  for (var i = 2; i <= n / 2; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(generateNPrime(35));
+
+const buySellStock = function(stocks) {
+  //iterate through the stocks
+  //keep track of the lowest purchase price
+  //keep track of maximum profit
+  let lowestPrice;
+  let maxProfit = 0;
+  for (var i = 0; i < stocks.length; i++) {
+    if (!lowestPrice) {
+      lowestPrice = stocks[i];
+    } else {
+      let currentProfit = stocks[i] - lowestPrice 
+      console.log(lowestPrice, stocks[i], currentProfit);
+      maxProfit = Math.max(maxProfit, currentProfit);
+      lowestPrice = Math.min(lowestPrice, stocks[i]);
+    }
+  }
+  return maxProfit;
+}
+console.log(buySellStock([310, 315, 275, 295, 260, 270, 290, 230, 255, 250]));
