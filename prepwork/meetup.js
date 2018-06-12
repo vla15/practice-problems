@@ -1335,37 +1335,27 @@ var removeInvalidParentheses = function (s) {
   //iterate through the input
   let combos = {}
   let results = [];
-  let permutations = s;
-  if (isValidParen(s) && !combos[s]) {
-    combos[s] = s;
-  }
-  while (Object.keys(combos).length < 0 || permutations.length > 0) {
-    for (let i = 0; i < s.length; i++) {
-      if (s[i] === '(' || s[i] === ')') {
-        let subsequence = s.substring(0, i) + s.substring(i + 1)
-        if (isValidParen(subsequence) && !combos[subsequence]) {
-          combos[subsequence] = subsequence;
-        }
+  let max = Number.MIN_SAFE_INTEGER
+  const recurse = function (s) {
+    if (s.length < max || combos[s]) {
+      return;
+    }
+    if (isPalindrome(s)) {
+      if (s.length > max) {
+        max = s.length;
+        combos = {};
+      }
+      combos[s] = s;
+      return;
+    }
+    for (var i = 0; i < s.length; i++) {
+      if (s[i] === ')' || s[i] === '(') {
+        recurse(s.substring(0, i) + s.substring(i + 1));
       }
     }
-    permutations = permutations.substring(1);
-    if (permutations.length === 0) {
-      results = s.split('').filter(d => {
-        if (d !== '(' && d !== ')') {
-          return d;
-        }
-      })
-    }
   }
-  if (Object.keys(combos).length === 0) {
-    if (results.length === 0) {
-      return [""]
-    } else {
-      return results;
-    }
-  } else {
-    return Object.keys(combos);
-  }
+  recurse(s)
+  return Object.keys(combos);
   //remove one paren at a time
   //check if the input is valid
   //if it is store in results
@@ -1373,26 +1363,15 @@ var removeInvalidParentheses = function (s) {
   //recurse and remove two parens
 };
 
-var isValidParen = function (s) {
-  let dict = {
-    ')': '('
-  }
-  let stack = [];
-  for (var i = 0; i < s.length; i++) {
-    //check only parens
-    let char = s[i]
-    if (char === '(' || char === ')') {
-      if (char === '(') {
-        stack.push('(')
-      } else {
-        let popped = stack.pop();
-        if (dict[char] !== popped) {
-          return false;
-        }
-      }
-    }
-  }
-  return stack.length === 0 ? true : false;
-}
 
-console.log(removeInvalidParentheses("()"));
+const isPalindrome = (s) => {
+  let count = 0;
+  let idx = 0;
+  while (count >= 0 && idx < s.length) {
+    if (s[idx] === ')' || s[idx] === '(') {
+      count = s[idx] === ')' ? count - 1 : count + 1;
+    }
+    idx++;
+  }
+  return count === 0;
+}
