@@ -1375,3 +1375,35 @@ const isPalindrome = (s) => {
   }
   return count === 0;
 }
+
+
+var checkPossibility = function (nums) {
+  let clonedNums = nums.slice();
+  if (isValidPossibility(nums)) {
+    return true;
+  }
+  for (var i = 0; i < clonedNums.length; i++) {
+    let min = Math.min(clonedNums[i - 1], clonedNums[i + 1]);
+    clonedNums[i] = min;
+    console.log(clonedNums);
+    if (isValidPossibility(clonedNums)) {
+      return true;
+    } else {
+      clonedNums = nums.slice();
+    }
+  }
+  return false;
+};
+
+const isValidPossibility = function(nums) {
+  for (var i = 0; i < nums.length - 1; i++) {
+    if (nums[i] > nums[i + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(checkPossibility([2,3,3,2,4]));
+console.log(checkPossibility([4,2,1]));
+console.log(checkPossibility([4,2,3]));
