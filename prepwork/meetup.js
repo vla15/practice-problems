@@ -1407,3 +1407,50 @@ const isValidPossibility = function(nums) {
 console.log(checkPossibility([2,3,3,2,4]));
 console.log(checkPossibility([4,2,1]));
 console.log(checkPossibility([4,2,3]));
+
+
+//perform breadth first search on tree
+const traverseBreadthFirst = function(tree) {
+  let queue = [tree];
+  let results = [];
+  while (queue.length > 0) {
+    let node = queue.shift();
+    results.push(node.value);
+    while (node.childNodes.length > 0) {
+      queue.push(node.childNodes.shift());
+    }
+  }
+  return results.join(' ');
+}
+
+
+var masterTree = {
+  value: 'j',
+  childNodes: [{
+    value: 'f',
+    childNodes: [{
+      value: 'a',
+      childNodes: [{
+        value: 'd',
+        childNodes: []
+      }]
+    },
+    {
+      value: 'h',
+      childNodes: []
+    }]
+  },
+  {
+    value: 'k',
+    childNodes: [{
+      value: 'z',
+      childNodes: []
+    }]
+  },
+  {
+    value: 'i',
+    childNodes: []
+  }]
+}
+
+console.log(traverseBreadthFirst(masterTree));
