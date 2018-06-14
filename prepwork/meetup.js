@@ -1454,3 +1454,70 @@ var masterTree = {
 }
 
 console.log(traverseBreadthFirst(masterTree));
+
+
+const numOfPaths = function(tree, sum, total = 0) {
+  let count = 0;
+  if (!tree) {
+    return count;
+  }
+  total += tree.value
+  console.log(tree.value, total);
+
+  if (total === sum) {
+    count += 1;
+  }
+
+  if (tree.left) {
+    count += numOfPaths(tree.left, sum, total);
+  }
+
+  if (tree.right) {
+    count += numOfPaths(tree.right, sum, total);
+  }
+  return count;
+}
+
+let otherTree = {
+  value: 5,
+  left: {
+    value: 7,
+    left: {
+      value: 1,
+      left: {
+        value: -7,
+        left: {
+          value: 1,
+          left: null,
+          right: null
+        },
+        right: null
+      },
+      right: {
+        value: 3,
+        left: null,
+        right: null
+      }
+    },
+    right: {
+      value: 5,
+      left: {
+        value: 9,
+        left: null,
+        right: {
+          value: 3,
+          left: null,
+          right: null
+        }
+      },
+      right: {
+        value: -1,
+        left: null,
+        right: null
+      }
+    }
+  },
+  right: null
+}
+
+console.log(numOfPaths(otherTree, 16));
