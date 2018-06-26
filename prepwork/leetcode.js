@@ -17,7 +17,7 @@
 // Output: 0
 // Explanation: No such pair of words.
 
-module.exports.maxProduct = function(words) {
+const maxProduct = function(words) {
   //brute force approach
   let max = 0;
   for (let i = 0; i < words.length; i++) {
@@ -44,4 +44,21 @@ const hasSameLetters = function(base, word) {
     }
   }
   return false;
+}
+
+
+const findDuplciateNumber = function(arr) {
+  //triangle series
+  let n = arr.length - 1;
+  let triangleSum = n * ( n + 1 ) / 2;
+  let sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum - triangleSum;
+}
+
+module.exports = {
+  maxProduct: maxProduct,
+  findDuplciateNumber: findDuplciateNumber
 }
